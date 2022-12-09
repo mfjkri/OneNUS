@@ -51,13 +51,17 @@ function NavBar() {
               align="end"
               id={`collasible-nav-dropdown`}
             >
-              <NavDropdown.Item>UsernameHere</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/">
+                UsernameHere
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/login">
+              <NavDropdown.Item as={Link} to="/signin">
                 Log in
               </NavDropdown.Item>
-              {/* <NavDropdown.Item href="#action4">Sign up</NavDropdown.Item> */}
-              {/* <NavDropdown.Item href="#action5">FAQ</NavDropdown.Item> */}
+              <NavDropdown.Item as={Link} to="/signup">
+                Sign up
+              </NavDropdown.Item>
+              {/* <NavDropdown.Item as={Link} to="#action5">FAQ</NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
