@@ -8,10 +8,8 @@ function SigninPage() {
       <form className="auth-form">
         <div className="auth-form-content">
           <h3 className="auth-form-title">Sign In</h3>
-          <div className="text-center">
-            Not registered yet? <Link to="/signup">Sign Up</Link>
-          </div>
-          <div className="form-group mt-3">
+
+          <div className="form-group mt-1">
             <label>Username</label>
             <input
               type="text"
@@ -31,6 +29,9 @@ function SigninPage() {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
+          </div>
+          <div className="text-center mt-2">
+            Don't have an account yet? <Link to="/signup">Sign Up</Link>
           </div>
         </div>
       </form>
