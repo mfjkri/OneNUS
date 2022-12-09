@@ -1,18 +1,8 @@
 body {
   background: url("../images/bg.jpg");
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
-  padding: 30px;
-}
 
-.navbar-nav > li > a::after {
-  content: "|";
-  padding-left: 10px;
-  @media (max-width: 767px) {
-    content: none;
-    padding-left: 0;
-  }
-}
-.navbar-nav > li:last-child > a::after {
-  content: none;
+  padding-top: 60px;
 }
