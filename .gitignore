@@ -2,6 +2,8 @@
 
 .env
 
+temp.tsx
+
 # dependencies
 /node_modules
 /.pnp
