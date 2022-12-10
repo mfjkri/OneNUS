@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router-dom";
 
-import { Landing } from "features/misc";
+import { Landing, NotFound } from "features/misc";
 import { useAuth } from "lib/auth";
 
 import { protectedRoutes } from "./protected";
@@ -10,10 +10,11 @@ export const AppRoutes = () => {
   const auth = useAuth();
 
   const commonRoutes = [{ path: "/", element: <Landing /> }];
+  const fallbackRoute = [{ path: "*", element: <NotFound /> }];
 
   const routes = auth.user ? protectedRoutes : publicRoutes;
 
-  const element = useRoutes([...routes, ...commonRoutes]);
+  const element = useRoutes([...routes, ...commonRoutes, ...fallbackRoute]);
 
   return <>{element}</>;
 };

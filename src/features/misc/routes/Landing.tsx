@@ -1,4 +1,5 @@
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import logo from "assets/logo.svg";
@@ -10,6 +11,12 @@ import { useAuth } from "lib/auth";
 export const Landing = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/app");
+    }
+  });
 
   const handleStart = () => {
     if (user) {
