@@ -11,6 +11,8 @@ import {
   AuthUser,
 } from "features/auth";
 import storage from "utils/storage";
+import { delay } from "utils/delay";
+import { ARTIFICIAL_DELAY } from "config";
 
 async function handleUserResponse(data: UserResponse) {
   const { jwt, user } = data;
@@ -40,7 +42,9 @@ async function registerFn(data: RegisterCredentialsDTO) {
 
 async function logoutFn() {
   storage.clearToken();
+  await delay(ARTIFICIAL_DELAY);
   window.location.assign(window.location.origin as unknown as string);
+  return null;
 }
 
 const authConfig = {

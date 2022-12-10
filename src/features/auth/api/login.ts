@@ -3,12 +3,16 @@
 import { UserResponse } from "../types";
 import { getTestUser } from "./testUser";
 
+import { delay } from "utils/delay";
+import { ARTIFICIAL_DELAY } from "config";
+
 export type LoginCredentialsDTO = {
   username: string;
   password: string;
 };
 
 async function fake_login(data: LoginCredentialsDTO) {
+  await delay(ARTIFICIAL_DELAY);
   return getTestUser();
 }
 export const loginWithUsernameAndPassword = (
