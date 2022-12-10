@@ -1,11 +1,12 @@
 import { UserResponse } from "../types";
+import { LoginCredentialsDTO } from "./login";
 
-export const getTestUser = (): UserResponse => {
+export const getTestUser = (data: LoginCredentialsDTO): UserResponse => {
   return {
-    jwt: "jwt123",
+    jwt: "jwttest",
     user: {
-      id: "testuser",
-      username: "password",
+      id: "idtest",
+      username: "test",
     },
   };
 };
