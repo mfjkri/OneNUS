@@ -35,7 +35,7 @@ export const Landing = () => {
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             <span className="block">OneNUS</span>
           </h2>
-          <img src={logo} alt="react" />
+          <img className="w-full my-3" src={logo} alt="react" />
 
           <p>Welcome to OneNUS. Please login or register to continue.</p>
           <div className="mt-8 flex justify-center">
