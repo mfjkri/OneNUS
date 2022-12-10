@@ -54,7 +54,8 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         )}
       </Form>
       <div className="mt-2 flex items-center justify-end">
-        <div className="text-sm">
+        <div className="text-sm text-primary">
+          Don't have an account yet?{" "}
           <Link
             to="../register"
             className="font-medium text-blue-600 hover:text-blue-500"
