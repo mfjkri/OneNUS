@@ -6,7 +6,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 const icons = {
   info: (
@@ -41,6 +41,12 @@ export const Notification = ({
   notification: { id, type, title, message },
   onDismiss,
 }: NotificationProps) => {
+  useEffect(() => {
+    setTimeout(() => {
+      onDismiss(id);
+    }, 5000);
+  }, []);
+
   return (
     <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
       <Transition
