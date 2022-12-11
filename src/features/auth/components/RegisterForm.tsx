@@ -5,10 +5,7 @@ import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
 import { useAuth } from "lib/auth";
 
-const schema = z.object({
-  username: z.string().min(1, "Required"),
-  password: z.string().min(1, "Required"),
-});
+import { AuthInputSchema } from "./Layout";
 
 type RegisterValues = {
   username: string;
@@ -24,12 +21,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   return (
     <div>
-      <Form<RegisterValues, typeof schema>
+      <Form<RegisterValues, typeof AuthInputSchema>
         onSubmit={async (values) => {
           await register(values);
           onSuccess();
         }}
-        schema={schema}
+        schema={AuthInputSchema}
         options={{
           shouldUnregister: true,
         }}
@@ -39,14 +36,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             <InputField
               type="text"
               label="Username"
-              maxLength={12}
               error={formState.errors["username"]}
               registration={register("username")}
             />
             <InputField
               type="password"
               label="Password"
-              maxLength={12}
               error={formState.errors["password"]}
               registration={register("password")}
             />
