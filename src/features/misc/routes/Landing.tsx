@@ -18,7 +18,7 @@ export const Landing = () => {
     }
   });
 
-  const handleStart = () => {
+  const redirectLogin = () => {
     if (user) {
       navigate("/app");
     } else {
@@ -26,7 +26,7 @@ export const Landing = () => {
     }
   };
 
-  const secondaryStart = () => {
+  const redirectRegister = () => {
     if (user) {
       navigate("/app");
     } else {
@@ -48,7 +48,7 @@ export const Landing = () => {
           <div className="mt-8 flex justify-center">
             <div className="inline-flex rounded-md shadow">
               <Button
-                onClick={handleStart}
+                onClick={redirectLogin}
                 startIcon={
                   <ArrowTopRightOnSquareIcon
                     className="h-6 w-6"
@@ -60,7 +60,7 @@ export const Landing = () => {
               </Button>
             </div>
             <div className="ml-3 inline-flex">
-              <Button onClick={secondaryStart} variant="inverse">
+              <Button onClick={redirectRegister} variant="inverse">
                 Register
               </Button>
             </div>
