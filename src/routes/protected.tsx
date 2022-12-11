@@ -5,12 +5,9 @@ import { Spinner } from "components/Elements";
 import { MainLayout } from "components/Layout";
 import { lazyImport } from "utils/lazyImport";
 
-const { Overview: Overview } = lazyImport(
-  () => import("features/misc"),
-  "Overview"
-);
+const { Overview } = lazyImport(() => import("features/misc"), "Overview");
 
-const { PostsRoutes: PostsRoutes } = lazyImport(
+const { PostsRoutes } = lazyImport(
   () => import("features/posts"),
   "PostsRoutes"
 );

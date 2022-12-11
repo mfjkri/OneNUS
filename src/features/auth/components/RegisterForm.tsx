@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import * as z from "zod";
 
 import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
