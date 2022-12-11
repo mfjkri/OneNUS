@@ -29,7 +29,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
             {children}
           </div>
           <p className="text-center">
-            <u>Note:</u> Max 12 characters for username and password!
+            <u>Max 12 characters</u> for username and password!
           </p>
         </div>
       </div>
