@@ -28,6 +28,9 @@ export const Layout = ({ children, title }: LayoutProps) => {
           <div className="bg-secondary py-8 px-4 shadow sm:rounded-lg sm:px-10">
             {children}
           </div>
+          <p className="text-center">
+            <u>Note:</u> Max 12 characters for username and password!
+          </p>
         </div>
       </div>
     </>

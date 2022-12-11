@@ -36,12 +36,14 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
             <InputField
               type="text"
               label="Username"
+              maxLength={12}
               error={formState.errors["username"]}
               registration={register("username")}
             />
             <InputField
               type="password"
               label="Password"
+              maxLength={12}
               error={formState.errors["password"]}
               registration={register("password")}
             />
