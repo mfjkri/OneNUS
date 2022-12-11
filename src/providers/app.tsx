@@ -9,8 +9,13 @@ import { Button, Spinner } from "components/Elements";
 import { Notifications } from "components/Notifications/Notifications";
 import { AuthProvider } from "lib/auth";
 import { queryClient } from "lib/react-query";
+import storage from "utils/storage";
 
 const ErrorFallback = () => {
+  React.useEffect(() => {
+    storage.clearToken();
+  }, []);
+
   return (
     <div
       className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
