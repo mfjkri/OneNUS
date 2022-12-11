@@ -5,9 +5,14 @@ import { Spinner } from "components/Elements";
 import { MainLayout } from "components/Layout";
 import { lazyImport } from "utils/lazyImport";
 
-const { Overview: Dashboard } = lazyImport(
+const { Overview: Overview } = lazyImport(
   () => import("features/misc"),
   "Overview"
+);
+
+const { PostsRoutes: PostsRoutes } = lazyImport(
+  () => import("features/posts"),
+  "PostsRoutes"
 );
 
 const App = () => {
@@ -31,7 +36,8 @@ export const protectedRoutes = [
     path: "/app",
     element: <App />,
     children: [
-      { path: "", element: <Dashboard /> },
+      { path: "posts/*", element: <PostsRoutes /> },
+      { path: "", element: <Overview /> },
       { path: "*", element: <Navigate to="." /> },
     ],
   },
