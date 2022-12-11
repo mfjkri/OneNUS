@@ -11,13 +11,13 @@ export const Overview = () => {
 
   const proceedToDiscussion = () => {
     if (user) {
-      navigate("/posts");
+      navigate("posts/");
     } else {
       navigate("/auth/login");
     }
   };
   return (
-    <ContentLayout title="Dashboard">
+    <ContentLayout title="">
       <div className="text-secondary">
         <div className="bg"></div>
         <h1 className="text-secondary font-extrabold text-4xl mb-4">
