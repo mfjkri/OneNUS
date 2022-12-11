@@ -5,7 +5,10 @@ import { Spinner } from "components/Elements";
 import { MainLayout } from "components/Layout";
 import { lazyImport } from "utils/lazyImport";
 
-const { Dashboard } = lazyImport(() => import("features/misc"), "Dashboard");
+const { Overview: Dashboard } = lazyImport(
+  () => import("features/misc"),
+  "Overview"
+);
 
 const App = () => {
   return (
