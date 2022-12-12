@@ -8,13 +8,17 @@ import { PostsList } from "../components/PostsList";
 export const PostsView = () => {
   return (
     <ContentLayout title="">
-      <Button
-        className="mb-3"
-        startIcon={<PlusIcon className="h-6 w-6" aria-hidden="true" />}
-      >
-        New Post
-      </Button>
-      <PostsList />
+      <div className="float-right">
+        <Button
+          className="mb-3 text-sm"
+          startIcon={<PlusIcon className="h-4 w-4" aria-hidden="true" />}
+        >
+          New Post
+        </Button>
+      </div>
+      <div className="clear-both">
+        <PostsList />
+      </div>
     </ContentLayout>
   );
 };
