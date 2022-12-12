@@ -1,9 +1,11 @@
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import * as React from "react";
 
-import { Button, Link } from "components/Elements";
+import { Link } from "components/Elements";
 
 import logo from "assets/logo.svg";
 import { useAuth } from "lib/auth";
+import { Button } from "react-bootstrap";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -13,7 +15,7 @@ const NavigationBar = () => {
   const { logout, isLoggingOut } = useAuth();
 
   return (
-    <nav className="px-2 sm:px-4 py-2.5 bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-600">
+    <nav className="px-2 sm:px-4 py-2.5 bg-primary fixed w-full z-20 top-0 left-0 border-b border-primary2">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <Link to="/app" className="flex items-center">
           <img src={logo} className="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
@@ -21,16 +23,15 @@ const NavigationBar = () => {
             OneNUS
           </span>
         </Link>
-        <div className="flex md:order-2">
-          <Button
-            isLoading={isLoggingOut}
-            onClick={async () => {
-              await logout();
-            }}
-          >
-            Log out
-          </Button>
-        </div>
+        <button
+          className="bg-trans text-indigo-400 hover:text-indigo-700 flex items-center"
+          onClick={async () => {
+            await logout();
+          }}
+        >
+          <p>Log out</p>
+          <ArrowRightOnRectangleIcon className="h-6 w-auto" />
+        </button>
       </div>
     </nav>
   );
