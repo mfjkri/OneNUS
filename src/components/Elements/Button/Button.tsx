@@ -7,6 +7,8 @@ const variants = {
   primary: "bg-blue-600 text-white",
   inverse: "bg-white text-blue-600",
   danger: "bg-red-600 text-white",
+  no_bg_light: "bg-transparent text-white hover:text-indigo-700 border-0",
+  no_bg_dark: "bg-transparent  text-indigo-400 hover:text-white border-0",
 };
 
 const sizes = {

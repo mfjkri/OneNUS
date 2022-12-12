@@ -1,11 +1,10 @@
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import * as React from "react";
 
-import { Link } from "components/Elements";
+import { Button, Link } from "components/Elements";
 
 import logo from "assets/logo.svg";
 import { useAuth } from "lib/auth";
-import { Button } from "react-bootstrap";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -23,15 +22,18 @@ const NavigationBar = () => {
             OneNUS
           </span>
         </Link>
-        <button
-          className="bg-trans text-indigo-400 hover:text-indigo-700 flex items-center"
-          onClick={async () => {
-            await logout();
-          }}
-        >
-          <p>Log out</p>
-          <ArrowRightOnRectangleIcon className="h-6 w-auto" />
-        </button>
+        <div className="flex md:order-2">
+          <Button
+            isLoading={isLoggingOut}
+            variant="no_bg_light"
+            endIcon={<ArrowRightOnRectangleIcon className="h-6 w-auto" />}
+            onClick={async () => {
+              await logout();
+            }}
+          >
+            Log out
+          </Button>
+        </div>
       </div>
     </nav>
   );
