@@ -7,3 +7,7 @@ export type Post = {
   author: string;
   repliesCount: number;
 } & BaseEntity;
+
+export type CreatePostReponse = {
+  postId: string;
+};

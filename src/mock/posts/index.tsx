@@ -7,13 +7,15 @@ function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+const ValidTags: Array<string> = ["general", "cs", "life", "misc"];
+
 export const CreateFakePostsData = (n: number): Post[] => {
   const currData: Post[] = [];
   for (let i = 0; i < n; i = i + 1) {
     currData.push({
       id: String(i),
       title: faker.lorem.sentence(randomIntFromInterval(4, 10)),
-      tag: faker.lorem.word(),
+      tag: ValidTags[randomIntFromInterval(0, ValidTags.length - 1)],
       text: faker.lorem.sentences(randomIntFromInterval(4, 10)),
       author: faker.name.firstName(),
       repliesCount: randomIntFromInterval(0, 40),
@@ -24,7 +26,7 @@ export const CreateFakePostsData = (n: number): Post[] => {
   return currData;
 };
 
-export const DefaultFakePostsData: Post[] = CreateFakePostsData(100);
+export const DefaultFakePostsData: Post[] = CreateFakePostsData(10);
 
 export const OldFakePostsData: Post[] = [
   {
