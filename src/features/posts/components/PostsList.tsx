@@ -1,4 +1,5 @@
 import { DefaultFakePostsData } from "mock/posts";
+
 import { Post } from "../types";
 import { PostPreview } from "./PostPreview";
 

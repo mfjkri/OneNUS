@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router";
 
+import { useAuth } from "lib/auth";
+
 import { Button } from "components/Elements";
 import { ContentLayout } from "components/Layout";
-
-import { useAuth } from "lib/auth";
-import { useEffect } from "react";
 
 export const Overview = () => {
   const navigate = useNavigate();
@@ -17,8 +16,6 @@ export const Overview = () => {
       navigate("/auth/login");
     }
   };
-
-  // useEffect(proceedToDiscussion, []);
 
   return (
     <ContentLayout title="">
