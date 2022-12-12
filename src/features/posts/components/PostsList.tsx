@@ -1,10 +1,9 @@
-import { CreateFakePostsData } from "mock/posts";
-
+import { DefaultFakePostsData } from "mock/posts";
 import { Post } from "../types";
 import { PostPreview } from "./PostPreview";
 
 export const PostsList = () => {
-  const data = CreateFakePostsData(100);
+  const data = DefaultFakePostsData;
   const columnClasses =
     "px-6 py-3 text-xs font-medium tracking-wider text-left uppercase text-center ";
 

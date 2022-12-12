@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { Post } from "features/posts";
 
 function randomIntFromInterval(min: number, max: number) {
-  // min and max included
+  // [min, max]: int
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -24,7 +24,9 @@ export const CreateFakePostsData = (n: number): Post[] => {
   return currData;
 };
 
-export const DefaultFakePostsData: Post[] = [
+export const DefaultFakePostsData: Post[] = CreateFakePostsData(100);
+
+export const OldFakePostsData: Post[] = [
   {
     id: "1",
     title: "Lorem ipsum dolor sit",
