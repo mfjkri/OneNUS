@@ -16,7 +16,7 @@ const NavigationBar = () => {
   return (
     <nav className="px-2 sm:px-4 py-2.5 bg-primary fixed w-full z-20 top-0 left-0 border-b border-primary2">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <Link to="/app" className="flex items-center">
+        <Link to="/app/posts" className="flex items-center">
           <img src={logo} className="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
             OneNUS
