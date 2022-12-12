@@ -4,7 +4,7 @@ import { PostsList } from "../components/PostsList";
 
 export const PostsView = () => {
   return (
-    <ContentLayout title="Forum Posts:">
+    <ContentLayout title="">
       <PostsList />
     </ContentLayout>
   );
