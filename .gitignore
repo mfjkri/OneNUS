@@ -4,6 +4,9 @@
 
 temp.tsx
 
+# yarn 
+.yarn/*
+
 # dependencies
 /node_modules
 /.pnp
