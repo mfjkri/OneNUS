@@ -1,4 +1,4 @@
-export type PageSortByProps = {
+type PageSortByProps = {
   sortOptions: [string, string][];
   setSortOption: Function;
   activeSortOption: string;
