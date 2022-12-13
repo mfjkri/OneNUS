@@ -1,21 +1,10 @@
-import { useNavigate } from "react-router";
-
 import { useAuth } from "lib/auth";
 
-import { Button } from "components/Elements";
+import { Button, Link } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 
 export const Overview = () => {
-  const navigate = useNavigate();
   const { user } = useAuth();
-
-  const proceedToDiscussion = () => {
-    if (user) {
-      navigate("posts/");
-    } else {
-      navigate("/auth/login");
-    }
-  };
 
   return (
     <ContentLayout title="">
@@ -45,7 +34,9 @@ export const Overview = () => {
           </p>
         </div>
         <div className="ml-3 inline-flex">
-          <Button onClick={proceedToDiscussion}>Proceed</Button>
+          <Link to="/app/posts">
+            <Button>Proceed</Button>
+          </Link>
         </div>
       </div>
     </ContentLayout>

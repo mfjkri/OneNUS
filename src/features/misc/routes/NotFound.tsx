@@ -1,16 +1,9 @@
-import { useNavigate } from "react-router";
-
 import logo from "assets/logo.svg";
-import { Button } from "components/Elements";
+import { Button, Link } from "components/Elements";
 
 import { Head } from "components/Head";
 
 export const NotFound = () => {
-  const navigate = useNavigate();
-
-  const redirectHome = () => {
-    navigate("/");
-  };
   return (
     <>
       <Head description="Not Found!" />
@@ -23,7 +16,9 @@ export const NotFound = () => {
 
           <div className="mt-8 flex justify-center">
             <div className="inline-flex rounded-md shadow">
-              <Button onClick={redirectHome}>Go Home</Button>
+              <Link to="/">
+                <Button>Go Home</Button>
+              </Link>
             </div>
           </div>
         </div>
