@@ -15,8 +15,7 @@ export type CreatePostReponse = {
 };
 
 export enum SortTypes {
-  default = "ByNew",
-  ByNew = "ByNew",
-  byHot = "byHot",
-  byRecent = "byRecent",
+  ByNew,
+  byHot,
+  byRecent,
 }

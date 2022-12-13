@@ -13,7 +13,11 @@ export const PostsList = ({ posts }: { posts: Post[] }) => {
             <table className="table-auto min-w-full divide-y bg-secondary">
               <thead className="bg-primary">
                 <tr>
-                  <th key="title" scope="col" className={columnClasses}></th>
+                  <th
+                    key="title"
+                    scope="col"
+                    className={columnClasses + "w-3/5"}
+                  ></th>
                   <th key="author" scope="col" className={columnClasses}>
                     Author
                   </th>

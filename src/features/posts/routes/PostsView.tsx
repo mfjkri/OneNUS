@@ -1,6 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
-
-import { Button, Spinner } from "components/Elements";
+import { Spinner } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 
 import { PostsList } from "../components/PostsList";
@@ -12,7 +10,7 @@ import { PageNavigator, PageSortBy } from "components/Pagination";
 export const PostsView = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [perPage, setPerPage] = useState(10);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
   const [filterTag, setFilterTag] = useState("-");
 
   const postsQuery = usePosts({
@@ -43,9 +41,9 @@ export const PostsView = () => {
       <div className="float-right">
         <PageSortBy
           sortOptions={[
-            [SortTypes.byHot, "hot"],
-            [SortTypes.ByNew, "new"],
-            [SortTypes.byRecent, "recent"],
+            [SortTypes[SortTypes.byHot], "hot"],
+            [SortTypes[SortTypes.ByNew], "new"],
+            [SortTypes[SortTypes.byRecent], "recent"],
           ]}
           activeSortOption={sortBy}
           setSortOption={(sortOption: string) => {
