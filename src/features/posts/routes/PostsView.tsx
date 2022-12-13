@@ -7,12 +7,12 @@ import { PostsList } from "../components/PostsList";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
 import { useState } from "react";
-import { PageNavigator } from "components/Pagination";
+import { PageNavigator, PageSortBy } from "components/Pagination";
 
 export const PostsView = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [perPage, setPerPage] = useState(10);
-  const [sortBy, setSortBy] = useState(SortTypes.byHot);
+  const [sortBy, setSortBy] = useState("");
   const [filterTag, setFilterTag] = useState("-");
 
   const postsQuery = usePosts({
@@ -40,15 +40,26 @@ export const PostsView = () => {
 
   return (
     <ContentLayout title="">
-      <PostsList posts={postsQuery.data.posts} />
-
-      <div className="mt-3">
+      <div className="float-right">
+        <PageSortBy
+          sortOptions={[
+            [SortTypes.byHot, "hot"],
+            [SortTypes.ByNew, "new"],
+            [SortTypes.byRecent, "recent"],
+          ]}
+          activeSortOption={sortBy}
+          setSortOption={(sortOption: string) => {
+            setSortBy(sortOption);
+            setPageNumber(1);
+          }}
+        />
+      </div>
+      <div className="mt-3 clear-both">
+        <PostsList posts={postsQuery.data.posts} />
         <PageNavigator
           pageNumber={pageNumber}
           maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
-          goToPage={(page: number) => {
-            setPageNumber(page);
-          }}
+          goToPage={setPageNumber}
         />
       </div>
     </ContentLayout>

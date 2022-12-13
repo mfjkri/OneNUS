@@ -21,15 +21,14 @@ export const PageNavigator = ({
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="mt-5 flex justify-center align-middle">
         <Button onClick={goPrev} disabled={pageNumber === 1}>
           <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
         </Button>
-        <Button
-          className="ml-5"
-          onClick={goNext}
-          disabled={pageNumber === maxPageNumber}
-        >
+        <p className="text-center mx-4 my-auto align-middle">
+          {pageNumber} out of {maxPageNumber}
+        </p>
+        <Button onClick={goNext} disabled={pageNumber === maxPageNumber}>
           <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
         </Button>
       </div>

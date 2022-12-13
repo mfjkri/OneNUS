@@ -12,6 +12,7 @@ module.exports = {
         secondary: "#EEEEEE",
         secondary2: "#CCCCCC",
         accent: "#00ADB5",
+        accent2: "#818CF8",
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
