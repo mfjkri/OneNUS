@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "components/Elements";
 
 import { Post } from "../types";
+import { UTCEpochToLocalDate } from "utils/format";
 
 export const PostPreviewColumns = [
   {
@@ -63,7 +64,7 @@ export const PostPreview = ({ postEntry, entryIndex }: PostEntryProp) => {
         {postEntry.repliesCount}
       </td>
       <td key="Last Updated3" className={rowClasses + "text-center"}>
-        {postEntry.updatedAt}
+        {UTCEpochToLocalDate(postEntry.updatedAt)}
       </td>
       <td key="Tags4" className={rowClasses + "text-center"}>
         {postEntry.tag}
