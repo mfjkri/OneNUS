@@ -40,18 +40,9 @@ export const PostsView = () => {
 
   return (
     <ContentLayout title="">
-      <div className="float-right">
-        <Button
-          className="mb-3 text-sm"
-          startIcon={<PlusIcon className="h-4 w-4" aria-hidden="true" />}
-        >
-          New Post
-        </Button>
-      </div>
-      <div className="clear-both">
-        <PostsList posts={postsQuery.data.posts} />
-      </div>
-      <div className="mt-3 float-right">
+      <PostsList posts={postsQuery.data.posts} />
+
+      <div className="mt-3">
         <PageNavigator
           pageNumber={pageNumber}
           maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}

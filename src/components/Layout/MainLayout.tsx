@@ -1,4 +1,7 @@
-import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  PlusIcon,
+  ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import * as React from "react";
 
 import { Button, Link } from "components/Elements";
@@ -23,6 +26,12 @@ const NavigationBar = () => {
           </span>
         </Link>
         <div className="flex md:order-2">
+          <Button
+            className="mr-2"
+            startIcon={<PlusIcon className="h-4 w-4" aria-hidden="true" />}
+          >
+            New Post
+          </Button>
           <Button
             isLoading={isLoggingOut}
             variant="no_bg_light"
