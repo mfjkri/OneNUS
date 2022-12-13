@@ -17,7 +17,7 @@ export const PostsView = () => {
         </Button>
       </div>
       <div className="clear-both">
-        <PostsList />
+        <PostsList perPage={10} pageNumber={1} sortBy="byHot" filterTag="-" />
       </div>
     </ContentLayout>
   );
