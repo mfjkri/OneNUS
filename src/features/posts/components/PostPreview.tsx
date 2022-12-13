@@ -30,21 +30,23 @@ export const PostPreview = ({
 
   return (
     <React.Fragment>
-      <td key="Title0" className={rowClasses}>
+      <td key="title" className={rowClasses}>
         <Link to="">
           <u className="text-primary hover:text-accent">{postEntry.title}</u>
         </Link>
       </td>
-      <td key="Author1" className={rowClasses + "text-center"}>
+      <td key="author" className={rowClasses + "text-center"}>
         {postEntry.author}
       </td>
-      <td key="Replies2" className={rowClasses + "text-center"}>
-        {postEntry.repliesCount}
+      <td key="commentsCount" className={rowClasses + "text-center"}>
+        {postEntry.commentsCount}
       </td>
-      <td key="Last Updated3" className={rowClasses + "text-center"}>
-        {UTCEpochToLocalDate(postEntry.updatedAt)}
+      <td key="commentedAt" className={rowClasses + "text-center"}>
+        {postEntry.commentedAt
+          ? UTCEpochToLocalDate(postEntry.commentedAt)
+          : "-"}
       </td>
-      <td key="Tags4" className={rowClasses + "text-center"}>
+      <td key="tag" className={rowClasses + "text-center"}>
         {postEntry.tag}
       </td>
     </React.Fragment>

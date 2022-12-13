@@ -5,7 +5,9 @@ export type Post = {
   tag: string;
   text: string;
   author: string;
-  repliesCount: number;
+  commentsCount: number;
+  commentedAt: number;
+  starsCount: number;
 } & BaseEntity;
 
 export type CreatePostReponse = {
