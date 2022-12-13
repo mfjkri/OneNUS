@@ -19,3 +19,5 @@ export enum SortTypes {
   byHot,
   byRecent,
 }
+
+export const PostTags = ["general", "cs", "life", "misc"];

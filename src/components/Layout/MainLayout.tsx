@@ -26,12 +26,14 @@ const NavigationBar = () => {
           </span>
         </Link>
         <div className="flex md:order-2">
-          <Button
-            className="mr-2"
-            startIcon={<PlusIcon className="h-4 w-4" aria-hidden="true" />}
-          >
-            New Post
-          </Button>
+          <Link to="/app/posts/new">
+            <Button
+              className="mr-2"
+              startIcon={<PlusIcon className="h-4 w-4" aria-hidden="true" />}
+            >
+              New Post
+            </Button>
+          </Link>
           <Button
             isLoading={isLoggingOut}
             variant="no_bg_light"
