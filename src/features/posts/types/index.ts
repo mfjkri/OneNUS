@@ -11,3 +11,10 @@ export type Post = {
 export type CreatePostReponse = {
   postId: string;
 };
+
+export enum SortTypes {
+  default = "ByNew",
+  ByNew = "ByNew",
+  byHot = "byHot",
+  byRecent = "byRecent",
+}

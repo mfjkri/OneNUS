@@ -14,6 +14,7 @@ export type GetPostsDTO = {
 
 export type GetPostsResponse = {
   posts: Post[];
+  postsCount: number;
 };
 
 export const getPosts = (data: GetPostsDTO): Promise<GetPostsResponse> => {
@@ -25,14 +26,25 @@ export const getPosts = (data: GetPostsDTO): Promise<GetPostsResponse> => {
 type QueryFnType = typeof getPosts;
 
 type UsePostsOptions = {
+  pageNumber: number;
+  perPage: number;
+  sortBy: string;
+  filterTag: string;
   data: GetPostsDTO;
   config?: QueryConfig<QueryFnType>;
 };
 
-export const usePosts = ({ config, data }: UsePostsOptions) => {
+export const usePosts = ({
+  config,
+  data,
+  pageNumber,
+  perPage,
+  sortBy,
+  filterTag,
+}: UsePostsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ["posts"],
+    queryKey: ["posts", pageNumber, perPage, sortBy, filterTag],
     queryFn: () => getPosts(data),
   });
 };

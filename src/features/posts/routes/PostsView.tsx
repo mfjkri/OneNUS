@@ -1,11 +1,43 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
 
-import { Button } from "components/Elements";
+import { Button, Spinner } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 
 import { PostsList } from "../components/PostsList";
+import { usePosts } from "../api/getPosts";
+import { SortTypes } from "../types";
+import { useState } from "react";
+import { PageNavigator } from "components/Pagination";
 
 export const PostsView = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [sortBy, setSortBy] = useState(SortTypes.byHot);
+  const [filterTag, setFilterTag] = useState("-");
+
+  const postsQuery = usePosts({
+    pageNumber: pageNumber,
+    perPage: perPage,
+    sortBy: sortBy,
+    filterTag: filterTag,
+    data: {
+      perPage: perPage,
+      pageNumber: pageNumber,
+      sortBy: sortBy,
+      filterTag: filterTag,
+    },
+  });
+
+  if (postsQuery.isLoading) {
+    return (
+      <div className="w-full h-48 flex justify-center items-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (!postsQuery.data) return null;
+
   return (
     <ContentLayout title="">
       <div className="float-right">
@@ -17,7 +49,16 @@ export const PostsView = () => {
         </Button>
       </div>
       <div className="clear-both">
-        <PostsList perPage={10} pageNumber={1} sortBy="byHot" filterTag="-" />
+        <PostsList posts={postsQuery.data.posts} />
+      </div>
+      <div className="mt-3 float-right">
+        <PageNavigator
+          pageNumber={pageNumber}
+          maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
+          goToPage={(page: number) => {
+            setPageNumber(page);
+          }}
+        />
       </div>
     </ContentLayout>
   );
