@@ -1,6 +1,8 @@
 import { faker } from "@faker-js/faker";
 
 import { Post } from "features/posts";
+import { createPost } from "features/posts/api/createPost";
+import { delay } from "utils/delay";
 
 function randomIntFromInterval(min: number, max: number) {
   // [min, max]: int
@@ -50,3 +52,17 @@ export const OldFakePostsData: Post[] = [
     createdAt: 100,
   },
 ];
+
+export async function SeedDBWithFakePosts() {
+  for (let i = 0; i < DefaultFakePostsData.length; i++) {
+    await delay(200);
+    const fakeData = DefaultFakePostsData[i];
+    console.log(fakeData);
+
+    createPost({
+      title: fakeData.title,
+      tag: fakeData.tag,
+      text: fakeData.text,
+    });
+  }
+}
