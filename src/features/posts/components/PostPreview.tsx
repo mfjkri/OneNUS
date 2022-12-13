@@ -5,43 +5,21 @@ import { Link } from "components/Elements";
 import { Post } from "../types";
 import { UTCEpochToLocalDate } from "utils/format";
 
-export const PostPreviewColumns = [
-  {
-    title: "Title",
-    field: "title",
-  },
-  {
-    title: "Author",
-    field: "author",
-  },
-  {
-    title: "Replies",
-    field: "repliesCount",
-  },
-  {
-    title: "Last Updated",
-    field: "Last updated",
-  },
-  {
-    title: "Tags",
-    field: "tag",
-  },
-];
+// type PostPreviewColumnsType = {
+//   title: string;
+//   author: string;
+//   repliesCount: number;
+//   updatedAt: number;
+//   tag: string;
+// };
 
-type PostPreviewColumnsType = {
-  title: string;
-  author: string;
-  repliesCount: number;
-  updatedAt: number;
-  tag: string;
-};
-
-type PostEntryProp = {
+export const PostPreview = ({
+  postEntry,
+  entryIndex,
+}: {
   postEntry: Post;
   entryIndex: number;
-};
-
-export const PostPreview = ({ postEntry, entryIndex }: PostEntryProp) => {
+}) => {
   // TODO Make column spacing fixed and truncuate text
   let rowClasses =
     "px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap truncate max-w-2xl ";
