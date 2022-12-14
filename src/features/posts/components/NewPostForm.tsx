@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import { Button, Link } from "components/Elements";
+import { Button, ConfirmationDialog, Link } from "components/Elements";
 import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
 import { createPost, NewPostDetails } from "../api/createPost";
@@ -54,11 +54,21 @@ export const NewPostForm = ({ onSuccess }: NewPostFormProps) => {
               Create Post
             </Button>
 
-            <Link to="/app/posts">
-              <Button className="mt-2 w-full" variant="danger">
-                Cancel
-              </Button>
-            </Link>
+            <ConfirmationDialog
+              triggerButton={
+                <Button className="mt-2 w-full" variant="danger">
+                  Discard Changes
+                </Button>
+              }
+              confirmButton={
+                <Link to="/app/posts">
+                  <Button className="w-full" variant="danger">
+                    Discard
+                  </Button>
+                </Link>
+              }
+              title="Are you sure you want to discard this post?"
+            />
           </div>
         </>
       )}
