@@ -11,7 +11,7 @@ function App() {
     onClick: toggle,
   };
   const ThemeClassName =
-    "w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 text-secondary hover hover:cursor-pointer";
+    "w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 text-secondary hover hover:cursor-pointer hover:opacity-50";
 
   return (
     <div className={isOpen ? "dark" : ""}>
@@ -20,12 +20,14 @@ function App() {
       </AppProvider>
       {isOpen ? (
         <MoonIcon
-          className={clsx(ThemeClassName, "hover:text-slate-500")}
+          aria-hidden="true"
+          className={clsx(ThemeClassName, "text-slate-500")}
           {...ThemeToggleProbs}
         />
       ) : (
         <SunIcon
-          className={clsx(ThemeClassName, "hover:text-yellow-500")}
+          aria-hidden="true"
+          className={clsx(ThemeClassName, "text-yellow-500")}
           {...ThemeToggleProbs}
         />
       )}

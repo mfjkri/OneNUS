@@ -19,7 +19,7 @@ export const Table = <Entry extends Record<string, any> & { id: string }>({
   if (!data?.length) {
     return (
       <div className="flex flex-col items-center justify-center text-gray-500 bg-white h-80">
-        <ArchiveBoxXMarkIcon className="w-16 h-16" />
+        <ArchiveBoxXMarkIcon className="w-16 h-16" aria-hidden="true" />
         <h4>No Entries Found</h4>
       </div>
     );

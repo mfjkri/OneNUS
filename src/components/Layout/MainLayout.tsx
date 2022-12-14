@@ -37,7 +37,12 @@ const NavigationBar = () => {
           <Button
             isLoading={isLoggingOut}
             variant="no_bg_light"
-            endIcon={<ArrowRightOnRectangleIcon className="h-6 w-auto" />}
+            endIcon={
+              <ArrowRightOnRectangleIcon
+                className="h-6 w-auto"
+                aria-hidden="true"
+              />
+            }
             onClick={async () => {
               await logout();
             }}
