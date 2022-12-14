@@ -7,7 +7,7 @@ import { SortTypes } from "../types";
 import { useState } from "react";
 import { PageNavigator, PageSortBy } from "components/Pagination";
 
-export const PostsView = () => {
+export const Posts = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
