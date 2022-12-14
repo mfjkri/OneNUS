@@ -15,24 +15,21 @@ import { UTCEpochToLocalDate } from "utils/format";
 
 export const PostPreview = ({
   postEntry,
-  entryIndex,
 }: {
   postEntry: Post;
   entryIndex: number;
 }) => {
   // TODO Make column spacing fixed and truncuate text
   let rowClasses =
-    "px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap truncate max-w-2xl ";
-
-  if (entryIndex % 2 === 0) {
-    rowClasses += "bg-secondary2 ";
-  }
+    "px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap truncate max-w-2xl text-primary dark:text-secondary ";
 
   return (
-    <React.Fragment>
+    <>
       <td key="title" className={rowClasses}>
         <Link to="">
-          <u className="text-primary hover:text-accent">{postEntry.title}</u>
+          <u className="hover:text-accent text-primary dark:text-secondary dark:hover:text-accent">
+            {postEntry.title}
+          </u>
         </Link>
       </td>
       <td key="author" className={rowClasses + "text-center"}>
@@ -49,6 +46,6 @@ export const PostPreview = ({
       <td key="tag" className={rowClasses + "text-center"}>
         {postEntry.tag}
       </td>
-    </React.Fragment>
+    </>
   );
 };

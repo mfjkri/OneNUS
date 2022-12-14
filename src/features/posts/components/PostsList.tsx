@@ -9,8 +9,8 @@ export const PostsList = ({ posts }: { posts: Post[] }) => {
     <div className="flex flex-col">
       <div className="-my-2 sm:-mx-6 lg:-mx-8">
         <div className="inline-block w-full py-2 align-middle sm:px-6 lg:px-8">
-          <div className="overflow-auto border-b border-primary2 shadow sm:rounded-lg">
-            <table className="table-auto min-w-full divide-y bg-secondary">
+          <div className="overflow-auto border-0 sm:rounded-lg">
+            <table className="table-auto min-w-full divide-y">
               <thead className="bg-primary">
                 <tr>
                   <th
@@ -36,7 +36,7 @@ export const PostsList = ({ posts }: { posts: Post[] }) => {
                 {posts.map((entry: Post, entryIndex: number) => (
                   <tr
                     key={entry?.id || entryIndex}
-                    className="odd:bg-white even:bg-gray-100"
+                    className="odd:bg-secondary even:bg-secondary2 odd:dark:bg-primary2 even:dark:bg-primary"
                   >
                     {<PostPreview postEntry={entry} entryIndex={entryIndex} />}
                   </tr>

@@ -58,7 +58,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         )}
       </Form>
       <div className="mt-2 flex items-center justify-end">
-        <div className="text-sm text-primary">
+        <div className="text-sm">
           Already have an account?{" "}
           <Link
             to="../login"
