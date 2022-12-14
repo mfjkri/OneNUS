@@ -10,10 +10,6 @@ export type Post = {
   starsCount: number;
 } & BaseEntity;
 
-export type CreatePostReponse = {
-  postId: string;
-};
-
 export enum SortTypes {
   ByNew,
   byHot,

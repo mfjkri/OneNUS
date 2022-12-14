@@ -3,7 +3,7 @@ import * as z from "zod";
 import { Button, ConfirmationDialog, Link } from "components/Elements";
 import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
-import { createPost, NewPostDetails } from "../api/createPost";
+import { CreatePostDTO, useCreatePost } from "../api/createPost";
 import { PostTags } from "../types";
 
 export const NewPostSchema = z.object({
@@ -17,10 +17,12 @@ type NewPostFormProps = {
 };
 
 export const NewPostForm = ({ onSuccess }: NewPostFormProps) => {
+  const createPostMutation = useCreatePost();
+
   return (
-    <Form<NewPostDetails, typeof NewPostSchema>
+    <Form<CreatePostDTO, typeof NewPostSchema>
       onSubmit={async (values) => {
-        await createPost(values);
+        await createPostMutation.mutateAsync(values);
         onSuccess();
       }}
       schema={NewPostSchema}
@@ -41,7 +43,7 @@ export const NewPostForm = ({ onSuccess }: NewPostFormProps) => {
           />
           <SelectField
             label="Category"
-            className="bg-secondary2"
+            className="bg-primary dark:bg-secondary "
             error={formState.errors["tag"]}
             registration={register("tag")}
             options={PostTags.map((type) => ({
@@ -50,7 +52,11 @@ export const NewPostForm = ({ onSuccess }: NewPostFormProps) => {
             }))}
           />
           <div>
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              isLoading={createPostMutation.isLoading}
+            >
               Create Post
             </Button>
 
