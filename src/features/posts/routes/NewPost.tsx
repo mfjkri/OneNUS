@@ -4,7 +4,7 @@ import { ContentLayout } from "components/Layout";
 import { NewPostForm } from "../components/NewPostForm";
 
 export const NewPost = () => {
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <ContentLayout title="">
@@ -12,7 +12,7 @@ export const NewPost = () => {
       <div className="bg-secondary dark:bg-primary mt-8 py-8 shadow rounded-3xl px-10">
         <NewPostForm
           onSuccess={() => {
-            nagivate("/app/posts");
+            navigate("/app/posts");
           }}
         />
       </div>

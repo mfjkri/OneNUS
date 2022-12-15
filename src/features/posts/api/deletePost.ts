@@ -21,7 +21,7 @@ export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
       const previousPosts = queryClient.getQueryData<Post[]>("posts");
       queryClient.setQueryData(
         "posts",
-        previousPosts?.filter((discussion) => discussion.id !== deletedPostId)
+        previousPosts?.filter((post) => post.id !== deletedPostId)
       );
 
       return { previousPosts };

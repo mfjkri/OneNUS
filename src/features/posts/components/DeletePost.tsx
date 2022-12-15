@@ -4,7 +4,6 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button, ConfirmationDialog } from "components/Elements";
 
 import { useDeletePost } from "../api/deletePost";
-import { delay } from "utils/delay";
 
 export const DeletePost = ({ postId }: { postId: string }) => {
   const deletePostMutation = useDeletePost();
@@ -21,7 +20,6 @@ export const DeletePost = ({ postId }: { postId: string }) => {
           onClick={async () => {
             await deletePostMutation.mutateAsync(postId);
             navigate("/app/posts");
-            await delay(1000);
           }}
           variant="danger"
         >
