@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import clsx from "clsx";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { useDisclosure } from "hooks/useDisclosure";
@@ -8,6 +9,14 @@ import { AppRoutes } from "routes";
 function App() {
   const { isOpen, toggle } = useDisclosure(true);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isOpen]);
+
   const ThemeToggleProbs = {
     onClick: toggle,
   };
@@ -15,7 +24,7 @@ function App() {
     "w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 text-secondary hover hover:cursor-pointer hover:opacity-50";
 
   return (
-    <div className={isOpen ? "dark" : ""}>
+    <div>
       <AppProvider>
         <AppRoutes />
       </AppProvider>
