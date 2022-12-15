@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import { Post } from "features/posts";
-import { createPost } from "features/posts/api/createPost";
+import { Post, createPost } from "features/posts";
 import { delay } from "utils/delay";
 
 function randomIntFromInterval(min: number, max: number) {
