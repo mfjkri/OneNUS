@@ -1,3 +1,4 @@
+import { Fragment, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import {
   CheckCircleIcon,
@@ -6,7 +7,6 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { Fragment, useEffect } from "react";
 
 const icons = {
   info: (
@@ -45,7 +45,7 @@ export const Notification = ({
     setTimeout(() => {
       onDismiss(id);
     }, 5000);
-  }, []);
+  }, [onDismiss, id]);
 
   return (
     <div className="w-full flex flex-col items-center space-y-4 sm:items-end">

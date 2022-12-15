@@ -8,9 +8,12 @@ import { useState } from "react";
 import { PageNavigator, PageSortBy } from "components/Pagination";
 
 export const Posts = () => {
+  // TODO Add pageNumber and filterTag selectors
   const [pageNumber, setPageNumber] = useState(1);
+  // eslint-disable-next-line
   const [perPage, setPerPage] = useState(10);
   const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
+  // eslint-disable-next-line
   const [filterTag, setFilterTag] = useState("-");
 
   const postsQuery = usePosts({
