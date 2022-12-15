@@ -8,7 +8,7 @@ import { PostTags } from "../types";
 
 export const NewPostSchema = z.object({
   title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
-  text: z.string().min(1, "Required").max(2500, "Maximum of 2500 characters"),
+  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
   tag: z.string().min(1, "Required"),
 });
 
