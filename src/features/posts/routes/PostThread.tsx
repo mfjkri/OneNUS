@@ -6,7 +6,7 @@ import { usePost } from "../api/getPost";
 import { ContentLayout } from "components/Layout";
 import { PostView } from "../components/PostView";
 
-export const Post = () => {
+export const PostThread = () => {
   const { postId } = useParams();
   const postQuery = usePost({ postId });
 
