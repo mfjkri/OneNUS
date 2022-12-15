@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { useAuth } from "lib/auth";
 
@@ -14,6 +16,7 @@ type PostViewProps = {
 
 export const PostView = ({ post }: PostViewProps) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   if (!user) {
     return null;
@@ -29,7 +32,14 @@ export const PostView = ({ post }: PostViewProps) => {
         <div className="grow ml-5">
           <div className="float-right mr-2 pt-1">
             {post.author === user?.username ? (
-              <DeletePost postId={post.id} />
+              <div className="flex flex-row">
+                <DeletePost postId={post.id} />
+                <div className="w-1"></div>
+                <PencilIcon
+                  className="h-6 w-auto hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
+                  onClick={() => navigate(`/app/posts/edit/${post.id}`)}
+                />
+              </div>
             ) : (
               <StarPost starsCount={post.starsCount} />
             )}
