@@ -45,6 +45,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         </div>
       }
     >
+      {/* Create our Component tree of Providers and Routing */}
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>

@@ -1,5 +1,6 @@
 const storagePrefix = "one_nus_";
 
+// Any methods related to localStorage (right now only used for JWT Token)
 const storage = {
   getToken: () => {
     return JSON.parse(

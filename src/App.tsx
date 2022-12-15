@@ -1,6 +1,7 @@
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { useDisclosure } from "hooks/useDisclosure";
+
 import { AppProvider } from "providers/app";
 import { AppRoutes } from "routes";
 
@@ -18,6 +19,8 @@ function App() {
       <AppProvider>
         <AppRoutes />
       </AppProvider>
+
+      {/* Color theme toggling */}
       {isOpen ? (
         <MoonIcon
           aria-hidden="true"

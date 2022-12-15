@@ -1,3 +1,4 @@
+// Check if string contains only alphabets / digits
 export const isAlphaNumericString = (str: string) => {
   var code, i, len;
 
@@ -15,6 +16,7 @@ export const isAlphaNumericString = (str: string) => {
   return true;
 };
 
+// Check if string contains only english alphabets
 export const isAlphaOnlyString = (str: string) => {
   var code, i, len;
 

@@ -5,8 +5,8 @@ import {
   UseMutationOptions,
   DefaultOptions,
 } from "react-query";
-import { PromiseValue } from "type-fest";
 
+// Set default options for all queries
 const queryConfig: DefaultOptions = {
   queries: {
     useErrorBoundary: true,
@@ -17,8 +17,9 @@ const queryConfig: DefaultOptions = {
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig });
 
-export type ExtractFnReturnType<FnType extends (...args: any) => any> =
-  PromiseValue<ReturnType<FnType>>;
+export type ExtractFnReturnType<FnType extends (...args: any) => any> = Awaited<
+  ReturnType<FnType>
+>;
 
 export type QueryConfig<QueryFnType extends (...args: any) => any> = Omit<
   UseQueryOptions<ExtractFnReturnType<QueryFnType>>,

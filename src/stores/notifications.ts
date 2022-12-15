@@ -30,3 +30,6 @@ export const useNotificationStore = create<NotificationsStore>((set) => ({
       ),
     })),
 }));
+
+// Usage
+// useNotificationStore.getState().addNotification({...})
