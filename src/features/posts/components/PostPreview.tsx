@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link } from "components/Elements";
 
 import { Post } from "../types";
