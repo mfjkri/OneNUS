@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 import { Button, Link } from "components/Elements";
 import { ContentLayout } from "components/Layout";
+import { CommentsList } from "features/comments";
 
 import { PostView } from "../components/PostView";
-import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 export const PostThread = () => {
   const { postId } = useParams();
@@ -26,6 +27,9 @@ export const PostThread = () => {
       </Link>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
         <PostView postId={parseInt(postId)} />
+      </div>
+      <div className="ml-5 mt-5">
+        <CommentsList />
       </div>
     </ContentLayout>
   );
