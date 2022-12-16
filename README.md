@@ -9,23 +9,28 @@
 3. ~~Mock data~~
 4. ~~View list of Posts~~
 5. ~~New post~~
-6. View post
-7. New comment
+6. ~~View post~~
+   1. ~~Edit post~~
+   2. ~~Delete post~~
+7. View comment
+   1. New comment
+   2. Edit comment
+   3. Delete comment
 
 ### Backend:
 
 1. ~~Set up database models~~
-2. Authentication route
+2. ~~Authentication~~
    - ~~Login~~
    - ~~Register~~
    - ~~GetUser~~
-3. Posts route
+3. ~~Posts~~
    - ~~GetPosts~~
    - ~~GetPostByID~~
    - ~~CreatePost~~
    - ~~UpdatePost~~
-   - DeletePost
-4. Comments route
+   - ~~DeletePost~~
+4. Comments
    - GetCommentsFromPostID
    - CreateComment
    - UpdateComment
@@ -35,6 +40,11 @@
 
 # Table of Contents
 
+- [CVWO Assignment Project](#cvwo-assignment-project)
+  - [TODO:](#todo)
+    - [Frontend:](#frontend)
+    - [Backend:](#backend)
+- [Table of Contents](#table-of-contents)
 - [Pre-Requistes](#pre-requistes)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
