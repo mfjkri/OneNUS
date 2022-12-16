@@ -4,13 +4,15 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { Button, Link } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { CommentsList } from "features/comments";
+import { NotFound } from "features/misc";
 
 import { PostView } from "../components/PostView";
 
 export const PostThread = () => {
   const { postId } = useParams();
-  if (!postId) {
-    return null;
+
+  if (!postId || !parseInt(postId)) {
+    return <NotFound />;
   }
 
   return (

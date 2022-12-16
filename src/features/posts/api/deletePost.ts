@@ -20,10 +20,12 @@ export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
 
       const previousPosts = queryClient.getQueryData<QueriedPosts>("posts");
       if (previousPosts) {
-        queryClient.setQueryData(
-          "posts",
-          previousPosts.posts.filter((post) => post.id !== deletedPostId)
-        );
+        queryClient.setQueryData("posts", {
+          posts: previousPosts.posts.filter(
+            (post) => post.id !== deletedPostId
+          ),
+          postCount: previousPosts.postCount - 1,
+        });
       }
 
       return { previousPosts };
@@ -34,7 +36,7 @@ export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
       }
     },
     onSuccess: () => {
-      queryClient.cancelQueries("posts");
+      queryClient.invalidateQueries("posts");
     },
     ...config,
     mutationFn: deletePost,

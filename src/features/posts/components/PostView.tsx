@@ -2,6 +2,7 @@ import * as z from "zod";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
+import { NotFound } from "features/misc";
 import { Form, InputField, TextAreaField } from "components/Form";
 import { Button, ConfirmationDialog, Spinner } from "components/Elements";
 import { useAuth } from "lib/auth";
@@ -153,7 +154,7 @@ export const PostView = ({ postId }: PostViewProps) => {
   }
 
   if (!postQuery.data) {
-    return null;
+    return <NotFound />;
   }
 
   return (
