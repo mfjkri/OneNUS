@@ -105,9 +105,9 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
           <p className="text-center">{post.author}</p>
         </div>
         <div className="grow max-w-[90%] ml-5">
-          <div className="float-right mx-2 pt-1">
+          <div className="float-right ml-4 pt-1">
             {ownPost ? (
-              <div className="flex flex-row border-2 rounded-lg p-1 bg-secondary2 dark:bg-primary2">
+              <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
                 <DeletePost postId={post.id} />
                 <PencilIcon
                   className="h-6 w-auto ml-2 hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"

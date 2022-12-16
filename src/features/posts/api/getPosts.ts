@@ -49,8 +49,3 @@ export const usePosts = ({
     queryFn: () => getPosts(data),
   });
 };
-
-export type QueriedPosts = {
-  posts: Post[];
-  postCount: number;
-};

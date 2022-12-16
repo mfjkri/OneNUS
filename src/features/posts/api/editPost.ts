@@ -32,7 +32,6 @@ export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
       queryClient.setQueryData(["posts", editingPost.postId], {
         ...previousPost,
         ...editingPost,
-        postId: editingPost.postId,
       });
 
       return { previousPost };
