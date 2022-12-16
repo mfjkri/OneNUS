@@ -6,7 +6,7 @@ export type Post = {
   text: string;
 
   author: string;
-  userId: string;
+  userId: number;
 
   commentsCount: number;
   commentedAt: number;

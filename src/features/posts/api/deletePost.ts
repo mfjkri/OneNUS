@@ -3,9 +3,9 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
-import { Post } from "../types";
+import { QueriedPosts } from "./getPosts";
 
-export const deletePost = (postId: string | undefined = "-") => {
+export const deletePost = (postId: number) => {
   return axios.delete(`posts/delete/${postId}`);
 };
 
@@ -18,11 +18,13 @@ export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
     onMutate: async (deletedPostId) => {
       await queryClient.cancelQueries("posts");
 
-      const previousPosts = queryClient.getQueryData<Post[]>("posts");
-      queryClient.setQueryData(
-        "posts",
-        previousPosts?.filter((post) => post.id !== deletedPostId)
-      );
+      const previousPosts = queryClient.getQueryData<QueriedPosts>("posts");
+      if (previousPosts) {
+        queryClient.setQueryData(
+          "posts",
+          previousPosts.posts.filter((post) => post.id !== deletedPostId)
+        );
+      }
 
       return { previousPosts };
     },

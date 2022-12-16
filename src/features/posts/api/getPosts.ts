@@ -44,7 +44,13 @@ export const usePosts = ({
 }: UsePostsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ["posts", pageNumber, perPage, sortBy, filterTag],
+    keepPreviousData: true,
+    queryKey: ["posts"],
     queryFn: () => getPosts(data),
   });
+};
+
+export type QueriedPosts = {
+  posts: Post[];
+  postCount: number;
 };

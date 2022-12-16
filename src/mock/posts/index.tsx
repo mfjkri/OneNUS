@@ -14,11 +14,12 @@ export const CreateFakePostsData = (n: number): Post[] => {
   const currData: Post[] = [];
   for (let i = 0; i < n; i = i + 1) {
     currData.push({
-      id: String(i),
+      id: randomIntFromInterval(4, 10),
       title: faker.lorem.sentence(randomIntFromInterval(4, 10)),
       tag: ValidTags[randomIntFromInterval(0, ValidTags.length - 1)],
       text: faker.lorem.sentences(randomIntFromInterval(4, 10)),
       author: faker.name.firstName(),
+      userId: randomIntFromInterval(4, 10),
       commentsCount: randomIntFromInterval(0, 40),
       commentedAt: 0,
       starsCount: randomIntFromInterval(0, 100),

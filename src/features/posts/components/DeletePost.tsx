@@ -5,7 +5,11 @@ import { Button, ConfirmationDialog } from "components/Elements";
 
 import { useDeletePost } from "../api/deletePost";
 
-export const DeletePost = ({ postId }: { postId: string }) => {
+type DeletePostProps = {
+  postId: number;
+};
+
+export const DeletePost = ({ postId }: DeletePostProps) => {
   const deletePostMutation = useDeletePost();
   const navigate = useNavigate();
 

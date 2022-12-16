@@ -4,7 +4,7 @@ import { ContentLayout } from "components/Layout";
 import { PostsList } from "../components/PostsList";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PagePaginator, PageSortBy } from "components/Pagination";
 
 export const Posts = () => {
@@ -28,6 +28,11 @@ export const Posts = () => {
       filterTag: filterTag,
     },
   });
+
+  useEffect(() => {
+    postsQuery.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber, perPage, sortBy, filterTag]);
 
   if (postsQuery.isLoading) {
     return (

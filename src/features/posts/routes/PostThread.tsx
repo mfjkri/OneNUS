@@ -25,7 +25,7 @@ export const PostThread = () => {
         </Button>
       </Link>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
-        <PostView postId={postId} />
+        <PostView postId={parseInt(postId)} />
       </div>
     </ContentLayout>
   );

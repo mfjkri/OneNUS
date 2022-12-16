@@ -23,15 +23,10 @@ export const useCreatePost = ({ config }: UseCreatePostOptions = {}) => {
   return useMutation({
     onMutate: async (newPost) => {
       await queryClient.cancelQueries("posts");
-
-      const previousPosts = queryClient.getQueryData<Post[]>("posts");
-      queryClient.setQueryData("posts", [...(previousPosts || []), newPost]);
-      return { previousPosts: previousPosts };
+      return { newPost };
     },
     onError: (_, __, context: any) => {
-      if (context?.previousPosts) {
-        queryClient.setQueryData("posts", context.previousPosts);
-      }
+      console.log("Failed to create new post", context.newPost);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("posts");

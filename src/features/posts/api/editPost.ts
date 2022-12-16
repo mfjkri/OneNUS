@@ -6,7 +6,7 @@ import { MutationConfig, queryClient } from "lib/react-query";
 import { Post } from "../types";
 
 export type EditPostDTO = {
-  postId: string;
+  postId: number;
   title: string;
   text: string;
 };
@@ -24,23 +24,25 @@ export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
     onMutate: async (editingPost) => {
       await queryClient.cancelQueries(["posts", editingPost.postId]);
 
-      const previousPosts = queryClient.getQueryData<Post>([
+      const previousPost = queryClient.getQueryData<Post>([
         "posts",
         editingPost.postId,
       ]);
 
       queryClient.setQueryData(["posts", editingPost.postId], {
-        ...previousPosts,
-        text: editingPost.text,
+        ...previousPost,
+        ...editingPost,
         postId: editingPost.postId,
       });
+
+      return { previousPost };
     },
 
     onError: (_, __, context: any) => {
-      if (context?.previousPosts) {
+      if (context?.previousPost) {
         queryClient.setQueryData(
-          ["posts", context.previousPosts.id],
-          context.previousPosts
+          ["posts", context.previousPost.id],
+          context.previousPost
         );
       }
     },

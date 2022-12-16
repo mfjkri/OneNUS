@@ -132,7 +132,7 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
 };
 
 type PostViewProps = {
-  postId: string;
+  postId: number;
 };
 
 export const PostView = ({ postId }: PostViewProps) => {
