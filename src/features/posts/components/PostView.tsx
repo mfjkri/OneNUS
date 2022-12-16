@@ -170,7 +170,7 @@ export const PostView = ({ postId }: PostViewProps) => {
       ) : (
         <PostRender
           post={postQuery.data}
-          ownPost={user.username === postQuery.data.author}
+          ownPost={user.id === postQuery.data.userId}
           toggleEditMode={toggle}
         />
       )}

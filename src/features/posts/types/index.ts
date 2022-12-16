@@ -4,9 +4,13 @@ export type Post = {
   title: string;
   tag: string;
   text: string;
+
   author: string;
+  userId: string;
+
   commentsCount: number;
   commentedAt: number;
+
   starsCount: number;
 } & BaseEntity;
 
