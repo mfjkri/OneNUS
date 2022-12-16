@@ -99,18 +99,17 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
   return (
     <div>
       <div className="flex flex-row">
-        <div className="flex-none w-20">
+        <div className="flex-none w-20 max-w-[10%]">
           <UserIcon className="w-auto h-auto" aria-hidden="true" />
           <p className="text-center">{post.author}</p>
         </div>
-        <div className="grow ml-5">
-          <div className="float-right mr-2 pt-1">
+        <div className="grow max-w-[90%] ml-5">
+          <div className="float-right mx-2 pt-1">
             {ownPost ? (
-              <div className="flex flex-row">
+              <div className="flex flex-row border-2 rounded-lg p-1 bg-secondary2 dark:bg-primary2">
                 <DeletePost postId={post.id} />
-                <div className="w-1"></div>
                 <PencilIcon
-                  className="h-6 w-auto hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
+                  className="h-6 w-auto ml-2 hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
                   onClick={toggleEditMode}
                 />
               </div>
@@ -118,7 +117,7 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
               <StarPost starsCount={post.starsCount} />
             )}
           </div>
-          <h2 className="text-2xl underline font-extrabold mb-1">
+          <h2 className="text-2xl break-all underline font-extrabold mb-2">
             {post.title}
           </h2>
           <p className="text-md break-words whitespace-pre-line">{post.text}</p>
