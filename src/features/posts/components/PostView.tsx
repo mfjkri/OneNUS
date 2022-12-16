@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { useEffect } from "react";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
@@ -142,10 +141,6 @@ export const PostView = ({ postId }: PostViewProps) => {
   const { isOpen, toggle } = useDisclosure(false);
   const postQuery = usePost({ postId });
 
-  useEffect(() => {
-    postQuery.refetch();
-  }, [isOpen]);
-
   if (!user) {
     return null;
   }
@@ -167,7 +162,10 @@ export const PostView = ({ postId }: PostViewProps) => {
       {isOpen ? (
         <EditPostForm
           post={postQuery.data}
-          onSuccess={toggle}
+          onSuccess={() => {
+            toggle();
+            postQuery.refetch();
+          }}
           onCancel={toggle}
         />
       ) : (
