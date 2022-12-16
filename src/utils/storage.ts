@@ -13,6 +13,26 @@ const storage = {
   clearToken: () => {
     window.localStorage.removeItem(`${storagePrefix}token`);
   },
+
+  getDarkMode: () => {
+    const cachedThemePreference = JSON.parse(
+      window.localStorage.getItem(`${storagePrefix}darkMode`) as string
+    );
+
+    if (!cachedThemePreference) {
+      storage.setDarkMode(true);
+      return true;
+    } else {
+      return cachedThemePreference === "true";
+    }
+  },
+
+  setDarkMode: (mode: boolean) => {
+    window.localStorage.setItem(
+      `${storagePrefix}darkMode`,
+      JSON.stringify(mode.toString())
+    );
+  },
 };
 
 export default storage;

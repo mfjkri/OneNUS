@@ -5,19 +5,21 @@ import { useDisclosure } from "hooks/useDisclosure";
 
 import { AppProvider } from "providers/app";
 import { AppRoutes } from "routes";
+import storage from "utils/storage";
 
 function App() {
-  const { isOpen, toggle } = useDisclosure(true);
+  const { isOpen: darkMode, toggle } = useDisclosure(storage.getDarkMode());
 
   useEffect(() => {
-    if (isOpen) {
+    storage.setDarkMode(darkMode);
+    if (darkMode) {
       document.body.classList.add("dark");
     } else {
       document.body.classList.remove("dark");
     }
-  }, [isOpen]);
+  }, [darkMode]);
 
-  const ThemeToggleProbs = {
+  const ThemeToggleProps = {
     onClick: toggle,
   };
   const ThemeClassName =
@@ -30,17 +32,17 @@ function App() {
       </AppProvider>
 
       {/* Color theme toggling */}
-      {isOpen ? (
+      {darkMode ? (
         <MoonIcon
           aria-hidden="true"
           className={clsx(ThemeClassName, "text-slate-500")}
-          {...ThemeToggleProbs}
+          {...ThemeToggleProps}
         />
       ) : (
         <SunIcon
           aria-hidden="true"
           className={clsx(ThemeClassName, "text-yellow-500")}
-          {...ThemeToggleProbs}
+          {...ThemeToggleProps}
         />
       )}
     </div>
