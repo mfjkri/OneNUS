@@ -5,7 +5,7 @@ import { PostsList } from "../components/PostsList";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
 import { useState } from "react";
-import { PageNavigator, PageSortBy } from "components/Pagination";
+import { PagePaginator, PageSortBy } from "components/Pagination";
 
 export const Posts = () => {
   // TODO Add pageNumber and filterTag selectors
@@ -57,11 +57,13 @@ export const Posts = () => {
       </div>
       <div className="mt-3 clear-both">
         <PostsList posts={postsQuery.data.posts} />
-        <PageNavigator
-          pageNumber={pageNumber}
-          maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
-          goToPage={setPageNumber}
-        />
+        <div className="mt-5">
+          <PagePaginator
+            pageNumber={pageNumber}
+            maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
+            goToPage={setPageNumber}
+          />
+        </div>
       </div>
     </ContentLayout>
   );
