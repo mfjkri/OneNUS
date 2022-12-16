@@ -138,7 +138,7 @@ type PostViewProps = {
 
 export const PostView = ({ postId }: PostViewProps) => {
   const { user } = useAuth();
-  const { isOpen, toggle } = useDisclosure(false);
+  const { isOpen: editMode, toggle } = useDisclosure(false);
   const postQuery = usePost({ postId });
 
   if (!user) {
@@ -159,7 +159,7 @@ export const PostView = ({ postId }: PostViewProps) => {
 
   return (
     <div>
-      {isOpen ? (
+      {editMode ? (
         <EditPostForm
           post={postQuery.data}
           onSuccess={() => {
