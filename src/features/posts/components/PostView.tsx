@@ -100,11 +100,11 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
   return (
     <div>
       <div className="flex flex-row">
-        <div className="flex-none w-20 max-w-[10%]">
+        <div className="flex-none w-[5%]">
           <UserIcon className="w-auto h-auto" aria-hidden="true" />
           <p className="text-center">{post.author}</p>
         </div>
-        <div className="grow max-w-[90%] ml-5">
+        <div className="grow w-[90%] ml-4">
           <div className="float-right ml-4 pt-1">
             {ownPost ? (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
@@ -125,7 +125,7 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
         </div>
       </div>
       <div className="grow mt-8 text-xs text-right text-gray-700 dark:text-gray-400">
-        <p>Created at: {UTCEpochToLocalDate(post.createdAt)}</p>
+        <p>Posted at: {UTCEpochToLocalDate(post.createdAt)}</p>
         <p>Last modified at: {UTCEpochToLocalDate(post.updatedAt)}</p>
       </div>
     </div>
