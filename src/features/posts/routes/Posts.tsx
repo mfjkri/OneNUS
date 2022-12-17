@@ -1,17 +1,23 @@
+import { useEffect, useState } from "react";
+
 import { Spinner } from "components/Elements";
 import { ContentLayout } from "components/Layout";
+import { PagePaginator, PageSortBy } from "components/Pagination";
+
+import { useAuth } from "lib/auth";
+import { POSTS_PER_PAGE } from "config";
 
 import { PostsList } from "../components/PostsList";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
-import { useEffect, useState } from "react";
-import { PagePaginator, PageSortBy } from "components/Pagination";
 
 export const Posts = () => {
+  const { user } = useAuth();
+
   // TODO Add pageNumber and filterTag selectors
   const [pageNumber, setPageNumber] = useState(1);
   // eslint-disable-next-line
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(POSTS_PER_PAGE);
   const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
   // eslint-disable-next-line
   const [filterTag, setFilterTag] = useState("-");
@@ -33,6 +39,8 @@ export const Posts = () => {
     postsQuery.refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber, perPage, sortBy, filterTag]);
+
+  if (!user) return null;
 
   if (postsQuery.isLoading) {
     return (

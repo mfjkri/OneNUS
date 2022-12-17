@@ -6,4 +6,7 @@ export const API_URL =
 
 export const MAX_POST_TITLE_CHAR = 100;
 export const MAX_POST_TEXT_CHAR = 5000;
+export const POSTS_PER_PAGE = 5;
+
 export const MAX_COMMENT_TEXT_CHAR = 1000;
+export const COMMENTS_PER_PAGE = 10;

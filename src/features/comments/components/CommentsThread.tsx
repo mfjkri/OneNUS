@@ -4,6 +4,7 @@ import { Spinner } from "components/Elements";
 import { PagePaginator } from "components/Pagination";
 
 import { useAuth } from "lib/auth";
+import { COMMENTS_PER_PAGE } from "config";
 
 import { SortTypes } from "../types";
 import { useComments } from "../api/getComments";
@@ -19,7 +20,7 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
 
   const [pageNumber, setPageNumber] = useState(1);
   // eslint-disable-next-line
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(COMMENTS_PER_PAGE);
   // eslint-disable-next-line
   const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
 
