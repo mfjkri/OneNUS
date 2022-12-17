@@ -36,7 +36,7 @@ export const useComments = ({ config, data }: UseCommentsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     keepPreviousData: true,
-    queryKey: ["comments"],
+    queryKey: ["comments", "all", data.postId],
     queryFn: () => getComments(data),
   });
 };

@@ -22,7 +22,7 @@ type NewCommentProps = {
 };
 
 export const NewComment = ({ postId, onSuccess }: NewCommentProps) => {
-  const createCommentMutation = useCreateComment();
+  const createCommentMutation = useCreateComment({ postId: postId });
 
   return (
     <Form<CreateCommentDTO, typeof NewCommentSchema>

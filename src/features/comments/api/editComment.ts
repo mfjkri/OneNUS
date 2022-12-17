@@ -15,10 +15,11 @@ export const editComment = (data: EditCommentDTO): Promise<Comment> => {
 };
 
 type UseEditCommentOptions = {
+  postId: number;
   config?: MutationConfig<typeof editComment>;
 };
 
-export const useEditComment = ({ config }: UseEditCommentOptions = {}) => {
+export const useEditComment = ({ postId, config }: UseEditCommentOptions) => {
   return useMutation({
     onMutate: async (editingComment) => {
       await queryClient.cancelQueries(["comments", editingComment.commentId]);
@@ -47,7 +48,7 @@ export const useEditComment = ({ config }: UseEditCommentOptions = {}) => {
 
     onSuccess: (data) => {
       queryClient.cancelQueries(["comments", data.id]);
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments", "all", postId]);
     },
     ...config,
     mutationFn: editComment,

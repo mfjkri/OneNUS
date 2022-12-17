@@ -35,7 +35,7 @@ export const CommentRender = ({
           <div className="float-right ml-4 pt-1">
             {ownComment && (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
-                <DeleteComment commentId={comment.id} />
+                <DeleteComment commentId={comment.id} postId={comment.postId} />
                 <PencilIcon
                   className="h-6 w-auto ml-2 hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
                   onClick={toggleEditMode}

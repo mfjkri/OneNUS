@@ -6,10 +6,11 @@ import { useDeleteComment } from "../../api/deleteComment";
 
 type DeleteCommentProps = {
   commentId: number;
+  postId: number;
 };
 
-export const DeleteComment = ({ commentId }: DeleteCommentProps) => {
-  const deleteCommentMutation = useDeleteComment();
+export const DeleteComment = ({ commentId, postId }: DeleteCommentProps) => {
+  const deleteCommentMutation = useDeleteComment({ postId: postId });
 
   return (
     <ConfirmationDialog

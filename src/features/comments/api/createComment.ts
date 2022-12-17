@@ -15,20 +15,24 @@ export const createComment = (data: CreateCommentDTO): Promise<Comment> => {
 };
 
 type UseCreateCommentOptions = {
+  postId: number;
   config?: MutationConfig<typeof createComment>;
 };
 
-export const useCreateComment = ({ config }: UseCreateCommentOptions = {}) => {
+export const useCreateComment = ({
+  postId,
+  config,
+}: UseCreateCommentOptions) => {
   return useMutation({
     onMutate: async (newComment) => {
-      await queryClient.cancelQueries("comments");
+      await queryClient.cancelQueries(["comments", "all", postId]);
       return { newComment };
     },
     onError: (_, __, context: any) => {
       console.log("Failed to create new comment", context.newComment);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments", "all", postId]);
     },
     ...config,
     mutationFn: createComment,

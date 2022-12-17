@@ -16,7 +16,7 @@ export const EditCommentForm = ({
   onSuccess,
   onCancel,
 }: EditCommentFormProps) => {
-  const editCommentMutation = useEditComment();
+  const editCommentMutation = useEditComment({ postId: comment.postId });
 
   return (
     <div className="p-4">

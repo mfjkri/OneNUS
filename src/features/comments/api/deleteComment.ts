@@ -10,19 +10,26 @@ export const deleteComment = (commentId: number) => {
 };
 
 type UseDeleteCommentOptions = {
+  postId: number;
   config?: MutationConfig<typeof deleteComment>;
 };
 
-export const useDeleteComment = ({ config }: UseDeleteCommentOptions = {}) => {
+export const useDeleteComment = ({
+  postId,
+  config,
+}: UseDeleteCommentOptions) => {
   return useMutation({
     onMutate: async (deletedCommentId) => {
-      await queryClient.cancelQueries("comments");
+      await queryClient.cancelQueries(["comments", "all", postId]);
 
-      const previousComments =
-        queryClient.getQueryData<GetCommentsResponse>("comments");
+      const previousComments = queryClient.getQueryData<GetCommentsResponse>([
+        "comments",
+        "all",
+        postId,
+      ]);
 
       if (previousComments) {
-        queryClient.setQueryData("comments", {
+        queryClient.setQueryData(["comments", "all", postId], {
           comments: previousComments.comments.filter(
             (comment) => comment.id !== deletedCommentId
           ),
@@ -34,11 +41,14 @@ export const useDeleteComment = ({ config }: UseDeleteCommentOptions = {}) => {
     },
     onError: (_, __, context: any) => {
       if (context?.previousComments) {
-        queryClient.setQueryData("comments", context.previousComments);
+        queryClient.setQueryData(
+          ["comments", "all", postId],
+          context.previousComments
+        );
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments", "all", postId]);
     },
     ...config,
     mutationFn: deleteComment,
