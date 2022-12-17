@@ -1,9 +1,15 @@
+import * as z from "zod";
+
 import { Form, InputField, TextAreaField } from "components/Form";
 import { Button, ConfirmationDialog } from "components/Elements";
 
 import { Post } from "../../types";
 import { EditPostDTO, useEditPost } from "../../api/editPost";
-import { NewPostSchema } from "./NewPostForm";
+
+const EditPostSchema = z.object({
+  title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
+  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
+});
 
 type EditPostFormProps = {
   post: Post;
@@ -20,7 +26,7 @@ export const EditPostForm = ({
 
   return (
     <div>
-      <Form<EditPostDTO, typeof NewPostSchema>
+      <Form<EditPostDTO, typeof EditPostSchema>
         onSubmit={async (values) => {
           await editPostMutation.mutateAsync({
             ...values,
@@ -28,7 +34,7 @@ export const EditPostForm = ({
           });
           onSuccess();
         }}
-        schema={NewPostSchema}
+        schema={EditPostSchema}
       >
         {({ register, formState }) => (
           <>
