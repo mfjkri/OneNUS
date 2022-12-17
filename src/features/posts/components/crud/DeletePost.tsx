@@ -3,7 +3,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 
 import { Button, ConfirmationDialog } from "components/Elements";
 
-import { useDeletePost } from "../api/deletePost";
+import { useDeletePost } from "../../api/deletePost";
 
 type DeletePostProps = {
   postId: number;

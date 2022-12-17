@@ -6,7 +6,7 @@ import { ContentLayout } from "components/Layout";
 import { CommentsThread } from "features/comments";
 import { NotFound } from "features/misc";
 
-import { PostView } from "../components/PostView";
+import { PostView } from "../components/crud/PostView";
 
 export const PostThread = () => {
   const { postId } = useParams();
@@ -31,7 +31,7 @@ export const PostThread = () => {
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
         <PostView postId={parsedPostId} />
       </div>
-      <div className="ml-5 mt-5">
+      <div className="px-6 py-5">
         <CommentsThread postId={parsedPostId} />
       </div>
     </ContentLayout>

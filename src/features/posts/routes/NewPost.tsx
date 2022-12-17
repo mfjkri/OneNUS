@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { ContentLayout } from "components/Layout";
-import { NewPostForm } from "../components/NewPostForm";
+import { NewPostForm } from "../components/crud/NewPostForm";
 
 export const NewPost = () => {
   const navigate = useNavigate();

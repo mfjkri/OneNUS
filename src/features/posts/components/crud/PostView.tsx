@@ -1,94 +1,18 @@
-import * as z from "zod";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { NotFound } from "features/misc";
-import { Form, InputField, TextAreaField } from "components/Form";
-import { Button, ConfirmationDialog, Spinner } from "components/Elements";
+import { Spinner } from "components/Elements";
 import { useAuth } from "lib/auth";
 
 import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
 
-import { Post } from "../types";
+import { Post } from "../../types";
+import { usePost } from "../../api/getPost";
+import { StarPost } from "../StarPost";
 import { DeletePost } from "./DeletePost";
-import { StarPost } from "./StarPost";
-import { EditPostDTO, useEditPost } from "../api/editPost";
-import { usePost } from "../api/getPost";
-
-const EditPostSchema = z.object({
-  title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
-  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
-});
-
-type EditPostFormProps = {
-  post: Post;
-  onSuccess: () => void;
-  onCancel: () => void;
-};
-
-const EditPostForm = ({ post, onSuccess, onCancel }: EditPostFormProps) => {
-  const editPostMutation = useEditPost();
-
-  return (
-    <div>
-      <Form<EditPostDTO, typeof EditPostSchema>
-        onSubmit={async (values) => {
-          await editPostMutation.mutateAsync({
-            ...values,
-            postId: post.id,
-          });
-          onSuccess();
-        }}
-        schema={EditPostSchema}
-      >
-        {({ register, formState }) => (
-          <>
-            <InputField
-              type="text"
-              className="hover:cursor-not-allowed"
-              disabled={true}
-              label="Title"
-              error={formState.errors["title"]}
-              registration={register("title", {
-                value: post.title,
-              })}
-            />
-            <TextAreaField
-              label="Body"
-              className="h-96"
-              error={formState.errors["text"]}
-              registration={register("text", { value: post.text })}
-            />
-            <div>
-              <Button
-                type="submit"
-                className="w-full"
-                isLoading={editPostMutation.isLoading}
-              >
-                Update Post
-              </Button>
-
-              <ConfirmationDialog
-                triggerButton={
-                  <Button className="mt-2 w-full" variant="danger">
-                    Discard Changes
-                  </Button>
-                }
-                confirmButton={
-                  <Button variant="danger" onClick={onCancel}>
-                    Discard
-                  </Button>
-                }
-                title="Are you sure you want to discard your changes?"
-              />
-            </div>
-          </>
-        )}
-      </Form>
-    </div>
-  );
-};
+import { EditPostForm } from "./EditPostForm";
 
 type PostRenderProps = {
   post: Post;
@@ -100,11 +24,16 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
   return (
     <div>
       <div className="flex flex-row">
-        <div className="flex-none w-[5%]">
+        <div className="flex-none w-[10%]">
           <UserIcon className="w-auto h-auto" aria-hidden="true" />
-          <p className="text-center">{post.author}</p>
+          <p className="break-all text-center">{post.author}</p>
+          {ownPost && (
+            <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
+              Me
+            </p>
+          )}
         </div>
-        <div className="grow w-[90%] ml-4">
+        <div className="grow w-[80%] ml-4">
           <div className="float-right ml-4 pt-1">
             {ownPost ? (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">

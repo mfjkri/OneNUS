@@ -3,8 +3,8 @@ import * as z from "zod";
 import { Button, ConfirmationDialog, Link } from "components/Elements";
 import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
-import { CreatePostDTO, useCreatePost } from "../api/createPost";
-import { PostTags } from "../types";
+import { CreatePostDTO, useCreatePost } from "../../api/createPost";
+import { PostTags } from "../../types";
 
 export const NewPostSchema = z.object({
   title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
