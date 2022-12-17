@@ -88,19 +88,23 @@ export const PagePaginator = ({
     (_, i) => i + 1 + initialPageRange
   );
 
+  const showExtremeSelectors = maxPageNumber > totalPagesShown;
+
   return (
     <div>
       <ol className="flex justify-center gap-1 text-xs font-bold text-primary dark:text-secondary">
-        <ChevronSelector
-          targetPageNumber={1}
-          currPageNumber={pageNumber}
-          maxPageNumber={maxPageNumber}
-          goToPage={goToPage}
-          selectorType="first"
-          chevronIcon={
-            <ChevronDoubleLeftIcon className="h-3 w-3" aria-hidden="true" />
-          }
-        />
+        {showExtremeSelectors && (
+          <ChevronSelector
+            targetPageNumber={1}
+            currPageNumber={pageNumber}
+            maxPageNumber={maxPageNumber}
+            goToPage={goToPage}
+            selectorType="first"
+            chevronIcon={
+              <ChevronDoubleLeftIcon className="h-3 w-3" aria-hidden="true" />
+            }
+          />
+        )}
         <ChevronSelector
           targetPageNumber={pageNumber - 1}
           currPageNumber={pageNumber}
@@ -135,16 +139,18 @@ export const PagePaginator = ({
             <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
           }
         />
-        <ChevronSelector
-          targetPageNumber={maxPageNumber}
-          currPageNumber={pageNumber}
-          maxPageNumber={maxPageNumber}
-          goToPage={goToPage}
-          selectorType="last"
-          chevronIcon={
-            <ChevronDoubleRightIcon className="h-3 w-3" aria-hidden="true" />
-          }
-        />
+        {showExtremeSelectors && (
+          <ChevronSelector
+            targetPageNumber={maxPageNumber}
+            currPageNumber={pageNumber}
+            maxPageNumber={maxPageNumber}
+            goToPage={goToPage}
+            selectorType="last"
+            chevronIcon={
+              <ChevronDoubleRightIcon className="h-3 w-3" aria-hidden="true" />
+            }
+          />
+        )}
       </ol>
     </div>
   );
