@@ -12,10 +12,10 @@
 6. ~~View post~~
    1. ~~Edit post~~
    2. ~~Delete post~~
-7. View comment
-   1. New comment
-   2. Edit comment
-   3. Delete comment
+7. ~~View comment~~
+   1. ~~New comment~~
+   2. ~~Edit comment~~
+   3. ~~Delete comment~~
 
 ### Backend:
 
@@ -30,11 +30,11 @@
    - ~~CreatePost~~
    - ~~UpdatePost~~
    - ~~DeletePost~~
-4. Comments
-   - GetCommentsFromPostID
-   - CreateComment
-   - UpdateComment
-   - DeleteComment
+4. ~~Comments~~
+   - ~~GetCommentsFromPostID~~
+   - ~~CreateComment~~
+   - ~~UpdateComment~~
+   - ~~DeleteComment~~
 
 <br/>
 
