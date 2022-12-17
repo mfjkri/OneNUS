@@ -69,7 +69,7 @@ export const Posts = () => {
         />
       </div>
       <div className="mt-3 clear-both">
-        <PostsList posts={postsQuery.data.posts} />
+        <PostsList posts={postsQuery.data.posts} user={user} />
         <div className="mt-5">
           <PagePaginator
             pageNumber={pageNumber}

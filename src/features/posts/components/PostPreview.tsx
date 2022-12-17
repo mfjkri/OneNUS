@@ -1,49 +1,53 @@
+import {
+  ChatBubbleBottomCenterTextIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
+
 import { Link } from "components/Elements";
 
-import { Post } from "../types";
 import { UTCEpochToLocalDate } from "utils/format";
 
-// type PostPreviewColumnsType = {
-//   title: string;
-//   author: string;
-//   repliesCount: number;
-//   updatedAt: number;
-//   tag: string;
-// };
+import { Post } from "../types";
 
 type PostPreviewProps = {
-  postEntry: Post;
-  entryIndex: number;
+  post: Post;
+  postIndex: number;
+  ownPost: boolean;
 };
 
-export const PostPreview = ({ postEntry }: PostPreviewProps) => {
-  // TODO Make column spacing fixed and truncuate text
-  let rowClasses =
-    "px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap truncate max-w-2xl text-primary dark:text-secondary ";
-
+export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
   return (
-    <>
-      <td key="title" className={rowClasses}>
-        <Link to={`./${postEntry.id}`}>
-          <u className="hover:text-accent text-primary dark:text-secondary dark:hover:text-accent">
-            {postEntry.title}
-          </u>
-        </Link>
-      </td>
-      <td key="author" className={rowClasses + "text-center"}>
-        {postEntry.author}
-      </td>
-      <td key="commentsCount" className={rowClasses + "text-center"}>
-        {postEntry.commentsCount}
-      </td>
-      <td key="commentedAt" className={rowClasses + "text-center"}>
-        {postEntry.commentedAt
-          ? UTCEpochToLocalDate(postEntry.commentedAt)
-          : "-"}
-      </td>
-      <td key="tag" className={rowClasses + "text-center"}>
-        {postEntry.tag}
-      </td>
-    </>
+    <Link to={`./${post.id}`}>
+      <div className="my-5 pr-5 text-primary dark:text-secondary hover:text-accent dark:hover:text-accent  hover:cursor-pointer">
+        <div className="flex flex-row h-24">
+          <div className="flex-none w-[10%]">
+            <UserIcon className="w-auto h-auto" aria-hidden="true" />
+            <p className="break-all text-center">{post.author}</p>
+            {ownPost && (
+              <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
+                Me
+              </p>
+            )}
+          </div>
+          <div className="grow w-[85%] ml-4">
+            <div className="float-right ml-4 pt-1">
+              <div className="flex flex-col">
+                <ChatBubbleBottomCenterTextIcon className="h-4 w-4" />
+                <p className="text-center text-[12px]">{post.commentsCount}</p>
+              </div>
+            </div>
+            <h2 className="text-xl break-all underline font-bold mb-2 truncate text-ellipsis">
+              {post.title}
+            </h2>
+            <p className="text-md break-all whitespace-pre-line truncate text-ellipsis max-h-[100%]">
+              {post.text}
+            </p>
+          </div>
+        </div>
+        <div className="grow mt-10 text-xs text-right text-gray-700 dark:text-gray-400">
+          <p>Posted at: {UTCEpochToLocalDate(post.createdAt)}</p>
+        </div>
+      </div>
+    </Link>
   );
 };
