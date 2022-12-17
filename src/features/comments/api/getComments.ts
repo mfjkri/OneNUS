@@ -32,7 +32,7 @@ type UseCommentsOptions = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const useComments = ({ config, data }: UseCommentsOptions) => {
+export const useComments = ({ data, config = {} }: UseCommentsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     keepPreviousData: true,

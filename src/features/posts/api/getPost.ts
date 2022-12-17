@@ -16,7 +16,7 @@ type UsePostOptions = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const usePost = ({ postId, config }: UsePostOptions) => {
+export const usePost = ({ postId, config = {} }: UsePostOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     queryKey: ["posts", postId],

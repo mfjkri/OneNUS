@@ -23,10 +23,6 @@ export const Posts = () => {
   const [filterTag, setFilterTag] = useState("-");
 
   const postsQuery = usePosts({
-    pageNumber: pageNumber,
-    perPage: perPage,
-    sortBy: sortBy,
-    filterTag: filterTag,
     data: {
       perPage: perPage,
       pageNumber: pageNumber,

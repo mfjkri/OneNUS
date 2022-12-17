@@ -19,7 +19,10 @@ type UseEditCommentOptions = {
   config?: MutationConfig<typeof editComment>;
 };
 
-export const useEditComment = ({ postId, config }: UseEditCommentOptions) => {
+export const useEditComment = ({
+  postId,
+  config = {},
+}: UseEditCommentOptions) => {
   return useMutation({
     onMutate: async (editingComment) => {
       await queryClient.cancelQueries(["comments", editingComment.commentId]);

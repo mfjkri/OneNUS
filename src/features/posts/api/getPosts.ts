@@ -26,22 +26,11 @@ export const getPosts = (data: GetPostsDTO): Promise<GetPostsResponse> => {
 type QueryFnType = typeof getPosts;
 
 type UsePostsOptions = {
-  pageNumber: number;
-  perPage: number;
-  sortBy: string;
-  filterTag: string;
   data: GetPostsDTO;
   config?: QueryConfig<QueryFnType>;
 };
 
-export const usePosts = ({
-  config,
-  data,
-  pageNumber,
-  perPage,
-  sortBy,
-  filterTag,
-}: UsePostsOptions) => {
+export const usePosts = ({ data, config = {} }: UsePostsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     keepPreviousData: true,
