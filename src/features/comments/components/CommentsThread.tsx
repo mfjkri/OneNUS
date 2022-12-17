@@ -8,7 +8,7 @@ import { useAuth } from "lib/auth";
 import { SortTypes } from "../types";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
-import { NewComment } from "./NewComment";
+import { NewComment } from "./crud/NewComment";
 
 type CommentsListProps = {
   postId: number;
@@ -53,15 +53,15 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
 
   return (
     <div>
-      <h1 className="text-xl">Comments</h1>
-      <NewComment postId={postId} />
-      {commentsQuery.data.comments ? (
-        <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
+      <NewComment postId={postId} onSuccess={() => null} />
+      <h1 className="text-xl ml-3">Comments</h1>
+      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
+        {commentsQuery.data.comments ? (
           <CommentsList comments={commentsQuery.data.comments} user={user} />
-        </div>
-      ) : (
-        <div className="ml-3 px-6 m-6">No Comments</div>
-      )}
+        ) : (
+          <NoComments />
+        )}
+      </div>
       <div className="mt-3">
         <PagePaginator
           pageNumber={pageNumber}
@@ -71,4 +71,8 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
       </div>
     </div>
   );
+};
+
+const NoComments = () => {
+  return <div className="ml-3 px-6 py-4">No Comments</div>;
 };

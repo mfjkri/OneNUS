@@ -1,7 +1,7 @@
 import { AuthUser } from "features/auth";
 
 import { Comment } from "../types";
-import { CommentView } from "./CommentView";
+import { CommentView } from "./crud/CommentView";
 
 type CommentsListProps = {
   comments: Comment[];

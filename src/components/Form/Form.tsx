@@ -38,6 +38,12 @@ export const Form = <
     ...options,
     resolver: schema && zodResolver(schema),
   });
+
+  React.useEffect(() => {
+    if (methods.formState.isSubmitSuccessful) {
+      methods.reset();
+    }
+  });
   return (
     <form
       className={clsx("space-y-6", className)}

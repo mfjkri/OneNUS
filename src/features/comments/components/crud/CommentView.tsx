@@ -1,83 +1,12 @@
-import * as z from "zod";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
-
-import { Form, TextAreaField } from "components/Form";
-import { Button, ConfirmationDialog } from "components/Elements";
 
 import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
 
-import { Comment } from "../types";
+import { Comment } from "../../types";
+import { EditCommentForm } from "./EditComment";
 import { DeleteComment } from "./DeleteComment";
-import { EditCommentDTO, useEditComment } from "../api/editComment";
-
-const EditPostSchema = z.object({
-  text: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
-});
-
-type EditCommentFormProps = {
-  comment: Comment;
-  onSuccess: () => void;
-  onCancel: () => void;
-};
-
-const EditCommentForm = ({
-  comment,
-  onSuccess,
-  onCancel,
-}: EditCommentFormProps) => {
-  const editCommentMutation = useEditComment();
-
-  return (
-    <div className="p-4">
-      <Form<EditCommentDTO, typeof EditPostSchema>
-        onSubmit={async (values) => {
-          await editCommentMutation.mutateAsync({
-            ...values,
-            commentId: comment.id,
-          });
-          onSuccess();
-        }}
-        schema={EditPostSchema}
-      >
-        {({ register, formState }) => (
-          <>
-            <TextAreaField
-              label="Now editing comment:"
-              className="h-20"
-              error={formState.errors["text"]}
-              registration={register("text", { value: comment.text })}
-            />
-            <div className="flex flex-row">
-              <div className="grow"></div>
-              <div className="flex flex-row">
-                <ConfirmationDialog
-                  triggerButton={
-                    <Button variant="danger">Discard Changes</Button>
-                  }
-                  confirmButton={
-                    <Button variant="danger" onClick={onCancel}>
-                      Discard
-                    </Button>
-                  }
-                  title="Are you sure you want to discard your changes?"
-                />
-                <Button
-                  type="submit"
-                  className="ml-3"
-                  isLoading={editCommentMutation.isLoading}
-                >
-                  Update Comment
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-      </Form>
-    </div>
-  );
-};
 
 type CommentRenderProps = {
   comment: Comment;
