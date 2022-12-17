@@ -1,5 +1,6 @@
-import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
+
+import { UserIcon } from "features/auth";
 
 import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
@@ -23,7 +24,11 @@ export const CommentRender = ({
     <div className="my-5">
       <div className="flex flex-row h-fit">
         <div className="flex-none w-[10%]">
-          <UserIcon className="w-auto h-auto" aria-hidden="true" />
+          <UserIcon
+            className="w-auto h-auto"
+            userId={comment.userId}
+            username={comment.author}
+          />
           <p className="break-all text-center">{comment.author}</p>
           {ownComment && (
             <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">

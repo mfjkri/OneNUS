@@ -1,9 +1,7 @@
-import {
-  ChatBubbleBottomCenterTextIcon,
-  UserIcon,
-} from "@heroicons/react/24/solid";
+import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
 
 import { Link } from "components/Elements";
+import { UserIcon } from "features/auth";
 
 import { UTCEpochToLocalDate } from "utils/format";
 
@@ -18,10 +16,14 @@ type PostPreviewProps = {
 export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
   return (
     <Link to={`./${post.id}`}>
-      <div className="my-5 pr-5 text-primary dark:text-secondary hover:text-accent dark:hover:text-accent  hover:cursor-pointer">
+      <div className="my-5 pr-5 text-primary dark:text-secondary hover:opacity-50 hover:cursor-pointer">
         <div className="flex flex-row h-24">
           <div className="flex-none w-[10%]">
-            <UserIcon className="w-auto h-auto" aria-hidden="true" />
+            <UserIcon
+              className="w-auto h-auto"
+              userId={post.userId}
+              username={post.author}
+            />
             <p className="break-all text-center">{post.author}</p>
             {ownPost && (
               <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">

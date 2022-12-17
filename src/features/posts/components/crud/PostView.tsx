@@ -1,10 +1,10 @@
-import { UserIcon } from "@heroicons/react/24/solid";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { NotFound } from "features/misc";
+import { UserIcon } from "features/auth";
 import { Spinner } from "components/Elements";
-import { useAuth } from "lib/auth";
 
+import { useAuth } from "lib/auth";
 import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
 
@@ -25,7 +25,11 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
     <div>
       <div className="flex flex-row">
         <div className="flex-none w-[10%]">
-          <UserIcon className="w-auto h-auto" aria-hidden="true" />
+          <UserIcon
+            className="w-auto h-auto"
+            userId={post.userId}
+            username={post.author}
+          />
           <p className="break-all text-center">{post.author}</p>
           {ownPost && (
             <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
