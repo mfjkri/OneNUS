@@ -3,15 +3,16 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 import { Button, Link } from "components/Elements";
 import { ContentLayout } from "components/Layout";
-import { CommentsList } from "features/comments";
+import { CommentsThread } from "features/comments";
 import { NotFound } from "features/misc";
 
 import { PostView } from "../components/PostView";
 
 export const PostThread = () => {
   const { postId } = useParams();
+  const parsedPostId = postId ? parseInt(postId) : undefined;
 
-  if (!postId || !parseInt(postId)) {
+  if (!parsedPostId) {
     return <NotFound />;
   }
 
@@ -28,10 +29,10 @@ export const PostThread = () => {
         </Button>
       </Link>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
-        <PostView postId={parseInt(postId)} />
+        <PostView postId={parsedPostId} />
       </div>
       <div className="ml-5 mt-5">
-        <CommentsList />
+        <CommentsThread postId={parsedPostId} />
       </div>
     </ContentLayout>
   );

@@ -6,3 +6,9 @@ export type Comment = {
   postId: number;
   userId: number;
 } & BaseEntity;
+
+export enum SortTypes {
+  ByNew,
+  byHot,
+  byRecent,
+}
