@@ -13,6 +13,7 @@ export const UserIcon = ({
   return (
     <img
       src={`https://avatars.dicebear.com/api/${gender}/${username}.svg`}
+      alt=""
       className={className}
     />
   );
