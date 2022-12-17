@@ -4,9 +4,16 @@ import { Button } from "components/Elements";
 import { Form, TextAreaField } from "components/Form";
 
 import { CreateCommentDTO, useCreateComment } from "../../api/createComment";
+import { MAX_COMMENT_TEXT_CHAR } from "config";
 
 export const NewCommentSchema = z.object({
-  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
+  text: z
+    .string()
+    .min(1, "Required")
+    .max(
+      MAX_COMMENT_TEXT_CHAR,
+      `Maximum of ${MAX_COMMENT_TEXT_CHAR} characters`
+    ),
 });
 
 type NewCommentProps = {

@@ -3,12 +3,20 @@ import * as z from "zod";
 import { Button, ConfirmationDialog, Link } from "components/Elements";
 import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
+import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
+
 import { CreatePostDTO, useCreatePost } from "../../api/createPost";
 import { PostTags } from "../../types";
 
 export const NewPostSchema = z.object({
-  title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
-  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
+  title: z
+    .string()
+    .min(1, "Required")
+    .max(MAX_POST_TITLE_CHAR, `Maximum of ${MAX_POST_TITLE_CHAR} characters`),
+  text: z
+    .string()
+    .min(1, "Required")
+    .max(MAX_POST_TEXT_CHAR, `Maximum of ${MAX_POST_TEXT_CHAR} characters`),
   tag: z.string().min(1, "Required"),
 });
 

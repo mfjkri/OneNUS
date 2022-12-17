@@ -3,3 +3,7 @@ export const API_URL =
   process.env.REACT_APP_API_MOCKING && process.env.NODE_ENV === "development"
     ? "http://localhost:8000"
     : (process.env.REACT_APP_API_URL as string);
+
+export const MAX_POST_TITLE_CHAR = 100;
+export const MAX_POST_TEXT_CHAR = 5000;
+export const MAX_COMMENT_TEXT_CHAR = 1000;

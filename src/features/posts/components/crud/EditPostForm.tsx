@@ -3,12 +3,20 @@ import * as z from "zod";
 import { Form, InputField, TextAreaField } from "components/Form";
 import { Button, ConfirmationDialog } from "components/Elements";
 
+import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
+
 import { Post } from "../../types";
 import { EditPostDTO, useEditPost } from "../../api/editPost";
 
 const EditPostSchema = z.object({
-  title: z.string().min(1, "Required").max(100, "Maximum of 100 characters"),
-  text: z.string().min(1, "Required").max(5000, "Maximum of 5000 characters"),
+  title: z
+    .string()
+    .min(1, "Required")
+    .max(MAX_POST_TITLE_CHAR, `Maximum of ${MAX_POST_TITLE_CHAR} characters`),
+  text: z
+    .string()
+    .min(1, "Required")
+    .max(MAX_POST_TEXT_CHAR, `Maximum of ${MAX_POST_TEXT_CHAR} characters`),
 });
 
 type EditPostFormProps = {
