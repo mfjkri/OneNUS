@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Spinner } from "components/Elements";
 import { PagePaginator } from "components/Pagination";

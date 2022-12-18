@@ -26,7 +26,6 @@ const storage = {
       return cachedThemePreference === "true";
     }
   },
-
   setDarkMode: (mode: boolean) => {
     window.localStorage.setItem(
       `${storagePrefix}darkMode`,
