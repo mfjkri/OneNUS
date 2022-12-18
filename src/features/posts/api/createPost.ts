@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
+import { postKeys } from "./queries";
 import { Post } from "../types";
 
 export type CreatePostDTO = {
@@ -22,14 +23,14 @@ type UseCreatePostOptions = {
 export const useCreatePost = ({ config }: UseCreatePostOptions = {}) => {
   return useMutation({
     onMutate: async (newPost) => {
-      await queryClient.cancelQueries("posts");
+      await queryClient.cancelQueries(postKeys.lists());
       return { newPost };
     },
     onError: (_, __, context: any) => {
       console.log("Failed to create new post", context.newPost);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("posts");
+      queryClient.invalidateQueries(postKeys.lists());
     },
     ...config,
     mutationFn: createPost,

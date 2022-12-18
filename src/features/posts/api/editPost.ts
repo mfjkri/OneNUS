@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
+import { postKeys } from "./queries";
 import { Post } from "../types";
 
 export type EditPostDTO = {
@@ -22,14 +23,12 @@ type UseEditPostOptions = {
 export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
   return useMutation({
     onMutate: async (editingPost) => {
-      await queryClient.cancelQueries(["posts", editingPost.postId]);
+      const queryKey = postKeys.post(editingPost.postId);
+      await queryClient.cancelQueries(queryKey);
 
-      const previousPost = queryClient.getQueryData<Post>([
-        "posts",
-        editingPost.postId,
-      ]);
+      const previousPost = queryClient.getQueryData<Post>(queryKey);
 
-      queryClient.setQueryData(["posts", editingPost.postId], {
+      queryClient.setQueryData(queryKey, {
         ...previousPost,
         ...editingPost,
       });
@@ -40,14 +39,17 @@ export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
     onError: (_, __, context: any) => {
       if (context?.previousPost) {
         queryClient.setQueryData(
-          ["posts", context.previousPost.id],
+          postKeys.post(context.previousPost.postId),
           context.previousPost
         );
       }
     },
 
     onSuccess: (data) => {
-      queryClient.cancelQueries(["posts", data.id]);
+      queryClient.invalidateQueries({
+        queryKey: postKeys.post(data.id),
+        refetchActive: false,
+      });
     },
     ...config,
     mutationFn: editPost,

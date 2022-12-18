@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { axios } from "lib/axios";
 import { ExtractFnReturnType, QueryConfig } from "lib/react-query";
 
+import { postKeys } from "./queries";
 import { Post } from "../types";
 
 export type GetPostsDTO = {
@@ -33,8 +34,8 @@ type UsePostsOptions = {
 export const usePosts = ({ data, config = {} }: UsePostsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    keepPreviousData: true,
-    queryKey: ["posts"],
+    // keepPreviousData: true,
+    queryKey: postKeys.list(data),
     queryFn: () => getPosts(data),
   });
 };

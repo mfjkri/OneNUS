@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { axios } from "lib/axios";
 import { ExtractFnReturnType, QueryConfig } from "lib/react-query";
 
+import { postKeys } from "./queries";
 import { Post } from "../types";
 
 export const getPost = (postId: number): Promise<Post> => {
@@ -19,7 +20,7 @@ type UsePostOptions = {
 export const usePost = ({ postId, config = {} }: UsePostOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ["posts", postId],
+    queryKey: postKeys.post(postId),
     queryFn: () => getPost(postId),
   });
 };

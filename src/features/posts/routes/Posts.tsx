@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Spinner } from "components/Elements";
 import { ContentLayout } from "components/Layout";
@@ -21,7 +21,6 @@ export const Posts = () => {
   const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
   // eslint-disable-next-line
   const [filterTag, setFilterTag] = useState("-");
-  const [isLoading, setIsLoading] = useState(false);
 
   const postsQuery = usePosts({
     data: {
@@ -31,16 +30,6 @@ export const Posts = () => {
       filterTag: filterTag,
     },
   });
-
-  useEffect(() => {
-    const refetchData = async () => {
-      setIsLoading(true);
-      await postsQuery.refetch();
-      setIsLoading(false);
-    };
-    refetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber, perPage, sortBy, filterTag]);
 
   if (!user) return null;
 
@@ -72,11 +61,6 @@ export const Posts = () => {
       </div>
       <div className="mt-3 clear-both">
         <PostsList posts={postsQuery.data.posts} user={user} />
-        {isLoading && (
-          <div className="w-full h-12 flex justify-center items-center">
-            <Spinner size="md" />
-          </div>
-        )}
         <div className="mt-5">
           <PagePaginator
             pageNumber={pageNumber}

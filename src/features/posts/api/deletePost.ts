@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
-import { GetPostsResponse } from "./getPosts";
+import { postKeys } from "./queries";
 
 export const deletePost = (postId: number) => {
   return axios.delete(`posts/delete/${postId}`);
@@ -16,28 +16,14 @@ type UseDeletePostOptions = {
 export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
   return useMutation({
     onMutate: async (deletedPostId) => {
-      await queryClient.cancelQueries("posts");
-
-      const previousPosts = queryClient.getQueryData<GetPostsResponse>("posts");
-
-      if (previousPosts) {
-        queryClient.setQueryData("posts", {
-          posts: previousPosts.posts.filter(
-            (post) => post.id !== deletedPostId
-          ),
-          postsCount: previousPosts.postsCount - 1,
-        });
-      }
-
-      return { previousPosts };
+      await queryClient.cancelQueries(postKeys.lists());
+      return { deletedPostId };
     },
     onError: (_, __, context: any) => {
-      if (context?.previousPosts) {
-        queryClient.setQueryData("posts", context.previousPosts);
-      }
+      console.log("Failed to delete post", context.deletedPostId);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("posts");
+      queryClient.invalidateQueries(postKeys.lists());
     },
     ...config,
     mutationFn: deletePost,
