@@ -16,7 +16,7 @@ type PostPreviewProps = {
 export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
   return (
     <Link to={`./${post.id}`}>
-      <div className="my-5 pr-5 text-primary dark:text-secondary hover:opacity-50 hover:cursor-pointer">
+      <div className="my-5 pr-5 text-primary dark:text-secondary hover:opacity-50 hover:cursor-pointer group">
         <div className="flex flex-row h-24">
           <div className="flex-none w-[10%]">
             <UserIcon
@@ -38,7 +38,7 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
                 <p className="text-center text-[12px]">{post.commentsCount}</p>
               </div>
             </div>
-            <h2 className="text-xl break-all underline font-bold mb-2 truncate text-ellipsis">
+            <h2 className="text-xl break-all font-bold mb-2 truncate text-ellipsis group-hover:underline">
               {post.title}
             </h2>
             <p className="text-md break-all whitespace-pre-line truncate text-ellipsis max-h-[100%]">
