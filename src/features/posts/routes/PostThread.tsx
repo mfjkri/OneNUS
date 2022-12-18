@@ -6,7 +6,7 @@ import { ContentLayout } from "components/Layout";
 import { CommentsThread } from "features/comments";
 import { NotFound } from "features/misc";
 
-import { PostView } from "../components/crud/PostView";
+import { ReadPost } from "../components/crud/ReadPost";
 
 export const PostThread = () => {
   const { postId } = useParams();
@@ -29,7 +29,7 @@ export const PostThread = () => {
         </Button>
       </Link>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
-        <PostView postId={parsedPostId} />
+        <ReadPost postId={parsedPostId} />
       </div>
       <div className="px-6 py-5">
         <CommentsThread postId={parsedPostId} />

@@ -12,15 +12,15 @@ import { Post } from "../../types";
 import { usePost } from "../../api/getPost";
 import { StarPost } from "../StarPost";
 import { DeletePost } from "./DeletePost";
-import { EditPostForm } from "./EditPostForm";
+import { UpdatePostForm } from "./UpdatePostForm";
 
-type PostRenderProps = {
+type PostViewProps = {
   post: Post;
   ownPost: boolean;
   toggleEditMode: () => void;
 };
 
-const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
+const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
   return (
     <div>
       <div className="flex flex-row">
@@ -65,11 +65,11 @@ const PostRender = ({ post, ownPost, toggleEditMode }: PostRenderProps) => {
   );
 };
 
-type PostViewProps = {
+type ReadPostProps = {
   postId: number;
 };
 
-export const PostView = ({ postId }: PostViewProps) => {
+export const ReadPost = ({ postId }: ReadPostProps) => {
   const { user } = useAuth();
   const { isOpen: editMode, toggle } = useDisclosure(false);
   const postQuery = usePost({ postId });
@@ -93,7 +93,7 @@ export const PostView = ({ postId }: PostViewProps) => {
   return (
     <div>
       {editMode ? (
-        <EditPostForm
+        <UpdatePostForm
           post={postQuery.data}
           onSuccess={() => {
             toggle();
@@ -102,7 +102,7 @@ export const PostView = ({ postId }: PostViewProps) => {
           onCancel={toggle}
         />
       ) : (
-        <PostRender
+        <PostView
           post={postQuery.data}
           ownPost={user.id === postQuery.data.userId}
           toggleEditMode={toggle}

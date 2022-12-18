@@ -6,31 +6,31 @@ import { MutationConfig, queryClient } from "lib/react-query";
 import { postKeys } from "./queries";
 import { Post } from "../types";
 
-export type EditPostDTO = {
+export type UpdatePostDTO = {
   postId: number;
   title: string;
   text: string;
 };
 
-export const editPost = (data: EditPostDTO): Promise<Post> => {
+export const updatePost = (data: UpdatePostDTO): Promise<Post> => {
   return axios.post("/posts/updatetext", data);
 };
 
-type UseEditPostOptions = {
-  config?: MutationConfig<typeof editPost>;
+type UseUpdatePostOptions = {
+  config?: MutationConfig<typeof updatePost>;
 };
 
-export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
+export const useUpdatePost = ({ config }: UseUpdatePostOptions = {}) => {
   return useMutation({
-    onMutate: async (editingPost) => {
-      const queryKey = postKeys.post(editingPost.postId);
+    onMutate: async (updatingPost) => {
+      const queryKey = postKeys.post(updatingPost.postId);
       await queryClient.cancelQueries(queryKey);
 
       const previousPost = queryClient.getQueryData<Post>(queryKey);
 
       queryClient.setQueryData(queryKey, {
         ...previousPost,
-        ...editingPost,
+        ...updatingPost,
       });
 
       return { previousPost };
@@ -52,6 +52,6 @@ export const useEditPost = ({ config }: UseEditPostOptions = {}) => {
       });
     },
     ...config,
-    mutationFn: editPost,
+    mutationFn: updatePost,
   });
 };

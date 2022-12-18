@@ -6,9 +6,9 @@ import { Button, ConfirmationDialog } from "components/Elements";
 import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
 
 import { Post } from "../../types";
-import { EditPostDTO, useEditPost } from "../../api/editPost";
+import { UpdatePostDTO, useUpdatePost } from "../../api/updatePost";
 
-const EditPostSchema = z.object({
+const UpdatePostSchema = z.object({
   title: z
     .string()
     .min(1, "Required")
@@ -19,30 +19,30 @@ const EditPostSchema = z.object({
     .max(MAX_POST_TEXT_CHAR, `Maximum of ${MAX_POST_TEXT_CHAR} characters`),
 });
 
-type EditPostFormProps = {
+type UpdatePostFormProps = {
   post: Post;
   onSuccess: () => void;
   onCancel: () => void;
 };
 
-export const EditPostForm = ({
+export const UpdatePostForm = ({
   post,
   onSuccess,
   onCancel,
-}: EditPostFormProps) => {
-  const editPostMutation = useEditPost();
+}: UpdatePostFormProps) => {
+  const updatePostMutation = useUpdatePost();
 
   return (
     <div>
-      <Form<EditPostDTO, typeof EditPostSchema>
+      <Form<UpdatePostDTO, typeof UpdatePostSchema>
         onSubmit={async (values) => {
-          await editPostMutation.mutateAsync({
+          await updatePostMutation.mutateAsync({
             ...values,
             postId: post.id,
           });
           onSuccess();
         }}
-        schema={EditPostSchema}
+        schema={UpdatePostSchema}
       >
         {({ register, formState }) => (
           <>
@@ -66,7 +66,7 @@ export const EditPostForm = ({
               <Button
                 type="submit"
                 className="w-full"
-                isLoading={editPostMutation.isLoading}
+                isLoading={updatePostMutation.isLoading}
               >
                 Update Post
               </Button>

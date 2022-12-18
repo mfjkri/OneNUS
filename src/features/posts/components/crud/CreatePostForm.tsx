@@ -8,7 +8,7 @@ import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
 import { CreatePostDTO, useCreatePost } from "../../api/createPost";
 import { PostTags } from "../../types";
 
-export const NewPostSchema = z.object({
+export const CreatePostSchema = z.object({
   title: z
     .string()
     .min(1, "Required")
@@ -20,20 +20,20 @@ export const NewPostSchema = z.object({
   tag: z.string().min(1, "Required"),
 });
 
-type NewPostFormProps = {
+type CreatePostFormProps = {
   onSuccess: () => void;
 };
 
-export const NewPostForm = ({ onSuccess }: NewPostFormProps) => {
+export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
   const createPostMutation = useCreatePost();
 
   return (
-    <Form<CreatePostDTO, typeof NewPostSchema>
+    <Form<CreatePostDTO, typeof CreatePostSchema>
       onSubmit={async (values) => {
         await createPostMutation.mutateAsync(values);
         onSuccess();
       }}
-      schema={NewPostSchema}
+      schema={CreatePostSchema}
     >
       {({ register, formState }) => (
         <>
