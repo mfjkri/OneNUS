@@ -1,7 +1,7 @@
 import { AuthUser } from "features/auth";
 
 import { Comment } from "../types";
-import { CommentView } from "./crud/CommentView";
+import { ReadComment } from "./crud/ReadComment";
 
 type CommentsListProps = {
   comments: Comment[];
@@ -13,7 +13,7 @@ export const CommentsList = ({ comments, user }: CommentsListProps) => {
     <ul className="divide-y divide-dashed px-6 py-2">
       {comments.map((comment, commentIndex) => (
         <li key={commentIndex}>
-          <CommentView
+          <ReadComment
             comment={comment}
             ownComment={user.id === comment.userId}
           />

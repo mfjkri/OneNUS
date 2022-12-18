@@ -2,33 +2,33 @@ import { Form, TextAreaField } from "components/Form";
 import { Button, ConfirmationDialog } from "components/Elements";
 
 import { Comment } from "../../types";
-import { EditCommentDTO, useEditComment } from "../../api/editComment";
-import { NewCommentSchema } from "./NewComment";
+import { UpdateCommentDTO, useUpdateComment } from "../../api/updateComment";
+import { CreateCommentSchema } from "./CreateComment";
 
-type EditCommentFormProps = {
+type UpdateCommentFormProps = {
   comment: Comment;
   onSuccess: () => void;
   onCancel: () => void;
 };
 
-export const EditCommentForm = ({
+export const UpdateCommentForm = ({
   comment,
   onSuccess,
   onCancel,
-}: EditCommentFormProps) => {
-  const editCommentMutation = useEditComment({ postId: comment.postId });
+}: UpdateCommentFormProps) => {
+  const updateCommentMutation = useUpdateComment({ postId: comment.postId });
 
   return (
     <div className="p-4">
-      <Form<EditCommentDTO, typeof NewCommentSchema>
+      <Form<UpdateCommentDTO, typeof CreateCommentSchema>
         onSubmit={async (values) => {
-          await editCommentMutation.mutateAsync({
+          await updateCommentMutation.mutateAsync({
             ...values,
             commentId: comment.id,
           });
           onSuccess();
         }}
-        schema={NewCommentSchema}
+        schema={CreateCommentSchema}
       >
         {({ register, formState }) => (
           <>
@@ -55,7 +55,7 @@ export const EditCommentForm = ({
                 <Button
                   type="submit"
                   className="ml-3"
-                  isLoading={editCommentMutation.isLoading}
+                  isLoading={updateCommentMutation.isLoading}
                 >
                   Update Comment
                 </Button>

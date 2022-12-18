@@ -6,20 +6,20 @@ import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
 
 import { Comment } from "../../types";
-import { EditCommentForm } from "./EditComment";
+import { UpdateCommentForm } from "./UpdateComment";
 import { DeleteComment } from "./DeleteComment";
 
-type CommentRenderProps = {
+type CommentViewProps = {
   comment: Comment;
   ownComment: boolean;
   toggleEditMode: () => void;
 };
 
-export const CommentRender = ({
+export const CommentView = ({
   comment,
   ownComment,
   toggleEditMode,
-}: CommentRenderProps) => {
+}: CommentViewProps) => {
   return (
     <div className="my-5">
       <div className="flex flex-row h-fit">
@@ -61,23 +61,23 @@ export const CommentRender = ({
   );
 };
 
-type CommentViewProps = {
+type ReadCommentProps = {
   comment: Comment;
   ownComment: boolean;
 };
 
-export const CommentView = ({ comment, ownComment }: CommentViewProps) => {
+export const ReadComment = ({ comment, ownComment }: ReadCommentProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
   return (
     <div>
       {editMode ? (
-        <EditCommentForm
+        <UpdateCommentForm
           comment={comment}
           onSuccess={toggle}
           onCancel={toggle}
         />
       ) : (
-        <CommentRender
+        <CommentView
           comment={comment}
           ownComment={ownComment}
           toggleEditMode={toggle}

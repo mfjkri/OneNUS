@@ -6,34 +6,34 @@ import { MutationConfig, queryClient } from "lib/react-query";
 import { commentKeys } from "./queries";
 import { Comment } from "../types";
 
-export type EditCommentDTO = {
+export type UpdateCommentDTO = {
   commentId: number;
   text: string;
 };
 
-export const editComment = (data: EditCommentDTO): Promise<Comment> => {
+export const updateComment = (data: UpdateCommentDTO): Promise<Comment> => {
   return axios.post("/comments/updatetext", data);
 };
 
-type UseEditCommentOptions = {
+type UseUpdateCommentOptions = {
   postId: number;
-  config?: MutationConfig<typeof editComment>;
+  config?: MutationConfig<typeof updateComment>;
 };
 
-export const useEditComment = ({
+export const useUpdateComment = ({
   postId,
   config = {},
-}: UseEditCommentOptions) => {
+}: UseUpdateCommentOptions) => {
   return useMutation({
-    onMutate: async (editingComment) => {
-      const queryKey = commentKeys.comment(editingComment.commentId);
+    onMutate: async (updatingComment) => {
+      const queryKey = commentKeys.comment(updatingComment.commentId);
       await queryClient.cancelQueries(queryKey);
 
       const previousComment = queryClient.getQueryData<Comment>(queryKey);
 
       queryClient.setQueryData(queryKey, {
         ...previousComment,
-        ...editingComment,
+        ...updatingComment,
       });
 
       return { previousComment };
@@ -53,6 +53,6 @@ export const useEditComment = ({
       queryClient.invalidateQueries(commentKeys.lists(postId));
     },
     ...config,
-    mutationFn: editComment,
+    mutationFn: updateComment,
   });
 };

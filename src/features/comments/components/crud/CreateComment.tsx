@@ -6,7 +6,7 @@ import { Form, TextAreaField } from "components/Form";
 import { CreateCommentDTO, useCreateComment } from "../../api/createComment";
 import { MAX_COMMENT_TEXT_CHAR } from "config";
 
-export const NewCommentSchema = z.object({
+export const CreateCommentSchema = z.object({
   text: z
     .string()
     .min(1, "Required")
@@ -16,16 +16,16 @@ export const NewCommentSchema = z.object({
     ),
 });
 
-type NewCommentProps = {
+type CreateCommentProps = {
   postId: number;
   onSuccess: () => void;
 };
 
-export const NewComment = ({ postId, onSuccess }: NewCommentProps) => {
+export const CreateComment = ({ postId, onSuccess }: CreateCommentProps) => {
   const createCommentMutation = useCreateComment({ postId: postId });
 
   return (
-    <Form<CreateCommentDTO, typeof NewCommentSchema>
+    <Form<CreateCommentDTO, typeof CreateCommentSchema>
       onSubmit={async (values) => {
         await createCommentMutation.mutateAsync({
           ...values,
@@ -33,7 +33,7 @@ export const NewComment = ({ postId, onSuccess }: NewCommentProps) => {
         });
         onSuccess();
       }}
-      schema={NewCommentSchema}
+      schema={CreateCommentSchema}
     >
       {({ register, formState }) => (
         <>

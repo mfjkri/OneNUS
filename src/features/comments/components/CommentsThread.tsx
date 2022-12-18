@@ -9,7 +9,7 @@ import { COMMENTS_PER_PAGE } from "config";
 import { SortTypes } from "../types";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
-import { NewComment } from "./crud/NewComment";
+import { CreateComment } from "./crud/CreateComment";
 
 type CommentsListProps = {
   postId: number;
@@ -49,7 +49,7 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
 
   return (
     <div>
-      <NewComment postId={postId} onSuccess={() => null} />
+      <CreateComment postId={postId} onSuccess={() => null} />
       <h1 className="text-xl ml-3">Comments</h1>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
         {commentsQuery.data.comments ? (
