@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
+import { commentKeys } from "./queries";
 import { Comment } from "../types";
 
 export type EditCommentDTO = {
@@ -25,14 +26,12 @@ export const useEditComment = ({
 }: UseEditCommentOptions) => {
   return useMutation({
     onMutate: async (editingComment) => {
-      await queryClient.cancelQueries(["comments", editingComment.commentId]);
+      const queryKey = commentKeys.comment(editingComment.commentId);
+      await queryClient.cancelQueries(queryKey);
 
-      const previousComment = queryClient.getQueryData<Comment>([
-        "comments",
-        editingComment.commentId,
-      ]);
+      const previousComment = queryClient.getQueryData<Comment>(queryKey);
 
-      queryClient.setQueryData(["comments", editingComment.commentId], {
+      queryClient.setQueryData(queryKey, {
         ...previousComment,
         ...editingComment,
       });
@@ -43,15 +42,15 @@ export const useEditComment = ({
     onError: (_, __, context: any) => {
       if (context?.previousComment) {
         queryClient.setQueryData(
-          ["comments", context.previousComment.id],
+          commentKeys.comment(context.previousComment.id),
           context.previousComment
         );
       }
     },
 
     onSuccess: (data) => {
-      queryClient.cancelQueries(["comments", data.id]);
-      queryClient.invalidateQueries(["comments", "all", postId]);
+      queryClient.cancelQueries(commentKeys.comment(data.id));
+      queryClient.invalidateQueries(commentKeys.lists(postId));
     },
     ...config,
     mutationFn: editComment,

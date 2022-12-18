@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
-import { GetCommentsResponse } from "./getComments";
+import { commentKeys } from "./queries";
 
 export const deleteComment = (commentId: number) => {
   return axios.delete(`comments/delete/${commentId}`);
@@ -20,35 +20,16 @@ export const useDeleteComment = ({
 }: UseDeleteCommentOptions) => {
   return useMutation({
     onMutate: async (deletedCommentId) => {
-      await queryClient.cancelQueries(["comments", "all", postId]);
-
-      const previousComments = queryClient.getQueryData<GetCommentsResponse>([
-        "comments",
-        "all",
-        postId,
-      ]);
-
-      if (previousComments) {
-        queryClient.setQueryData(["comments", "all", postId], {
-          comments: previousComments.comments.filter(
-            (comment) => comment.id !== deletedCommentId
-          ),
-          commentsCount: previousComments.commentsCount - 1,
-        });
-      }
-
-      return { previousComments };
+      await queryClient.cancelQueries(commentKeys.lists(postId));
+      return { deletedCommentId };
     },
     onError: (_, __, context: any) => {
-      if (context?.previousComments) {
-        queryClient.setQueryData(
-          ["comments", "all", postId],
-          context.previousComments
-        );
+      if (context?.deletedCommentId) {
+        console.log("Failed to delete comment", context.deletedCommentId);
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments", "all", postId]);
+      queryClient.invalidateQueries(commentKeys.lists(postId));
     },
     ...config,
     mutationFn: deleteComment,

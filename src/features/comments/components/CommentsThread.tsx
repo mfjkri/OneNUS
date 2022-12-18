@@ -33,11 +33,6 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
     },
   });
 
-  useEffect(() => {
-    commentsQuery.refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber, perPage, sortBy]);
-
   if (!user) {
     return null;
   }

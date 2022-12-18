@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
 
+import { commentKeys } from "./queries";
 import { Comment } from "../types";
 
 export type CreateCommentDTO = {
@@ -25,14 +26,14 @@ export const useCreateComment = ({
 }: UseCreateCommentOptions) => {
   return useMutation({
     onMutate: async (newComment) => {
-      await queryClient.cancelQueries(["comments", "all", postId]);
+      await queryClient.cancelQueries(commentKeys.lists(postId));
       return { newComment };
     },
     onError: (_, __, context: any) => {
       console.log("Failed to create new comment", context.newComment);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments", "all", postId]);
+      queryClient.invalidateQueries(commentKeys.lists(postId));
     },
     ...config,
     mutationFn: createComment,

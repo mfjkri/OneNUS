@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { axios } from "lib/axios";
 import { ExtractFnReturnType, QueryConfig } from "lib/react-query";
 
+import { commentKeys } from "./queries";
 import { Comment } from "../types";
 
 export type GetCommentsDTO = {
@@ -36,7 +37,7 @@ export const useComments = ({ data, config = {} }: UseCommentsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     keepPreviousData: true,
-    queryKey: ["comments", "all", data.postId],
+    queryKey: commentKeys.list(data),
     queryFn: () => getComments(data),
   });
 };
