@@ -1,4 +1,4 @@
-// export * from "./api/getComments";
+export * from "./api/queries";
 
 export * from "./components";
 

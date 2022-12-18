@@ -28,7 +28,8 @@ export const useDeleteComment = ({
         console.log("Failed to delete comment", context.deletedCommentId);
       }
     },
-    onSuccess: () => {
+    onSuccess: (_, __, context) => {
+      queryClient.removeQueries(commentKeys.comment(context.deletedCommentId));
       queryClient.invalidateQueries(commentKeys.lists(postId));
     },
     ...config,
