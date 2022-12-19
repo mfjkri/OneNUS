@@ -1,35 +1,66 @@
+import * as React from "react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
+import { size } from "@material-tailwind/react/types/components/dialog";
+import { colors } from "@material-tailwind/react/types/generic";
 import {
   ExclamationCircleIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import * as React from "react";
 
-import { Button } from "components/Elements/Button";
-import { Dialog, DialogTitle } from "components/Elements/Dialog";
+import { Button } from "../Button";
 import { useDisclosure } from "hooks/useDisclosure";
+
+const DangerIcon = () => {
+  return (
+    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-opacity-5 sm:mx-0 sm:h-10 sm:w-10">
+      <ExclamationCircleIcon
+        className="h-6 w-6 text-red-600"
+        aria-hidden="true"
+      />
+    </div>
+  );
+};
+
+const InfoIcon = () => {
+  return (
+    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+      <InformationCircleIcon
+        className="h-6 w-6 text-blue-600"
+        aria-hidden="true"
+      />
+    </div>
+  );
+};
 
 export type ConfirmationDialogProps = {
   triggerButton: React.ReactElement;
   confirmButton: React.ReactElement;
+  cancelButtonColor?: colors;
   title: string;
   body?: string;
   cancelButtonText?: string;
-  icon?: "danger" | "info";
+  icon?: "danger" | "info" | "";
+  size?: size;
   isDone?: boolean;
 };
 
 export const ConfirmationDialog = ({
   triggerButton,
   confirmButton,
+  cancelButtonColor = "blue",
   title,
   body = "",
   cancelButtonText = "Cancel",
-  icon = "danger",
+  icon = "",
   isDone = false,
+  size = "sm",
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
-
-  const cancelButtonRef = React.useRef(null);
 
   React.useEffect(() => {
     if (isDone) {
@@ -42,58 +73,57 @@ export const ConfirmationDialog = ({
   });
 
   return (
-    <>
+    <React.Fragment>
       {trigger}
-      <Dialog isOpen={isOpen} onClose={close} initialFocus={cancelButtonRef}>
-        <div className="inline-block align-bottom bg-white dark:bg-primary rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6">
-          <div className="sm:flex sm:items-start">
-            {icon === "danger" && (
-              <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-opacity-5 sm:mx-0 sm:h-10 sm:w-10">
-                <ExclamationCircleIcon
-                  className="h-6 w-6 text-red-600"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
+      <Dialog open={isOpen} handler={open} size={size}>
+        <DialogHeader>
+          {icon !== "" && (
+            <div className="mr-3">
+              {icon === "danger" && <DangerIcon />}
 
-            {icon === "info" && (
-              <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-                <InformationCircleIcon
-                  className="h-6 w-6 text-blue-600"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
-            <div className="text-center sm:my-auto sm:ml-2 sm:text-left">
-              <DialogTitle
-                as="h3"
-                className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-400"
-              >
-                {title}
-              </DialogTitle>
-              {body && (
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500 dark:text-gray-100">
-                    {body}
-                  </p>
-                </div>
-              )}
+              {icon === "info" && <InfoIcon />}
             </div>
-          </div>
-          <div className="mt-4 flex space-x-2 justify-end">
-            <Button
-              type="button"
-              variant="inverse"
-              className="w-full inline-flex justify-center rounded-md border focus:ring-1 focus:ring-offset-1 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-              onClick={close}
-              ref={cancelButtonRef}
-            >
-              {cancelButtonText}
-            </Button>
-            {confirmButton}
-          </div>
-        </div>
+          )}
+          {title}
+        </DialogHeader>
+        <DialogBody>{body}</DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color={cancelButtonColor}
+            onClick={close}
+            className="mr-1"
+          >
+            <span>{cancelButtonText}</span>
+          </Button>
+          {confirmButton}
+        </DialogFooter>
       </Dialog>
-    </>
+    </React.Fragment>
+  );
+};
+
+type DiscardConfirmationDialogProps = {
+  onDiscard: () => void;
+};
+
+export const DiscardConfirmationDialog = ({
+  onDiscard,
+}: DiscardConfirmationDialogProps) => {
+  return (
+    <ConfirmationDialog
+      title="Discard changes"
+      body="Are you sure you want to discard your changes?"
+      triggerButton={
+        <Button fullWidth={true} variant="filled" color="red">
+          Discard Changes
+        </Button>
+      }
+      confirmButton={
+        <Button variant="filled" color="red" onClick={onDiscard}>
+          Discard
+        </Button>
+      }
+    />
   );
 };

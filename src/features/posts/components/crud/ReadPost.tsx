@@ -2,7 +2,7 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { NotFound } from "features/misc";
 import { UserIcon } from "features/auth";
-import { Spinner } from "components/Elements";
+import { IconButton, Spinner } from "components/Elements";
 
 import { useAuth } from "lib/auth";
 import { useDisclosure } from "hooks/useDisclosure";
@@ -42,8 +42,12 @@ const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
             {ownPost ? (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
                 <DeletePost postId={post.id} />
-                <PencilIcon
-                  className="h-6 w-auto ml-2 hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
+                <IconButton
+                  variant="text"
+                  color="white"
+                  size="sm"
+                  icon={<PencilIcon className="h-6 w-6" />}
+                  iconAria="Edit"
                   onClick={toggleEditMode}
                 />
               </div>

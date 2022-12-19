@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-import { Button, ConfirmationDialog } from "components/Elements";
+import { Button, IconButton, ConfirmationDialog } from "components/Elements";
 
 import { useDeletePost } from "../../api/deletePost";
 
@@ -15,22 +15,29 @@ export const DeletePost = ({ postId }: DeletePostProps) => {
 
   return (
     <ConfirmationDialog
+      title="Delete post"
+      body="Are you sure you want to delete this post?"
       triggerButton={
-        <TrashIcon className="flex-none h-6 w-6 hover:fill-red-600 hover:cursor-pointer" />
+        <IconButton
+          variant="text"
+          color="red"
+          size="sm"
+          icon={<TrashIcon className="h-6 w-6" />}
+          iconAria="Delete"
+        />
       }
       confirmButton={
         <Button
+          color="red"
           isLoading={deletePostMutation.isLoading}
           onClick={async () => {
             await deletePostMutation.mutateAsync(postId);
             navigate("/app/posts");
           }}
-          variant="danger"
         >
           Delete
         </Button>
       }
-      title="Are you sure you want to delete this post?"
     />
   );
 };

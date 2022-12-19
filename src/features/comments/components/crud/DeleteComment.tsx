@@ -14,22 +14,23 @@ export const DeleteComment = ({ commentId, postId }: DeleteCommentProps) => {
 
   return (
     <ConfirmationDialog
+      title="Delete comment"
+      body="Are you sure you want to delete this comment?"
       isDone={deleteCommentMutation.isSuccess}
       triggerButton={
         <TrashIcon className="flex-none h-6 w-6 hover:fill-red-600 hover:cursor-pointer" />
       }
       confirmButton={
         <Button
+          color="red"
           isLoading={deleteCommentMutation.isLoading}
           onClick={async () => {
             await deleteCommentMutation.mutateAsync(commentId);
           }}
-          variant="danger"
         >
           Delete
         </Button>
       }
-      title="Are you sure you want to delete your comment?"
     />
   );
 };

@@ -20,10 +20,10 @@ export const PostThread = () => {
     <ContentLayout title="">
       <Link to="/app/posts">
         <Button
+          variant="text"
           startIcon={
             <ChevronLeftIcon className="w-auto h-4" aria-hidden="true" />
           }
-          variant="no_bg_dark"
         >
           <p className="text-xl font-bold leading-tight">Back to posts</p>
         </Button>

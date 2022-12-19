@@ -1,6 +1,7 @@
 import * as z from "zod";
+import { useNavigate } from "react-router-dom";
 
-import { Button, ConfirmationDialog, Link } from "components/Elements";
+import { Button, DiscardConfirmationDialog } from "components/Elements";
 import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
 import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
@@ -26,6 +27,7 @@ type CreatePostFormProps = {
 
 export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
   const createPostMutation = useCreatePost();
+  const navigate = useNavigate();
 
   return (
     <Form<CreatePostDTO, typeof CreatePostSchema>
@@ -62,26 +64,14 @@ export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
           <div>
             <Button
               type="submit"
-              className="w-full"
+              className="w-full mb-2"
               isLoading={createPostMutation.isLoading}
             >
               Create Post
             </Button>
 
-            <ConfirmationDialog
-              triggerButton={
-                <Button className="mt-2 w-full" variant="danger">
-                  Discard Changes
-                </Button>
-              }
-              confirmButton={
-                <Link to="/app/posts">
-                  <Button className="w-full" variant="danger">
-                    Discard
-                  </Button>
-                </Link>
-              }
-              title="Are you sure you want to discard this post?"
+            <DiscardConfirmationDialog
+              onDiscard={() => navigate("/app/posts")}
             />
           </div>
         </>

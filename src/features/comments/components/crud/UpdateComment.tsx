@@ -1,5 +1,5 @@
 import { Form, TextAreaField } from "components/Form";
-import { Button, ConfirmationDialog } from "components/Elements";
+import { Button, DiscardConfirmationDialog } from "components/Elements";
 
 import { Comment } from "../../types";
 import { UpdateCommentDTO, useUpdateComment } from "../../api/updateComment";
@@ -41,23 +41,14 @@ export const UpdateCommentForm = ({
             <div className="flex flex-row">
               <div className="grow"></div>
               <div className="flex flex-row">
-                <ConfirmationDialog
-                  triggerButton={
-                    <Button variant="danger">Discard Changes</Button>
-                  }
-                  confirmButton={
-                    <Button variant="danger" onClick={onCancel}>
-                      Discard
-                    </Button>
-                  }
-                  title="Are you sure you want to discard your changes?"
-                />
+                <DiscardConfirmationDialog onDiscard={onCancel} />
                 <Button
                   type="submit"
+                  fullWidth={true}
                   className="ml-3"
                   isLoading={updateCommentMutation.isLoading}
                 >
-                  Update Comment
+                  Update
                 </Button>
               </div>
             </div>

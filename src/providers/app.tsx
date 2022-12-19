@@ -4,6 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "@material-tailwind/react";
 
 import { Button, Spinner } from "components/Elements";
 import { ThemeToggle } from "components/Layout";
@@ -12,6 +13,7 @@ import { Notifications } from "components/Notifications/Notifications";
 import { AuthProvider } from "lib/auth";
 import { queryClient } from "lib/react-query";
 import storage from "utils/storage";
+import { appTheme } from "assets/theme";
 
 const ErrorFallback = () => {
   React.useEffect(() => {
@@ -52,11 +54,13 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== "production" && <ReactQueryDevtools />}
-            <Notifications />
-            <AuthProvider>
-              <Router>{children}</Router>
-              <ThemeToggle />
-            </AuthProvider>
+            <ThemeProvider value={appTheme}>
+              <Notifications />
+              <AuthProvider>
+                <Router>{children}</Router>
+                <ThemeToggle />
+              </AuthProvider>
+            </ThemeProvider>
           </QueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>

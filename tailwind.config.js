@@ -1,6 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const withMT = require("@material-tailwind/react/utils/withMT");
 
-module.exports = {
+module.exports = withMT({
   mode: "jit",
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "class", // or 'media' or 'class'
@@ -25,4 +26,4 @@ module.exports = {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
-};
+});

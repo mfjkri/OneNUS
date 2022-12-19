@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 import { Form, InputField, TextAreaField } from "components/Form";
-import { Button, ConfirmationDialog } from "components/Elements";
+import { Button, DiscardConfirmationDialog } from "components/Elements";
 
 import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
 
@@ -65,25 +65,13 @@ export const UpdatePostForm = ({
             <div>
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full mb-2"
                 isLoading={updatePostMutation.isLoading}
               >
                 Update Post
               </Button>
 
-              <ConfirmationDialog
-                triggerButton={
-                  <Button className="mt-2 w-full" variant="danger">
-                    Discard Changes
-                  </Button>
-                }
-                confirmButton={
-                  <Button variant="danger" onClick={onCancel}>
-                    Discard
-                  </Button>
-                }
-                title="Are you sure you want to discard your changes?"
-              />
+              <DiscardConfirmationDialog onDiscard={onCancel} />
             </div>
           </>
         )}

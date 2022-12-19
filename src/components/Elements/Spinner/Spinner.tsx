@@ -20,7 +20,7 @@ export type SpinnerProps = {
 
 export const Spinner = ({
   size = "md",
-  variant = "primary",
+  variant = "light",
   className = "",
 }: SpinnerProps) => {
   return (

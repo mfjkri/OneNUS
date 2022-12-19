@@ -1,21 +1,14 @@
-import clsx from "clsx";
 import * as React from "react";
+import { Button as MaterialButton } from "@material-tailwind/react";
+import {
+  variant,
+  size,
+  color,
+  ripple,
+  fullWidth,
+} from "@material-tailwind/react/types/components/button";
 
 import { Spinner } from "components/Elements/Spinner";
-
-const variants = {
-  primary: "bg-blue-600 text-white",
-  inverse: "bg-white text-blue-600",
-  danger: "bg-red-600 text-white",
-  no_bg_light: "bg-transparent text-white hover:text-accent border-0",
-  no_bg_dark: "bg-transparent  text-indigo-400 hover:text-white border-0",
-};
-
-const sizes = {
-  sm: "py-2 px-4 text-sm",
-  md: "py-2 px-6 text-md",
-  lg: "py-3 px-8 text-lg",
-};
 
 type IconProps =
   | { startIcon: React.ReactElement; endIcon?: never }
@@ -23,19 +16,23 @@ type IconProps =
   | { endIcon?: undefined; startIcon?: undefined };
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: keyof typeof variants;
-  size?: keyof typeof sizes;
+  variant?: variant;
+  size?: size;
+  color?: color;
+  ripple?: ripple;
+  fullWidth?: fullWidth;
   isLoading?: boolean;
 } & IconProps;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      type = "button",
-      className = "",
-      variant = "primary",
-      size = "md",
-      isLoading = false,
+      variant,
+      size,
+      color,
+      ripple,
+      fullWidth,
+      isLoading,
       startIcon,
       endIcon,
       ...props
@@ -43,22 +40,22 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     return (
-      <button
+      <MaterialButton
         ref={ref}
-        type={type}
-        className={clsx(
-          "flex justify-center items-center border-0 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80",
-          variants[variant],
-          sizes[size],
-          className
-        )}
+        variant={variant}
+        size={size}
+        color={color}
+        ripple={ripple}
+        fullWidth={fullWidth}
         disabled={isLoading}
         {...props}
       >
-        {isLoading && <Spinner size="sm" className="text-current" />}
-        {!isLoading && startIcon}
-        <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
-      </button>
+        <div className="flex justify-center items-center m-auto">
+          {isLoading && <Spinner size="sm" className="text-current" />}
+          {!isLoading && startIcon}
+          <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
+        </div>
+      </MaterialButton>
     );
   }
 );

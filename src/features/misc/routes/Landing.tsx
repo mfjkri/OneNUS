@@ -46,24 +46,26 @@ export const Landing = () => {
 
           <p>Welcome to OneNUS. Please login or register to continue.</p>
           <div className="mt-8 flex justify-center">
-            <div className="inline-flex rounded-md shadow">
-              <Button
-                onClick={redirectLogin}
-                startIcon={
-                  <ArrowTopRightOnSquareIcon
-                    className="h-6 w-6"
-                    aria-hidden="true"
-                  />
-                }
-              >
-                Login
-              </Button>
-            </div>
-            <div className="ml-3 inline-flex">
-              <Button onClick={redirectRegister} variant="inverse">
-                Register
-              </Button>
-            </div>
+            <Button
+              color="blue"
+              onClick={redirectLogin}
+              className="w-1/3"
+              startIcon={
+                <ArrowTopRightOnSquareIcon
+                  className="h-6 w-6"
+                  aria-hidden="true"
+                />
+              }
+            >
+              Login
+            </Button>
+            <Button
+              color="white"
+              className="ml-3 w-1/3"
+              onClick={redirectRegister}
+            >
+              Register
+            </Button>
           </div>
         </div>
       </div>
