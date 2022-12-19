@@ -1,5 +1,4 @@
 import { Tooltip } from "@material-tailwind/react";
-import { Button } from "components/Elements";
 
 type PageSortByProps = {
   sortOptions: [string, string, string][];
