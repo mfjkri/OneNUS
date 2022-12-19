@@ -15,14 +15,24 @@ import { Spinner } from "components/Elements/Spinner";
 type IconWithToolTipProps = {
   icon: React.ReactElement;
   iconAria?: string;
+  className?: string;
 };
 
 export const IconWithToolTip = ({
   icon,
-  iconAria = "",
+  iconAria,
+  className,
 }: IconWithToolTipProps) => {
   return (
-    <>{iconAria === "" ? icon : <Tooltip content={iconAria}>{icon}</Tooltip>}</>
+    <>
+      {iconAria ? (
+        <Tooltip content={iconAria} className={className}>
+          {icon}
+        </Tooltip>
+      ) : (
+        { icon }
+      )}
+    </>
   );
 };
 

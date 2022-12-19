@@ -176,7 +176,7 @@ export const appTheme = {
         fontFamily: "fontFamily", // "font-sans"
         fontSize: "text-sm",
         fontWeight: "font-normal",
-        color: "text-secondary dark:text-secondary",
+        color: "text-primary dark:text-secondary",
         outline: "focus:outline-none",
         overflowWrap: "break-words",
         zIndex: "z-[999]",

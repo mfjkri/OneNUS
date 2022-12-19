@@ -48,9 +48,13 @@ export const Posts = () => {
       <div className="float-right">
         <PageSortBy
           sortOptions={[
-            [SortTypes[SortTypes.byHot], "hot"],
-            [SortTypes[SortTypes.ByNew], "new"],
-            [SortTypes[SortTypes.byRecent], "recent"],
+            [SortTypes[SortTypes.byHot], "hot", "Sort by replies count"],
+            [SortTypes[SortTypes.ByNew], "new", "Sort by creation date"],
+            [
+              SortTypes[SortTypes.byRecent],
+              "recent",
+              "Sort by lastest replies",
+            ],
           ]}
           activeSortOption={sortBy}
           setSortOption={(sortOption: string) => {
