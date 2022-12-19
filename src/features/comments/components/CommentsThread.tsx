@@ -52,11 +52,7 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
       <CreateComment postId={postId} onSuccess={() => null} />
       <h1 className="text-xl ml-3">Comments</h1>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
-        {commentsQuery.data.comments ? (
-          <CommentsList comments={commentsQuery.data.comments} user={user} />
-        ) : (
-          <NoComments />
-        )}
+        <CommentsList comments={commentsQuery.data.comments} user={user} />
       </div>
       <div className="mt-3">
         <PagePaginator
@@ -67,8 +63,4 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
       </div>
     </div>
   );
-};
-
-const NoComments = () => {
-  return <div className="ml-3 px-6 py-4">No Comments</div>;
 };

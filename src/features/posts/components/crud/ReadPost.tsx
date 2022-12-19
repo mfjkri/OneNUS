@@ -51,7 +51,7 @@ const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
               <StarPost starsCount={post.starsCount} />
             )}
           </div>
-          <h2 className="text-2xl break-all underline font-extrabold mb-2">
+          <h2 className="text-2xl break-all font-extrabold mb-2">
             {post.title}
           </h2>
           <p className="text-md break-words whitespace-pre-line">{post.text}</p>
