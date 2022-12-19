@@ -31,6 +31,7 @@ export const InputField = (props: InputFieldProps) => {
         label={label}
         className={className}
         disabled={disabled}
+        error={error?.message !== undefined}
         {...registration}
       />
     </FieldWrapper>

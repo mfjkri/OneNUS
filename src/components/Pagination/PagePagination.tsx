@@ -84,7 +84,12 @@ export const PagePaginator = ({
     Math.floor((pageNumber - 1) / totalPagesShown) * totalPagesShown;
 
   const pageNumbers = Array.from(
-    { length: Math.min(totalPagesShown, maxPageNumber - initialPageRange) },
+    {
+      length: Math.min(
+        totalPagesShown,
+        Math.max(maxPageNumber - initialPageRange, 1)
+      ),
+    },
     (_, i) => i + 1 + initialPageRange
   );
 
