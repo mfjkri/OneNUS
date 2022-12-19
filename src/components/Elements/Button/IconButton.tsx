@@ -52,7 +52,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         {...props}
       >
         {isLoading ? (
-          <Spinner size={size} className="text-current" />
+          <Spinner size={size} variant="light" />
         ) : (
           <IconWithToolTip icon={icon} iconAria={iconAria} />
         )}

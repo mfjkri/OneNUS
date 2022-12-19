@@ -51,7 +51,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         <div className="flex justify-center items-center m-auto">
-          {isLoading && <Spinner size="sm" className="text-current" />}
+          {isLoading && <Spinner size="sm" variant="light" />}
           {!isLoading && startIcon}
           <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
         </div>
@@ -59,5 +59,3 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-
-Button.displayName = "Button";

@@ -8,8 +8,9 @@ const sizes = {
 };
 
 const variants = {
-  light: "text-white",
-  primary: "text-blue-600",
+  light: "text-secondary",
+  dark: "text-primary",
+  blue: "text-blue-600",
 };
 
 export type SpinnerProps = {
@@ -20,7 +21,7 @@ export type SpinnerProps = {
 
 export const Spinner = ({
   size = "md",
-  variant = "light",
+  variant = "blue",
   className = "",
 }: SpinnerProps) => {
   return (

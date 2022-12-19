@@ -1,6 +1,7 @@
 import { StarIcon } from "@heroicons/react/24/outline";
 
 export const StarPost = ({ starsCount }: { starsCount: number }) => {
+  return <div></div>;
   return (
     <div className="flex flex-col">
       <StarIcon className="h-6 w-auto hover:fill-orange-400 hover:cursor-pointer" />
