@@ -61,7 +61,7 @@ You can find the live version of this project [here](http://onenus.s3-website-ap
 
 2. `yarn`
 
-   This project uses [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/) as the package manager instead of `npm`. (Using npm will probably still work just fine but it isn't guaranteed)
+   This project uses [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/) as the package manager instead of `npm`.
 
 <br/>
 
@@ -87,18 +87,21 @@ You can find the live version of this project [here](http://onenus.s3-website-ap
    $ yarn start
    ```
 
-5. All set!
+5. Additional notes.
+
+   Create a dotenv file `.env` under the root directory with the following variables:
+
+   ```python
+   REACT_APP_API_URL: PRODUCTION_API_URL # Production API endpoint
+   REACT_APP_LOCAL_API_URL: LOCAL_API_URL # Local testing API endpoint
+   REACT_APP_API_MOCKING: false # Whether to use production or local API for local testing (in production mode it will use PRODUCTION_API_URL regardless)
+   ```
+
+6. All set!
 
    You can view the app at [localhost:3000](http://localhost:3000).
 
-   _Note_: If there is an application already running at port 3000, it will try and use another port. See your terminal for more info.
-
-6. Additional notes.
-
-   You may want to create a dotenv file `.env` under the root directory with the following variables:
-
-   1. REACT_APP_API_URL: `string` = API_URL (This is the access link to the backend server)
-   2. REACT_APP_API_MOCKING: `boolean` = true / false (Whether to use API_URL or localhost for testing purposes)
+   _Note_: If there is already an application listening to the default port:3000, it will try and use another port. See your terminal for more info.
 
 <br/>
 
