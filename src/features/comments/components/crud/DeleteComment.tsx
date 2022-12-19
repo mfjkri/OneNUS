@@ -1,6 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-import { Button, ConfirmationDialog } from "components/Elements";
+import { Button, IconButton, ConfirmationDialog } from "components/Elements";
 
 import { useDeleteComment } from "../../api/deleteComment";
 
@@ -18,7 +18,13 @@ export const DeleteComment = ({ commentId, postId }: DeleteCommentProps) => {
       body="Are you sure you want to delete this comment?"
       isDone={deleteCommentMutation.isSuccess}
       triggerButton={
-        <TrashIcon className="flex-none h-6 w-6 hover:fill-red-600 hover:cursor-pointer" />
+        <IconButton
+          variant="text"
+          color="red"
+          size="sm"
+          icon={<TrashIcon className="h-6 w-6" />}
+          iconAria="Delete"
+        />
       }
       confirmButton={
         <Button

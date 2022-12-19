@@ -1,5 +1,6 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
+import { IconButton } from "components/Elements";
 import { UserIcon } from "features/auth";
 
 import { useDisclosure } from "hooks/useDisclosure";
@@ -41,8 +42,12 @@ export const CommentView = ({
             {ownComment && (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
                 <DeleteComment commentId={comment.id} postId={comment.postId} />
-                <PencilIcon
-                  className="h-6 w-auto ml-2 hover:fill-primary dark:hover:fill-secondary hover:cursor-pointer"
+                <IconButton
+                  variant="text"
+                  color="white"
+                  size="sm"
+                  icon={<PencilIcon className="h-6 w-6" />}
+                  iconAria="Edit"
                   onClick={toggleEditMode}
                 />
               </div>
