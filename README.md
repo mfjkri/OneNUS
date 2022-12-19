@@ -1,5 +1,15 @@
 # CVWO Assignment Project
 
+## TODO:
+
+1. Add Categories fiter for viewing posts
+2. Add starring of posts functionality
+3. Mobile responsive design
+
+Last updated: 19/12/22
+
+<br/>
+
 # Table of Contents
 
 - [Demo](#demo)
@@ -25,6 +35,8 @@ You can find the live version of this project [here](http://onenus.s3-website-ap
   - [React Query Auth](https://github.com/alan2207/react-query-auth) - User authentication
   - [Axios](https://axios-http.com/docs/intro) - HTTP Client
   - [TailwindCSS](https://tailwindcss.com/) - CSS Framework
+  - [Material Tailwind](https://www.material-tailwind.com/) - UI-Components library
+  - [HeadlessUI](https://headlessui.com/) - Unstyled UI-Components library
   - [React Hook Form](https://react-hook-form.com/) - Form validation
   - [Zod](https://zod.dev/) - Schema validation
   -
