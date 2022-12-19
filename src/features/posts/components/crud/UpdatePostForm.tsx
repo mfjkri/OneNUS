@@ -48,7 +48,6 @@ export const UpdatePostForm = ({
           <>
             <InputField
               type="text"
-              className="hover:cursor-not-allowed"
               disabled={true}
               label="Title"
               error={formState.errors["title"]}

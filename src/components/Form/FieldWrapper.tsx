@@ -25,7 +25,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
           className
         )}
       >
-        {label}
+        <p className="ml-1">{label}</p>
         <div className="mt-1">{children}</div>
       </label>
       {error?.message && (

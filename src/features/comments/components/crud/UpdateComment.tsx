@@ -40,7 +40,7 @@ export const UpdateCommentForm = ({
             />
             <div className="flex flex-row">
               <div className="grow"></div>
-              <div className="flex flex-row">
+              <div className="flex flex-row w-80">
                 <DiscardConfirmationDialog onDiscard={onCancel} />
                 <Button
                   type="submit"

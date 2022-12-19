@@ -53,13 +53,13 @@ export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
           />
           <SelectField
             label="Category"
-            className="bg-primary dark:bg-secondary "
             error={formState.errors["tag"]}
             registration={register("tag")}
             options={PostTags.map((type) => ({
               label: type,
               value: type,
             }))}
+            defaultValue={PostTags[0]}
           />
           <div>
             <Button

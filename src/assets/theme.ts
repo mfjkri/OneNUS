@@ -31,6 +31,68 @@ export const appTheme = {
   },
 
   /* -------------------------------------------------------------------------- */
+  /*                                    Input                                   */
+  /* -------------------------------------------------------------------------- */
+
+  input: {
+    defaultProps: {
+      variant: "outlined",
+      size: "md",
+      color: "blue",
+      label: "",
+      error: false,
+      success: false,
+      icon: undefined,
+      labelProps: {},
+      className: "",
+    },
+    styles: {
+      base: {
+        container: {
+          position: "relative",
+          width: "w-full",
+          minWidth: "min-w-[200px]",
+        },
+        input: {
+          peer: "peer",
+          width: "w-full",
+          height: "h-full",
+          bg: "bg-transparent",
+          color: "text-primary dark:text-secondary", //"text-blue-gray-700",
+          fontFamily: "fontFamily",
+          fontWeight: "font-normal",
+          outline: "outline outline-0 focus:outline-0",
+          disabled:
+            "disabled:bg-secondary dark:disabled:bg-primary2 disabled:border-0 disabled:hover:cursor-not-allowed",
+          // "disabled:bg-blue-gray-50 disabled:border-0",
+          transition: "transition-all",
+        },
+        label: {
+          display: "flex",
+          width: "w-full",
+          height: "h-full",
+          userSelect: "select-none",
+          pointerEvents: "pointer-events-none",
+          position: "absolute",
+          left: "left-0",
+          fontWeight: "font-normal",
+          color: "peer-placeholder-shown:text-blue-gray-500",
+          lineHeight: "leading-tight peer-focus:leading-tight",
+          disabled:
+            "peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500",
+          transition: "transition-all",
+        },
+        icon: {
+          display: "grid",
+          placeItems: "place-items-center",
+          position: "absolute",
+          color: "text-blue-gray-500",
+        },
+      },
+    },
+  },
+
+  /* -------------------------------------------------------------------------- */
   /*                                   Dialog                                   */
   /* -------------------------------------------------------------------------- */
 
@@ -64,7 +126,7 @@ export const appTheme = {
           boxShadow: "shadow-2xl",
           color: "text-blue-gray-500",
           fontSmoothing: "antialiased",
-          fontFamily: "font-sans",
+          fontFamily: "fontFamily", // "font-sans"
           fontSize: "text-base",
           fontWeight: "font-light",
           lineHeight: "leading-relaxed",
@@ -83,10 +145,11 @@ export const appTheme = {
   },
 
   dialogBody: {
+    defaultProps: { className: "", divider: false },
     styles: {
       base: {
         initial: {
-          color: "text-primary dark:text-secondary",
+          color: "text-primary dark:text-secondary", // "text-blue-gray-500"
         },
       },
     },
@@ -106,11 +169,11 @@ export const appTheme = {
     },
     styles: {
       base: {
-        bg: "bg-black dark:bg-primary2",
+        bg: "bg-transparent",
         py: "py-1.5",
         px: "px-3",
         borderRadius: "rounded-lg",
-        fontFamily: "font-sans",
+        fontFamily: "fontFamily", // "font-sans"
         fontSize: "text-sm",
         fontWeight: "font-normal",
         color: "text-secondary dark:text-secondary",

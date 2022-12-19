@@ -14,8 +14,8 @@ export const TextAreaField = (props: TextAreaFieldProps) => {
     <FieldWrapper label={label} error={error}>
       <textarea
         className={clsx(
-          `appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-0 rounded-md shadow-sm placeholder-gray-400 dark:text-secondary dark:bg-primary2
-          focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`,
+          `appearance-none block w-full px-3 py-2 border dark:border-0 border-gray-400 rounded-md shadow-sm placeholder-gray-400 dark:text-secondary dark:bg-primary2
+          focus:outline-none focus:border-2 focus:ring-[#2196f3] focus:border-[#2196f3] dark:focus:border-[#2196f3] sm:text-sm`,
           className
         )}
         {...registration}
