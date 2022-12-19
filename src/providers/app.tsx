@@ -6,7 +6,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { Button, Spinner } from "components/Elements";
+import { ThemeToggle } from "components/Layout";
 import { Notifications } from "components/Notifications/Notifications";
+
 import { AuthProvider } from "lib/auth";
 import { queryClient } from "lib/react-query";
 import storage from "utils/storage";
@@ -53,6 +55,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             <Notifications />
             <AuthProvider>
               <Router>{children}</Router>
+              <ThemeToggle />
             </AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>
