@@ -1,15 +1,12 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
-import { NotFound } from "features/misc";
-import { UserIcon } from "features/auth";
-import { IconButton, Spinner } from "components/Elements";
-
-import { useAuth } from "lib/auth";
-import { useDisclosure } from "hooks/useDisclosure";
 import { UTCEpochToLocalDate } from "utils/format";
+import { useDisclosure } from "hooks/useDisclosure";
+
+import { IconButton } from "components/Elements";
+import { AuthUser, UserIcon } from "features/auth";
 
 import { Post } from "../../types";
-import { usePost } from "../../api/getPost";
 import { StarPost } from "../StarPost";
 import { DeletePost } from "./DeletePost";
 import { UpdatePostForm } from "./UpdatePostForm";
@@ -70,45 +67,29 @@ const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
 };
 
 type ReadPostProps = {
-  postId: number;
+  user: AuthUser;
+  post: Post;
+  refetch: Function;
 };
 
-export const ReadPost = ({ postId }: ReadPostProps) => {
-  const { user } = useAuth();
+export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
-  const postQuery = usePost({ postId });
-
-  if (!user) {
-    return null;
-  }
-
-  if (postQuery.isLoading) {
-    return (
-      <div className="w-full h-48 flex justify-center items-center">
-        <Spinner size="lg" />
-      </div>
-    );
-  }
-
-  if (!postQuery.data) {
-    return <NotFound />;
-  }
 
   return (
     <div>
       {editMode ? (
         <UpdatePostForm
-          post={postQuery.data}
+          post={post}
           onSuccess={() => {
             toggle();
-            postQuery.refetch();
+            refetch();
           }}
           onCancel={toggle}
         />
       ) : (
         <PostView
-          post={postQuery.data}
-          ownPost={user.id === postQuery.data.userId}
+          post={post}
+          ownPost={user.id === post.userId}
           toggleEditMode={toggle}
         />
       )}

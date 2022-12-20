@@ -6,16 +6,18 @@ import { PagePaginator } from "components/Pagination";
 import { useAuth } from "lib/auth";
 import { COMMENTS_PER_PAGE } from "config";
 
+import { Post } from "features/posts";
+
 import { SortTypes } from "../types";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
 
 type CommentsListProps = {
-  postId: number;
+  post: Post;
 };
 
-export const CommentsThread = ({ postId }: CommentsListProps) => {
+export const CommentsThread = ({ post }: CommentsListProps) => {
   const { user } = useAuth();
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -26,7 +28,7 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
 
   const commentsQuery = useComments({
     data: {
-      postId: postId,
+      postId: post.id,
       perPage: perPage,
       pageNumber: pageNumber,
       sortBy: sortBy,
@@ -45,10 +47,14 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
 
   return (
     <div>
-      <CreateComment postId={postId} onSuccess={() => null} />
+      <CreateComment postId={post.id} onSuccess={() => null} />
       <h1 className="text-xl ml-3">Comments</h1>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
-        <CommentsList comments={commentsQuery.data.comments} user={user} />
+        <CommentsList
+          comments={commentsQuery.data.comments}
+          user={user}
+          postUserid={post.userId}
+        />
       </div>
       <div className="mt-3">
         <PagePaginator

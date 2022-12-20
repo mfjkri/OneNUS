@@ -1,18 +1,27 @@
 import { useParams } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
-import { Button, Link } from "components/Elements";
+import { Button, Link, SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
-import { CommentsThread } from "features/comments";
 import { NotFound } from "features/misc";
+import { CommentsThread } from "features/comments";
+
+import { useAuth } from "lib/auth";
 
 import { ReadPost } from "../components/crud/ReadPost";
+import { usePost } from "../api/getPost";
 
 export const PostThread = () => {
   const { postId } = useParams();
-  const parsedPostId = postId ? parseInt(postId) : undefined;
+  const { user } = useAuth();
+  const parsedPostId = postId ? parseInt(postId) : 0;
+  const postQuery = usePost({ postId: parsedPostId });
 
-  if (!parsedPostId) {
+  if (postQuery.isLoading) {
+    return <SpinnerWithBackground size="lg" />;
+  }
+
+  if (!postQuery.data || !user) {
     return <NotFound />;
   }
 
@@ -29,10 +38,14 @@ export const PostThread = () => {
         </Button>
       </Link>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
-        <ReadPost postId={parsedPostId} />
+        <ReadPost
+          user={user}
+          post={postQuery.data}
+          refetch={postQuery.refetch}
+        />
       </div>
       <div className="px-6 py-5">
-        <CommentsThread postId={parsedPostId} />
+        <CommentsThread post={postQuery.data} />
       </div>
     </ContentLayout>
   );

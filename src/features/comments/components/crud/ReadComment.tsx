@@ -13,12 +13,14 @@ import { DeleteComment } from "./DeleteComment";
 type CommentViewProps = {
   comment: Comment;
   ownComment: boolean;
+  isPosterComment: Boolean;
   toggleEditMode: () => void;
 };
 
 export const CommentView = ({
   comment,
   ownComment,
+  isPosterComment,
   toggleEditMode,
 }: CommentViewProps) => {
   return (
@@ -31,9 +33,9 @@ export const CommentView = ({
             username={comment.author}
           />
           <p className="break-all text-center">{comment.author}</p>
-          {ownComment && (
+          {(ownComment || isPosterComment) && (
             <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
-              Me
+              {ownComment ? "Me" : "Author"}
             </p>
           )}
         </div>
@@ -69,9 +71,14 @@ export const CommentView = ({
 type ReadCommentProps = {
   comment: Comment;
   ownComment: boolean;
+  isPosterComment: boolean;
 };
 
-export const ReadComment = ({ comment, ownComment }: ReadCommentProps) => {
+export const ReadComment = ({
+  comment,
+  ownComment,
+  isPosterComment,
+}: ReadCommentProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
   return (
     <div>
@@ -85,6 +92,7 @@ export const ReadComment = ({ comment, ownComment }: ReadCommentProps) => {
         <CommentView
           comment={comment}
           ownComment={ownComment}
+          isPosterComment={isPosterComment}
           toggleEditMode={toggle}
         />
       )}

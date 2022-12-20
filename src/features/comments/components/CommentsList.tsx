@@ -10,9 +10,14 @@ const NoComments = () => {
 type CommentsListProps = {
   comments: Comment[];
   user: AuthUser;
+  postUserid: number;
 };
 
-export const CommentsList = ({ comments, user }: CommentsListProps) => {
+export const CommentsList = ({
+  comments,
+  user,
+  postUserid,
+}: CommentsListProps) => {
   return (
     <>
       {comments ? (
@@ -22,6 +27,7 @@ export const CommentsList = ({ comments, user }: CommentsListProps) => {
               <ReadComment
                 comment={comment}
                 ownComment={user.id === comment.userId}
+                isPosterComment={postUserid === comment.userId}
               />
             </li>
           ))}
