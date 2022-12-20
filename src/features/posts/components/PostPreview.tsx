@@ -24,9 +24,11 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
               userId={post.userId}
               username={post.author}
             />
-            <p className="break-all text-center">{post.author}</p>
+            <p className="invisible md:visible break-all text-center">
+              {post.author}
+            </p>
             {ownPost && (
-              <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
+              <p className="invisible md:visible text-[10px] text-center font-bold text-green-600 dark:text-green-600">
                 Me
               </p>
             )}
