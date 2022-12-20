@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Spinner } from "components/Elements";
+import { SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { PagePaginator, PageSortBy } from "components/Pagination";
 
@@ -34,11 +34,7 @@ export const Posts = () => {
   if (!user) return null;
 
   if (postsQuery.isLoading) {
-    return (
-      <div className="w-full h-48 flex justify-center items-center">
-        <Spinner size="lg" />
-      </div>
-    );
+    return <SpinnerWithBackground size="lg" />;
   }
 
   if (!postsQuery.data) return null;

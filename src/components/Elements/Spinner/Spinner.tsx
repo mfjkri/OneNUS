@@ -56,3 +56,11 @@ export const Spinner = ({
     </>
   );
 };
+
+export const SpinnerWithBackground = ({ ...props }: SpinnerProps) => {
+  return (
+    <div className="w-full h-48 flex justify-center items-center">
+      <Spinner {...props} />
+    </div>
+  );
+};

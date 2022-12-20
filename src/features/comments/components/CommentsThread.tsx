@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Spinner } from "components/Elements";
+import { SpinnerWithBackground } from "components/Elements";
 import { PagePaginator } from "components/Pagination";
 
 import { useAuth } from "lib/auth";
@@ -38,11 +38,7 @@ export const CommentsThread = ({ postId }: CommentsListProps) => {
   }
 
   if (commentsQuery.isLoading) {
-    return (
-      <div className="w-full h-48 flex justify-center items-center">
-        <Spinner size="lg" />
-      </div>
-    );
+    return <SpinnerWithBackground size="lg" />;
   }
 
   if (!commentsQuery.data) return null;
