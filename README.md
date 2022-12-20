@@ -18,12 +18,13 @@ Last updated: 19/12/22
   - [Pre-Requistes](#pre-requistes)
   - [Installation](#installation)
 - [Project Structure](#project-structure)
+- [Deployment](#deployment)
 
 <br/>
 
 # Demo
 
-You can find the live version of this project [here](http://onenus.s3-website-ap-southeast-1.amazonaws.com/).
+You can find the live version of this project [here](https://app.onenus.link).
 
 <br/>
 
@@ -75,19 +76,13 @@ You can find the live version of this project [here](http://onenus.s3-website-ap
    ```
    $ cd One-NUS
    ```
-3. Install project dependencies
+3. Install project dependencies.
 
    ```
    $ yarn install
    ```
 
-4. Start test server.
-
-   ```
-   $ yarn start
-   ```
-
-5. Additional notes.
+4. Required config files.
 
    Create a dotenv file `.env` under the root directory with the following variables:
 
@@ -95,6 +90,12 @@ You can find the live version of this project [here](http://onenus.s3-website-ap
    REACT_APP_API_URL: PRODUCTION_API_URL # Production API endpoint
    REACT_APP_LOCAL_API_URL: LOCAL_API_URL # Local testing API endpoint
    REACT_APP_API_MOCKING: false # Whether to use production or local API for local testing (in production mode it will use PRODUCTION_API_URL regardless)
+   ```
+
+5. Start test server.
+
+   ```
+   $ yarn start
    ```
 
 6. All set!
@@ -119,3 +120,11 @@ Some key sub-directories in src are:
 - [`src/features/`](src/features/) - Components with specific functionality (eg. Auth, Post, Comment)
 - [`src/routes`](src/routes/) - Routing for the app (see [src/routes/index.tsx](src/routes/index.tsx) for more information)
 - [`src/config/`](src/config/) - Environment variables and global configuration values are exported and accessible here.
+
+<br/>
+
+# Deployment
+
+This app is deployed to an [AWS S3 bucket](https://aws.amazon.com/s3/) served using [Cloudfront](https://aws.amazon.com/cloudfront/) and [Route 53](https://aws.amazon.com/route53/).
+
+Signed SSL certificates for the domain are provided by [AWS ACM](https://aws.amazon.com/certificate-manager/).
