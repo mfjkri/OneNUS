@@ -5,7 +5,7 @@ import logo from "assets/logo.svg";
 import { Link } from "components/Elements";
 import { Head } from "components/Head";
 
-import { isAlphaNumericString, isAlphaOnlyString } from "utils/strings";
+import { isAlphaOnlyString } from "utils/strings";
 
 export const AuthInputSchema = z.object({
   username: z
@@ -15,13 +15,7 @@ export const AuthInputSchema = z.object({
     .refine((val) => isAlphaOnlyString(val), {
       message: "Only alphabetical letters allowed",
     }),
-  password: z
-    .string()
-    .min(1, "Required")
-    .max(24, "Maximum of 24 characters")
-    .refine((val) => isAlphaNumericString(val), {
-      message: "Only alphanumeric characters allowed",
-    }),
+  password: z.string().min(1, "Required").max(32, "Maximum of 32 characters"),
 });
 
 type LayoutProps = {
