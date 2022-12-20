@@ -13,7 +13,7 @@ Last updated: 19/12/22
 # Table of Contents
 
 - [Demo](#demo)
-- [Technologies Used](#technologies-used)
+- [Technologies](#technologies)
 - [Getting Started](#getting-started)
   - [Pre-Requistes](#pre-requistes)
   - [Installation](#installation)
@@ -28,7 +28,7 @@ You can find the live version of this project [here](https://app.onenus.link).
 
 <br/>
 
-# Technologies Used
+# Technologies
 
 - Frontend: [Typescript](https://www.typescriptlang.org/)
   - [ReactJS](https://reactjs.org/)
@@ -41,7 +41,7 @@ You can find the live version of this project [here](https://app.onenus.link).
   - [React Hook Form](https://react-hook-form.com/) - Form validation
   - [Zod](https://zod.dev/) - Schema validation
   -
-- Backend: [Go](https://go.dev/)
+- Backend [(Repo here) ](https://github.com/mfjkri/One-NUS-Backend): [Go](https://go.dev/)
 
   - [Gin](https://gin-gonic.com/) - Web Framework
   - [Gorm](https://gorm.io/) - ORM library
