@@ -4,7 +4,7 @@ import { UTCEpochToLocalDate } from "utils/format";
 import { useDisclosure } from "hooks/useDisclosure";
 
 import { IconButton } from "components/Elements";
-import { AuthUser, UserIcon } from "features/auth";
+import { AuthUser, UserIcon, UserRoles } from "features/auth";
 
 import { Post } from "../../types";
 import { StarPost } from "../StarPost";
@@ -13,11 +13,19 @@ import { UpdatePostForm } from "./UpdatePostForm";
 
 type PostViewProps = {
   post: Post;
+  canEdit: boolean;
+  canDelete: boolean;
   ownPost: boolean;
   toggleEditMode: () => void;
 };
 
-const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
+const PostView = ({
+  post,
+  canEdit,
+  canDelete,
+  ownPost,
+  toggleEditMode,
+}: PostViewProps) => {
   return (
     <div>
       <div className="flex flex-row">
@@ -36,17 +44,19 @@ const PostView = ({ post, ownPost, toggleEditMode }: PostViewProps) => {
         </div>
         <div className="grow w-[80%] ml-4">
           <div className="float-right ml-4 pt-1">
-            {ownPost ? (
+            {canEdit || canDelete ? (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
-                <DeletePost postId={post.id} />
-                <IconButton
-                  variant="text"
-                  color="white"
-                  size="sm"
-                  icon={<PencilIcon className="h-6 w-6" />}
-                  iconAria="Edit"
-                  onClick={toggleEditMode}
-                />
+                {canDelete && <DeletePost postId={post.id} />}
+                {canEdit && (
+                  <IconButton
+                    variant="text"
+                    color="white"
+                    size="sm"
+                    icon={<PencilIcon className="h-6 w-6" />}
+                    iconAria="Edit"
+                    onClick={toggleEditMode}
+                  />
+                )}
               </div>
             ) : (
               <StarPost starsCount={post.starsCount} />
@@ -74,6 +84,7 @@ type ReadPostProps = {
 
 export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
+  const isOwner = user.id === post.userId;
 
   return (
     <div>
@@ -89,7 +100,9 @@ export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
       ) : (
         <PostView
           post={post}
-          ownPost={user.id === post.userId}
+          canEdit={isOwner}
+          canDelete={isOwner || user.role === UserRoles.ADMIN}
+          ownPost={isOwner}
           toggleEditMode={toggle}
         />
       )}

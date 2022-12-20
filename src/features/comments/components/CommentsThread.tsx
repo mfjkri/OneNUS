@@ -1,12 +1,10 @@
 import { useState } from "react";
 
+import { COMMENTS_PER_PAGE } from "config";
 import { SpinnerWithBackground } from "components/Elements";
 import { PagePaginator } from "components/Pagination";
-
-import { useAuth } from "lib/auth";
-import { COMMENTS_PER_PAGE } from "config";
-
 import { Post } from "features/posts";
+import { AuthUser } from "features/auth";
 
 import { SortTypes } from "../types";
 import { useComments } from "../api/getComments";
@@ -14,12 +12,11 @@ import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
 
 type CommentsListProps = {
+  user: AuthUser;
   post: Post;
 };
 
-export const CommentsThread = ({ post }: CommentsListProps) => {
-  const { user } = useAuth();
-
+export const CommentsThread = ({ user, post }: CommentsListProps) => {
   const [pageNumber, setPageNumber] = useState(1);
   // eslint-disable-next-line
   const [perPage, setPerPage] = useState(COMMENTS_PER_PAGE);
@@ -34,10 +31,6 @@ export const CommentsThread = ({ post }: CommentsListProps) => {
       sortBy: sortBy,
     },
   });
-
-  if (!user) {
-    return null;
-  }
 
   if (commentsQuery.isLoading) {
     return <SpinnerWithBackground size="lg" />;

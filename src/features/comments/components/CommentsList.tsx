@@ -1,4 +1,4 @@
-import { AuthUser } from "features/auth";
+import { AuthUser, UserRoles } from "features/auth";
 
 import { Comment } from "../types";
 import { ReadComment } from "./crud/ReadComment";
@@ -26,6 +26,10 @@ export const CommentsList = ({
             <li key={commentIndex}>
               <ReadComment
                 comment={comment}
+                canEdit={user.id === comment.userId}
+                canDelete={
+                  user.id === comment.userId || user.role === UserRoles.ADMIN
+                }
                 ownComment={user.id === comment.userId}
                 isPosterComment={postUserid === comment.userId}
               />

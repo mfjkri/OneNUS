@@ -12,6 +12,8 @@ import { DeleteComment } from "./DeleteComment";
 
 type CommentViewProps = {
   comment: Comment;
+  canEdit: boolean;
+  canDelete: boolean;
   ownComment: boolean;
   isPosterComment: Boolean;
   toggleEditMode: () => void;
@@ -19,6 +21,8 @@ type CommentViewProps = {
 
 export const CommentView = ({
   comment,
+  canEdit,
+  canDelete,
   ownComment,
   isPosterComment,
   toggleEditMode,
@@ -41,17 +45,24 @@ export const CommentView = ({
         </div>
         <div className="grow w-[85%] ml-4">
           <div className="float-right ml-4 pt-1">
-            {ownComment && (
+            {(canEdit || canDelete) && (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
-                <DeleteComment commentId={comment.id} postId={comment.postId} />
-                <IconButton
-                  variant="text"
-                  color="white"
-                  size="sm"
-                  icon={<PencilIcon className="h-6 w-6" />}
-                  iconAria="Edit"
-                  onClick={toggleEditMode}
-                />
+                {canDelete && (
+                  <DeleteComment
+                    commentId={comment.id}
+                    postId={comment.postId}
+                  />
+                )}
+                {canEdit && (
+                  <IconButton
+                    variant="text"
+                    color="white"
+                    size="sm"
+                    icon={<PencilIcon className="h-6 w-6" />}
+                    iconAria="Edit"
+                    onClick={toggleEditMode}
+                  />
+                )}
               </div>
             )}
           </div>
@@ -70,12 +81,16 @@ export const CommentView = ({
 
 type ReadCommentProps = {
   comment: Comment;
+  canEdit: boolean;
+  canDelete: boolean;
   ownComment: boolean;
   isPosterComment: boolean;
 };
 
 export const ReadComment = ({
   comment,
+  canEdit,
+  canDelete,
   ownComment,
   isPosterComment,
 }: ReadCommentProps) => {
@@ -91,6 +106,8 @@ export const ReadComment = ({
       ) : (
         <CommentView
           comment={comment}
+          canEdit={canEdit}
+          canDelete={canDelete}
           ownComment={ownComment}
           isPosterComment={isPosterComment}
           toggleEditMode={toggle}

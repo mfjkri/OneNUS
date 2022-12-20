@@ -45,7 +45,7 @@ export const PostThread = () => {
         />
       </div>
       <div className="px-6 py-5">
-        <CommentsThread post={postQuery.data} />
+        <CommentsThread user={user} post={postQuery.data} />
       </div>
     </ContentLayout>
   );
