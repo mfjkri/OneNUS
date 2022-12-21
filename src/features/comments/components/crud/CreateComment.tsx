@@ -39,7 +39,7 @@ export const CreateComment = ({ postId, onSuccess }: CreateCommentProps) => {
         <>
           <TextAreaField
             label="Share your thoughts!"
-            className="h-20"
+            className="h-20 bg-secondary2 dark:bg-gray-900"
             error={formState.errors["text"]}
             registration={register("text")}
           />
