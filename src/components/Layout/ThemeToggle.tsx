@@ -21,17 +21,13 @@ export const ThemeToggle = () => {
       {darkMode ? (
         <MoonIcon
           aria-hidden="true"
-          className={
-            "w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 hover hover:cursor-pointer hover:opacity-50 text-slate-500"
-          }
+          className="w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 hover hover:cursor-pointer hover:opacity-60 text-gray-500"
           onClick={toggle}
         />
       ) : (
         <SunIcon
           aria-hidden="true"
-          className={
-            "w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 hover hover:cursor-pointer hover:opacity-50 text-yellow-500"
-          }
+          className="w-6 h-6 rounded-full fixed bottom-0 right-0 mr-2 mb-2 hover hover:cursor-pointer hover:opacity-60 text-yellow-500"
           onClick={toggle}
         />
       )}
