@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
+import { useNotificationStore } from "stores/notifications";
 
 import { commentKeys } from "./queries";
 import { Comment } from "../types";
@@ -51,6 +52,11 @@ export const useUpdateComment = ({
     onSuccess: (data) => {
       queryClient.cancelQueries(commentKeys.comment(data.id));
       queryClient.invalidateQueries(commentKeys.lists(postId));
+      useNotificationStore.getState().addNotification({
+        type: "success",
+        title: "Success",
+        message: "Updated your comment!",
+      });
     },
     ...config,
     mutationFn: updateComment,

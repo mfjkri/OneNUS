@@ -10,6 +10,7 @@ import {
   RegisterCredentialsDTO,
   AuthUser,
 } from "features/auth";
+import { useNotificationStore } from "stores/notifications";
 import storage from "utils/storage";
 
 async function handleUserResponse(data: UserResponse) {
@@ -29,12 +30,26 @@ async function loadUser() {
 async function loginFn(data: LoginCredentialsDTO) {
   const response = await loginWithUsernameAndPassword(data);
   const user = await handleUserResponse(response);
+
+  useNotificationStore.getState().addNotification({
+    type: "success",
+    title: "Success",
+    message: "Logged in!",
+  });
+
   return user;
 }
 
 async function registerFn(data: RegisterCredentialsDTO) {
   const response = await registerWithUsernameAndPassword(data);
   const user = await handleUserResponse(response);
+
+  useNotificationStore.getState().addNotification({
+    type: "success",
+    title: "Success",
+    message: "Registered your new account!",
+  });
+
   return user;
 }
 

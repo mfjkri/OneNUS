@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
+import { useNotificationStore } from "stores/notifications";
 
 import { postKeys } from "./queries";
 import { Post } from "../types";
@@ -31,6 +32,11 @@ export const useCreatePost = ({ config }: UseCreatePostOptions = {}) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(postKeys.lists());
+      useNotificationStore.getState().addNotification({
+        type: "success",
+        title: "Success",
+        message: "Created new post!",
+      });
     },
     ...config,
     mutationFn: createPost,

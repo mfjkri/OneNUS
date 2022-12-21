@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
+import { useNotificationStore } from "stores/notifications";
 
 import { removeCommentListsQuery } from "features/comments";
 
@@ -27,8 +28,12 @@ export const useDeletePost = ({ config }: UseDeletePostOptions = {}) => {
     onSuccess: (_, __, context: any) => {
       queryClient.removeQueries(postKeys.post(context.deletedPostId));
       removeCommentListsQuery(context.deletedPostId);
-
       queryClient.invalidateQueries(postKeys.lists());
+      useNotificationStore.getState().addNotification({
+        type: "success",
+        title: "Success",
+        message: "Deleted your post!",
+      });
     },
     ...config,
     mutationFn: deletePost,
