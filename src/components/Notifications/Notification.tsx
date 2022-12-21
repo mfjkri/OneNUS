@@ -6,6 +6,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Alert } from "@material-tailwind/react";
+import { color } from "@material-tailwind/react/types/components/alert";
 
 import { delay } from "utils/delay";
 
@@ -26,6 +27,13 @@ const icons = {
     />
   ),
   error: <XCircleIcon className="h-6 w-6 text-red-100" aria-hidden="true" />,
+};
+
+const colors = {
+  info: "light-blue",
+  success: "green",
+  error: "deep-orange",
+  warning: "amber",
 };
 
 const default_ttl = {
@@ -58,17 +66,6 @@ export const Notification = ({
     onDismiss(id);
   }
 
-  const getColor = (type: keyof typeof icons) => {
-    return type === "error"
-      ? "deep-orange"
-      : type === "warning"
-      ? "amber"
-      : type === "success"
-      ? "green"
-      : "light-blue";
-    // return colors[type] || undefined;
-  };
-
   useEffect(() => {
     setTimeout(() => {
       dismissNotification();
@@ -79,16 +76,16 @@ export const Notification = ({
   return (
     <Fragment>
       <Alert
-        color={getColor(type)}
-        className="pointer-events-auto"
+        color={colors[type] as color}
+        icon={icons[type]}
         show={show}
+        className="pointer-events-auto"
+        dismissible={{
+          onClose: () => dismissNotification(),
+        }}
         animate={{
           mount: { y: 0 },
           unmount: { y: -100 },
-        }}
-        icon={icons[type]}
-        dismissible={{
-          onClose: () => dismissNotification(),
         }}
       >
         <b>{title}</b> : {message}
