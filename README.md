@@ -99,6 +99,7 @@ You can find the live version of this project [here](https://app.onenus.link).
 - [State management](#state-management)
 - [Features](#features)
 - [Deployment](#deployment)
+- [Reflection](#reflection)
 
 <br/>
 
@@ -183,3 +184,9 @@ Note that each subdirectory in this convention is optional and can be left out i
 This app is deployed to an [AWS S3 bucket](https://aws.amazon.com/s3/) served using [Cloudfront](https://aws.amazon.com/cloudfront/) and [Route 53](https://aws.amazon.com/route53/).
 
 Signed SSL certificates for the domain are provided by [AWS ACM](https://aws.amazon.com/certificate-manager/).
+
+<br/>
+
+# Reflection
+
+...
