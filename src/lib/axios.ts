@@ -1,8 +1,10 @@
 import Axios, { AxiosRequestConfig } from "axios";
 
 import { API_URL } from "config";
-import { useNotificationStore } from "stores/notifications";
+import { store } from "stores/store";
 import storage from "utils/storage";
+
+import { addNotification } from "components/Notifications";
 
 export const axios = Axios.create({
   baseURL: API_URL,
@@ -26,11 +28,13 @@ axios.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message;
-    useNotificationStore.getState().addNotification({
-      type: "error",
-      title: "Error",
-      message,
-    });
+    store.dispatch(
+      addNotification({
+        type: "error",
+        title: "Error",
+        message,
+      })
+    );
 
     return Promise.reject(error);
   }

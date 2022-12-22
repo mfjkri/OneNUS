@@ -1,6 +1,5 @@
 import { initReactQueryAuth } from "react-query-auth";
 
-import { Spinner } from "components/Elements";
 import {
   loginWithUsernameAndPassword,
   getUser,
@@ -10,8 +9,11 @@ import {
   RegisterCredentialsDTO,
   AuthUser,
 } from "features/auth";
-import { useNotificationStore } from "stores/notifications";
+import { store } from "stores/store";
 import storage from "utils/storage";
+
+import { Spinner } from "components/Elements";
+import { addNotification } from "components/Notifications";
 
 async function handleUserResponse(data: UserResponse) {
   const { jwt, user } = data;
@@ -31,11 +33,13 @@ async function loginFn(data: LoginCredentialsDTO) {
   const response = await loginWithUsernameAndPassword(data);
   const user = await handleUserResponse(response);
 
-  useNotificationStore.getState().addNotification({
-    type: "success",
-    title: "Success",
-    message: "Logged in!",
-  });
+  store.dispatch(
+    addNotification({
+      type: "success",
+      title: "Success",
+      message: "Logged in!",
+    })
+  );
 
   return user;
 }
@@ -44,11 +48,13 @@ async function registerFn(data: RegisterCredentialsDTO) {
   const response = await registerWithUsernameAndPassword(data);
   const user = await handleUserResponse(response);
 
-  useNotificationStore.getState().addNotification({
-    type: "success",
-    title: "Success",
-    message: "Registered your new account!",
-  });
+  store.dispatch(
+    addNotification({
+      type: "success",
+      title: "Success",
+      message: "Registered your new account!",
+    })
+  );
 
   return user;
 }

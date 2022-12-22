@@ -2,7 +2,9 @@ import { useMutation } from "react-query";
 
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
-import { useNotificationStore } from "stores/notifications";
+import { store } from "stores/store";
+
+import { addNotification } from "components/Notifications";
 
 import { commentKeys } from "./queries";
 import { Comment } from "../types";
@@ -35,11 +37,13 @@ export const useCreateComment = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries(commentKeys.lists(postId));
-      useNotificationStore.getState().addNotification({
-        type: "success",
-        title: "Success",
-        message: "Created new comment!",
-      });
+      store.dispatch(
+        addNotification({
+          type: "success",
+          title: "Success",
+          message: "Created new comment!",
+        })
+      );
     },
     ...config,
     mutationFn: createComment,

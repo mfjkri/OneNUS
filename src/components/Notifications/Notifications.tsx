@@ -1,6 +1,7 @@
-import { useNotificationStore } from "stores/notifications";
+import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 
 import { Notification } from "./Notification";
+import { dismissNotification } from "./notificationSlices";
 
 /*
 Notifications component.
@@ -10,18 +11,21 @@ Attributes:
   None
 */
 export const Notifications = () => {
-  const { notifications, dismissNotification } = useNotificationStore();
+  const notifications = useAppSelector((state) => state.notifications);
+
+  const dispatch = useAppDispatch();
+  const dismiss = (id: string) => dispatch(dismissNotification(id));
 
   return (
     <div
       aria-live="assertive"
       className="z-50 flex flex-col fixed inset-0 space-y-4 items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
     >
-      {notifications.map((notification) => (
+      {notifications.notifications.map((notification) => (
         <Notification
           key={notification.id}
           notification={notification}
-          onDismiss={dismissNotification}
+          onDismiss={dismiss}
         />
       ))}
     </div>

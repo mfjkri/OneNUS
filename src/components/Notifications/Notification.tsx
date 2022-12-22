@@ -89,7 +89,7 @@ export const Notification = ({
       dismissNotification();
     }, ttl);
     //eslint-disable-next-line
-  }, [onDismiss, id, ttl]);
+  }, []);
 
   return (
     <Fragment>

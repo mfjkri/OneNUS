@@ -2,7 +2,9 @@ import { useMutation } from "react-query";
 
 import { axios } from "lib/axios";
 import { MutationConfig, queryClient } from "lib/react-query";
-import { useNotificationStore } from "stores/notifications";
+import { store } from "stores/store";
+
+import { addNotification } from "components/Notifications";
 
 import { postKeys } from "./queries";
 import { Post } from "../types";
@@ -51,11 +53,14 @@ export const useUpdatePost = ({ config }: UseUpdatePostOptions = {}) => {
         queryKey: postKeys.post(data.id),
         refetchActive: false,
       });
-      useNotificationStore.getState().addNotification({
-        type: "success",
-        title: "Success",
-        message: "Updated your post!",
-      });
+
+      store.dispatch(
+        addNotification({
+          type: "success",
+          title: "Success",
+          message: "Updated your post!",
+        })
+      );
     },
     ...config,
     mutationFn: updatePost,
