@@ -30,7 +30,7 @@ export const CommentView = ({
   return (
     <div className="my-5">
       <div className="flex flex-row h-fit">
-        <div className="flex-none w-[10%]">
+        <div className="flex-none w-[0%] md:w-[10%] invisible md:visible md:mr-4">
           <UserIcon
             className="w-auto h-auto"
             userId={comment.userId}
@@ -43,7 +43,7 @@ export const CommentView = ({
             </p>
           )}
         </div>
-        <div className="grow w-[85%] ml-4">
+        <div className="grow w-[85%]">
           <div className="float-right ml-4 pt-1">
             {(canEdit || canDelete) && (
               <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
