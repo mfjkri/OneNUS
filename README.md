@@ -1,24 +1,18 @@
-# CVWO Assignment Project
+# OneNUS [22/23 CVWO Winter Assignment]
 
-## TODO:
-
-1. Add Categories fiter for viewing posts
-2. Add starring of posts functionality
-3. Mobile responsive design
-
-Last updated: 19/12/22
+A webforum with simplicity in mind.
 
 <br/>
 
-# Table of Contents
+# Project Status
 
-- [Demo](#demo)
-- [Technologies](#technologies)
-- [Getting Started](#getting-started)
-  - [Pre-Requistes](#pre-requistes)
-  - [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Deployment](#deployment)
+This project is currently still in development.
+
+- Functionality for categorizing posts is still in progress.
+- Mobile support is still severely lacking
+- Starring of posts is not yet available
+
+Last updated: 22/12/22
 
 <br/>
 
@@ -26,35 +20,18 @@ Last updated: 19/12/22
 
 You can find the live version of this project [here](https://app.onenus.link).
 
-<br/>
+### Screenshots
 
-# Technologies
-
-- Frontend: [Typescript](https://www.typescriptlang.org/)
-  - [ReactJS](https://reactjs.org/)
-  - [React Query](https://react-query-v3.tanstack.com/) - Data synchronization
-  - [React Query Auth](https://github.com/alan2207/react-query-auth) - User authentication
-  - [Axios](https://axios-http.com/docs/intro) - HTTP Client
-  - [TailwindCSS](https://tailwindcss.com/) - CSS Framework
-  - [Material Tailwind](https://www.material-tailwind.com/) - UI-Components library
-  - [HeadlessUI](https://headlessui.com/) - Unstyled UI-Components library
-  - [React Hook Form](https://react-hook-form.com/) - Form validation
-  - [Zod](https://zod.dev/) - Schema validation
-  -
-- Backend [(Repo here) ](https://github.com/mfjkri/One-NUS-Backend): [Go](https://go.dev/)
-
-  - [Gin](https://gin-gonic.com/) - Web Framework
-  - [Gorm](https://gorm.io/) - ORM library
-
-- Misc:
-  - [Dicebear Avatars](https://avatars.dicebear.com/) - User avatars
-  - [Heroicons](https://heroicons.com/) - UI icons
+|                              |                                |
+| :--------------------------: | :----------------------------: |
+| ![Landing](docs/landing.jpg) |    ![Login](docs/login.jpg)    |
+|   ![Posts](docs/posts.jpg)   | ![PostView](docs/postview.jpg) |
 
 <br/>
 
-# Getting Started
+# Building this project
 
-## Pre-Requistes
+## Prerequisites
 
 1. `NodeJS`
 
@@ -106,6 +83,43 @@ You can find the live version of this project [here](https://app.onenus.link).
 
 <br/>
 
+# Table of Contents
+
+- [OneNUS \[22/23 CVWO Winter Assignment\]](#onenus-2223-cvwo-winter-assignment)
+- [Project Status](#project-status)
+- [Demo](#demo)
+  - [Screenshots](#screenshots)
+- [Building this project](#building-this-project)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Table of Contents](#table-of-contents)
+- [Technologies used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Routes](#routes)
+- [State management](#state-management)
+- [Features](#features)
+- [Deployment](#deployment)
+
+<br/>
+
+# Technologies used
+
+- [ReactJS](https://reactjs.org/) with [Typescript](https://www.typescriptlang.org/)
+- [React Query](https://react-query-v3.tanstack.com/) - Data synchronization
+- [React Query Auth](https://github.com/alan2207/react-query-auth) - User authentication
+- [Axios](https://axios-http.com/docs/intro) - HTTP Client
+- [TailwindCSS](https://tailwindcss.com/) - CSS Framework
+- [Material Tailwind](https://www.material-tailwind.com/) - UI-Components library
+- [HeadlessUI](https://headlessui.com/) - Unstyled UI-Components library
+- [React Hook Form](https://react-hook-form.com/) - Form validation
+- [Zod](https://zod.dev/) - Schema validation
+
+- Misc:
+  - [Dicebear Avatars](https://avatars.dicebear.com/) - User avatars
+  - [Heroicons](https://heroicons.com/) - UI icons
+
+<br/>
+
 # Project Structure
 
 This project uses a structure inspired by [bullet-proof-react](https://github.com/alan2207/bulletproof-react/) by [Alan Alickovic ](https://github.com/alan2207).
@@ -118,8 +132,49 @@ Some key sub-directories in src are:
 
 - [`src/components/`](src/components/) - Shared components with reusable functionality (eg. Button, Link)
 - [`src/features/`](src/features/) - Components with specific functionality (eg. Auth, Post, Comment)
-- [`src/routes`](src/routes/) - Routing for the app (see [src/routes/index.tsx](src/routes/index.tsx) for more information)
+- [`src/routes`](src/routes/) - Routing for the app (see the [Routes](#Routes) section for more inf for more information)
 - [`src/config/`](src/config/) - Environment variables and global configuration values are exported and accessible here.
+
+<br/>
+
+# Routes
+
+Routing in this project is managed by [`react-router-dom v6.4.5`](https://reactrouter.com/en/main).
+
+Global routing is defined in [src/routes/index.jsx](src/routes/index.tsx) which splits routes into two categories:
+
+- Public: Freely accessible (includes pages to login and register)
+- Protected: Requires user authentication to access
+
+Only routing _TO_ the feature is handled here. Further sub-routing _WITHIN_ the feature are handled by the respective feature itself in `src/$FEATURENAME/routes/index.tsx`.
+
+e.g. [`src/auth/routes/index.jsx`](src/features/auth/routes/index.tsx)
+
+<br/>
+
+# State management
+
+...
+
+<br/>
+
+# Features
+
+There are 3 main features in this app.
+
+- [`auth`](src/features/auth/) - User authentication (Login & Register)
+- [`posts`](src/features/posts/) - Forum posts
+- [`comments`](src/features/comments/) - Forum comments
+
+Each feature follows the convention below:
+
+- `api`: Handles any API calls made by the feature
+- `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](src/components/))
+- `routes`: Handles any sub-routing within the feature
+- `types`: Defines any custom types used in this feature
+- `index.ts`: Exports all required components or types that is used elsewhere (e.g. by other features)
+
+Note that each subdirectory in this convention is optional and can be left out if not required by the feature (e.g. comments feature does not have a routes/ subdirectory as it not have any subrouting within it)
 
 <br/>
 
