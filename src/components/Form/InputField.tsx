@@ -1,39 +1,69 @@
+import * as React from "react";
 import { Input } from "@material-tailwind/react";
-import { variant } from "@material-tailwind/react/types/components/input";
+import {
+  variant,
+  size,
+  color,
+  icon,
+} from "@material-tailwind/react/types/components/input";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from "./FieldWrapper";
 
-type InputFieldProps = FieldWrapperPassThroughProps & {
-  type?: "text" | "email" | "password";
-  variant?: variant;
-  className?: string;
-  disabled?: boolean;
-  registration: Partial<UseFormRegisterReturn>;
-};
+export type InputFieldProps = FieldWrapperPassThroughProps &
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    type?: "text" | "email" | "password";
+    variant?: variant;
+    size?: size;
+    color?: color;
+    icon?: icon;
+    label?: string;
+    registration: Partial<UseFormRegisterReturn>;
+  };
 
-export const InputField = (props: InputFieldProps) => {
-  const {
-    type = "text",
-    variant,
-    label,
-    className,
-    disabled,
-    registration,
-    error,
-  } = props;
+/*
+Input element with preset styling, options and error message.
 
-  return (
-    <FieldWrapper error={error}>
-      <Input
-        type={type}
-        variant={variant}
-        label={label}
-        className={className}
-        disabled={disabled}
-        error={error?.message !== undefined}
-        {...registration}
-      />
-    </FieldWrapper>
-  );
-};
+Attributes:
+  - variant, size, color, icon, label: Refer to
+    https://www.material-tailwind.com/docs/react/input
+    https://www.material-tailwind.com/docs/react/props/input
+
+  - registration: Partial<UseFormRegisterReturn>
+    Relevant props for input validation set by react-hook-form
+
+  - ALL OTHER NATIVE INPUT PROPS
+*/
+export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  (
+    {
+      type = "text",
+      variant,
+      size,
+      color,
+      icon,
+      label,
+      registration,
+      error,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <FieldWrapper error={error}>
+        <Input
+          type={type}
+          variant={variant}
+          size={size}
+          color={color}
+          icon={icon}
+          label={label}
+          error={error?.message !== undefined}
+          ref={ref}
+          {...props}
+          {...registration}
+        />
+      </FieldWrapper>
+    );
+  }
+);

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import * as React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
@@ -9,34 +8,35 @@ type Option = {
   value: string | number | string[];
 };
 
-type SelectFieldProps = FieldWrapperPassThroughProps & {
-  options: Option[];
-  className?: string;
-  defaultValue?: string;
-  placeholder?: string;
-  registration: Partial<UseFormRegisterReturn>;
-};
+export type SelectFieldProps = FieldWrapperPassThroughProps &
+  React.InputHTMLAttributes<HTMLSelectElement> & {
+    options: Option[];
+    registration: Partial<UseFormRegisterReturn>;
+  };
 
-export const SelectField = (props: SelectFieldProps) => {
-  const {
-    label,
-    options,
-    error,
-    className,
-    defaultValue,
-    registration,
-    placeholder,
-  } = props;
+/*
+Select element with preset styling, options and error message.
+
+Attributes:
+  - label : string | undefined
+    Label text of the select element.
+
+  - options | Option[]
+    List of options available for the select element.
+
+  - registration: Partial<UseFormRegisterReturn>
+    Relevant props for input validation set by react-hook-form
+*/
+export const SelectField = React.forwardRef<
+  HTMLSelectElement,
+  SelectFieldProps
+>(({ label, options, error, registration, ...props }, ref) => {
   return (
     <FieldWrapper label={label} error={error}>
       <select
-        placeholder={placeholder}
-        name="location"
-        className={clsx(
-          "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 bg-secondary2 dark:bg-primary2 text-primary dark:text-secondary focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-          className
-        )}
-        defaultValue={defaultValue}
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 bg-secondary2 dark:bg-primary2 text-primary dark:text-secondary focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+        ref={ref}
+        {...props}
         {...registration}
       >
         {options.map(({ label, value }) => (
@@ -47,4 +47,4 @@ export const SelectField = (props: SelectFieldProps) => {
       </select>
     </FieldWrapper>
   );
-};
+});

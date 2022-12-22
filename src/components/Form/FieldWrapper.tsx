@@ -7,7 +7,6 @@ type FieldWrapperProps = {
   className?: string;
   children: React.ReactNode;
   error?: FieldError | undefined;
-  description?: string;
 };
 
 export type FieldWrapperPassThroughProps = Omit<
@@ -15,8 +14,30 @@ export type FieldWrapperPassThroughProps = Omit<
   "className" | "children"
 >;
 
-export const FieldWrapper = (props: FieldWrapperProps) => {
-  const { label, className, error, children } = props;
+/*
+Wrapper component around the other form fields (e.g. InputField).
+Provides error message functionality, label and description.
+
+Attributes:
+  - label: string | undefined
+    Label text at the top of the form field.
+
+  - className: string | undefined
+    Any additional styling for the wrapper element.
+
+  - children: ReactNode
+    Form field components that is wrapped by this component.
+
+  - error: FieldError | undefined
+    Error object that is provided by react-hook-form. 
+    Error message will be displayed.
+*/
+export const FieldWrapper = ({
+  label,
+  className,
+  children,
+  error,
+}: FieldWrapperProps) => {
   return (
     <div>
       <label

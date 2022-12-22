@@ -8,7 +8,7 @@ import clsx from "clsx";
 
 type PageSelectorProps = {
   pageNumber: number;
-  goToPage: Function;
+  goToPage: (newPage: number) => void;
 };
 
 const InactivePageSelector = ({ pageNumber, goToPage }: PageSelectorProps) => {
@@ -34,7 +34,7 @@ type ChevronSelectorProps = {
   targetPageNumber: number;
   currPageNumber: number;
   maxPageNumber: number;
-  goToPage: Function;
+  goToPage: (newPage: number) => void;
   chevronIcon: JSX.Element;
   selectorType: string;
 };
@@ -67,13 +67,29 @@ const ChevronSelector = ({
   );
 };
 
-type PagePaginatorProps = {
+export type PagePaginatorProps = {
   pageNumber: number;
   maxPageNumber: number;
-  goToPage: Function;
+  goToPage: (newPage: number) => void;
   totalPagesShown?: number;
 };
 
+/*
+Adds pagination functionality. Allows user to navigate between pages.
+
+Attributes:
+  - pageNumber: number
+    The current page number.
+  
+  - maxPageNumber: number
+    The current maximum page number.
+  
+  - goToPage: function [(newPage: number) => void]
+    Callback function that is used to go to the newPage number.
+
+  - totalPagesShown: number
+    How many pages number to show at once. Defaults to 5.
+*/
 export const PagePaginator = ({
   pageNumber,
   maxPageNumber,

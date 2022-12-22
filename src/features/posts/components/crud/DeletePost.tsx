@@ -17,13 +17,15 @@ export const DeletePost = ({ postId }: DeletePostProps) => {
     <ConfirmationDialog
       title="Delete post"
       body="Are you sure you want to delete this post?"
+      icon="danger"
+      isDone={deletePostMutation.isSuccess}
       triggerButton={
         <IconButton
           variant="text"
           color="red"
           size="sm"
           icon={<TrashIcon className="h-6 w-6" />}
-          iconAria="Delete"
+          toolTip="Delete"
         />
       }
       confirmButton={

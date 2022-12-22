@@ -40,25 +40,59 @@ const InfoIcon = () => {
 export type ConfirmationDialogProps = {
   triggerButton: React.ReactElement;
   confirmButton: React.ReactElement;
-  cancelButtonColor?: colors;
   title: string;
   body?: string;
   cancelButtonText?: string;
+  cancelButtonColor?: colors;
   icon?: "danger" | "info" | "";
   size?: size;
   isDone?: boolean;
 };
 
+/*
+Adds a trigger button that upon trigger will present user with a Dialog, with 
+possible actions of Confirm and Cancel.
+
+Attributes:
+  - triggerButton: React.ReactElement
+    Button to trigger / open the Dialog
+  
+  - confirmButton: React.ReactElement
+    Button to confirm / complete the Dialog
+  
+  - title: string
+    Title of the Dialog
+  
+  - body: string | undefined
+    Body of the Dialog. Defaults to an empty body "".
+
+  - cancelButtonText: string | undefined
+    Text displayed on the Cancel Dialog button. Defaults to "Cancel".
+
+  - cancelButtonColor: colors | undefined
+    Color of the Cancel Dialog button. Defaults to "blue".
+  
+  - icon: "danger" | "info" | ""
+    Whether to add an Icon to the Dialog. Defaults to no icon.
+
+  - size: size | undefined
+    Size of the Dialog window. Defaults to "sm".
+  
+  - isDone: boolean | undefined
+    Whether the Dialog is completed. Defaults to false.
+  
+  - ALL OTHER NATIVE DIALOG PROPS
+*/
 export const ConfirmationDialog = ({
   triggerButton,
   confirmButton,
-  cancelButtonColor = "blue",
   title,
   body = "",
   cancelButtonText = "Cancel",
+  cancelButtonColor = "blue",
   icon = "",
-  isDone = false,
   size = "sm",
+  isDone = false,
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
 
@@ -100,30 +134,5 @@ export const ConfirmationDialog = ({
         </DialogFooter>
       </Dialog>
     </React.Fragment>
-  );
-};
-
-type DiscardConfirmationDialogProps = {
-  onDiscard: () => void;
-};
-
-export const DiscardConfirmationDialog = ({
-  onDiscard,
-}: DiscardConfirmationDialogProps) => {
-  return (
-    <ConfirmationDialog
-      title="Discard changes"
-      body="Are you sure you want to discard your changes?"
-      triggerButton={
-        <Button fullWidth={true} variant="filled" color="red">
-          Discard Changes
-        </Button>
-      }
-      confirmButton={
-        <Button variant="filled" color="red" onClick={onDiscard}>
-          Discard
-        </Button>
-      }
-    />
   );
 };

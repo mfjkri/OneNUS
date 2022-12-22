@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
 
 import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
@@ -37,12 +38,14 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               label="Username"
               error={formState.errors["username"]}
               registration={register("username")}
+              icon={<UserIcon className="h-4 w-4" aria-hidden="true" />}
             />
             <InputField
               type="password"
               label="Password"
               error={formState.errors["password"]}
               registration={register("password")}
+              icon={<LockClosedIcon className="h-4 w-4" aria-hidden="true" />}
             />
 
             <div>

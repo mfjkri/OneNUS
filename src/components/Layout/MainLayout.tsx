@@ -9,10 +9,6 @@ import { Button, Link } from "components/Elements";
 import logo from "assets/logo.svg";
 import { useAuth } from "lib/auth";
 
-type MainLayoutProps = {
-  children: React.ReactNode;
-};
-
 const NewPostButton = () => {
   return (
     <Link to="/app/posts/new">
@@ -64,6 +60,17 @@ const NavigationBar = () => {
   );
 };
 
+export type MainLayoutProps = {
+  children: React.ReactNode;
+};
+
+/*
+Standardized parent layout for all components in protected routes.
+
+Attributes:
+  - children: ReactNode
+    Children nodes contained in the MainLayout.
+*/
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="h-screen flex overflow-hidden">

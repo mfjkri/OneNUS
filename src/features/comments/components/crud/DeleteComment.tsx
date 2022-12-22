@@ -16,6 +16,7 @@ export const DeleteComment = ({ commentId, postId }: DeleteCommentProps) => {
     <ConfirmationDialog
       title="Delete comment"
       body="Are you sure you want to delete this comment?"
+      icon="danger"
       isDone={deleteCommentMutation.isSuccess}
       triggerButton={
         <IconButton
@@ -23,7 +24,7 @@ export const DeleteComment = ({ commentId, postId }: DeleteCommentProps) => {
           color="red"
           size="sm"
           icon={<TrashIcon className="h-6 w-6" />}
-          iconAria="Delete"
+          toolTip="Delete"
         />
       }
       confirmButton={

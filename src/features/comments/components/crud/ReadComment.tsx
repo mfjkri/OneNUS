@@ -59,7 +59,7 @@ export const CommentView = ({
                     color="white"
                     size="sm"
                     icon={<PencilIcon className="h-6 w-6" />}
-                    iconAria="Edit"
+                    toolTip="Edit"
                     onClick={toggleEditMode}
                   />
                 )}

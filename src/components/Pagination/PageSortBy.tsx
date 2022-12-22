@@ -1,15 +1,32 @@
 import { Tooltip } from "@material-tailwind/react";
 
-type PageSortByProps = {
-  sortOptions: [string, string, string][];
-  setSortOption: Function;
+export type PageSortByProps = {
   activeSortOption: string;
+  sortOptions: [string, string, string][];
+  setSortOption: (newSortOption: string) => void;
 };
 
+/*
+Adds sorting functionality. Allows user to apply sorting option.
+
+Attributes:
+  - sortOptions: [string, string, string][]
+    Sort options available.
+    [
+      [sortOptionKey, displayed text, tooltip message on hover],
+      ...
+    ]
+  
+  - setSortOption: function [(newSortOption: string) => void]
+    Callback function that is used to sort by the newSortOption.
+  
+  - activeSortOption: string
+    Current sort option.
+*/
 export const PageSortBy = ({
+  activeSortOption,
   sortOptions,
   setSortOption,
-  activeSortOption,
 }: PageSortByProps) => {
   return (
     <div className="flex justify-center mb-1">

@@ -2,6 +2,13 @@ import { useNotificationStore } from "stores/notifications";
 
 import { Notification } from "./Notification";
 
+/*
+Notifications component.
+This component creates Notification components and is maanged by the NotificationsStore.
+
+Attributes:
+  None
+*/
 export const Notifications = () => {
   const { notifications, dismissNotification } = useNotificationStore();
 
