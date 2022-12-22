@@ -6,14 +6,16 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
 
-import { Button, Spinner } from "components/Elements";
-import { ThemeToggle } from "components/Layout";
-import { Notifications } from "components/Notifications/Notifications";
-
+import { Provider as ReduxProvider } from "react-redux";
 import { AuthProvider } from "lib/auth";
 import { queryClient } from "lib/react-query";
+import { store } from "stores/store";
 import storage from "utils/storage";
 import { appTheme } from "assets/theme";
+
+import { Button, Spinner } from "components/Elements";
+import { ThemeToggle } from "components/Layout";
+import { Notifications } from "components/Notifications";
 
 const ErrorFallback = () => {
   React.useEffect(() => {
@@ -55,11 +57,14 @@ export const AppProvider = ({ children }: AppProviderProps) => {
           <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== "production" && <ReactQueryDevtools />}
             <ThemeProvider value={appTheme}>
-              <Notifications />
-              <AuthProvider>
-                <Router>{children}</Router>
-                <ThemeToggle />
-              </AuthProvider>
+              <ReduxProvider store={store}>
+                <Notifications />
+                <AuthProvider>
+                  <Router>{children}</Router>
+
+                  <ThemeToggle />
+                </AuthProvider>
+              </ReduxProvider>
             </ThemeProvider>
           </QueryClientProvider>
         </HelmetProvider>

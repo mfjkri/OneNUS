@@ -1,26 +1,27 @@
-import { useState } from "react";
-
 import { SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { PagePaginator, PageSortBy } from "components/Pagination";
 
+import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { useAuth } from "lib/auth";
-import { POSTS_PER_PAGE } from "config";
 
 import { PostsList } from "../components/PostsList";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
+import { setPageNumber, setSortby } from "../slices";
 
 export const Posts = () => {
   const { user } = useAuth();
 
   // TODO Add pageNumber and filterTag selectors
-  const [pageNumber, setPageNumber] = useState(1);
-  // eslint-disable-next-line
-  const [perPage, setPerPage] = useState(POSTS_PER_PAGE);
-  const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
-  // eslint-disable-next-line
-  const [filterTag, setFilterTag] = useState("-");
+  const pageNumber = useAppSelector((state) => state.posts.pageNumber);
+  const perPage = useAppSelector((state) => state.posts.perPage);
+  const filterTag = useAppSelector((state) => state.posts.filterTag);
+  const sortBy = useAppSelector((state) => state.posts.sortBy);
+
+  const dispatch = useAppDispatch();
+  const goToPage = (newPageNumber: number) =>
+    dispatch(setPageNumber(newPageNumber));
 
   const postsQuery = usePosts({
     data: {
@@ -54,8 +55,8 @@ export const Posts = () => {
           ]}
           activeSortOption={sortBy}
           setSortOption={(sortOption: string) => {
-            setSortBy(sortOption);
-            setPageNumber(1);
+            dispatch(setSortby(sortOption));
+            goToPage(1);
           }}
         />
       </div>
@@ -65,7 +66,7 @@ export const Posts = () => {
           <PagePaginator
             pageNumber={pageNumber}
             maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
-            goToPage={setPageNumber}
+            goToPage={goToPage}
           />
         </div>
       </div>

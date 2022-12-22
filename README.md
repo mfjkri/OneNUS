@@ -29,7 +29,7 @@ You can find the live version of this project [here](https://app.onenus.link).
 
 <br/>
 
-# Building this project
+# Building the project
 
 ## Prerequisites
 
@@ -88,8 +88,8 @@ You can find the live version of this project [here](https://app.onenus.link).
 - [OneNUS \[22/23 CVWO Winter Assignment\]](#onenus-2223-cvwo-winter-assignment)
 - [Project Status](#project-status)
 - [Demo](#demo)
-  - [Screenshots](#screenshots)
-- [Building this project](#building-this-project)
+    - [Screenshots](#screenshots)
+- [Building the project](#building-the-project)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Table of Contents](#table-of-contents)
