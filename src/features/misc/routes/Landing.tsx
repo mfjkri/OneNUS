@@ -22,8 +22,7 @@ export const Landing = () => {
     if (user) {
       navigate("/app");
     } else {
-      window.location.assign("/auth/login");
-      // navigate("/auth/login");
+      navigate("/auth/login");
     }
   };
 
@@ -31,8 +30,7 @@ export const Landing = () => {
     if (user) {
       navigate("/app");
     } else {
-      window.location.assign("/auth/register");
-      // navigate("/auth/register");
+      navigate("/auth/register");
     }
   };
 
