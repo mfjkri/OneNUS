@@ -1,6 +1,6 @@
 # OneNUS [22/23 CVWO Winter Assignment]
 
-A webforum with simplicity in mind.
+A webforum designed with simplicity in mind.
 
 <br/>
 
@@ -9,8 +9,8 @@ A webforum with simplicity in mind.
 This project is currently still in development.
 
 - Functionality for categorizing posts is still in progress.
-- Mobile support is still severely lacking
 - Starring of posts is not yet available
+- Mobile support is still severely lacking
 
 Last updated: 22/12/22
 
@@ -20,7 +20,11 @@ Last updated: 22/12/22
 
 You can find the live version of this project [here](https://app.onenus.link).
 
-### Screenshots
+## Backend
+
+You can find the backend API that this project consumes [here](https://github.com/mfjkri/One-NUS-Backend).
+
+## Screenshots
 
 |                              |                                |
 | :--------------------------: | :----------------------------: |
@@ -88,7 +92,8 @@ You can find the live version of this project [here](https://app.onenus.link).
 - [OneNUS \[22/23 CVWO Winter Assignment\]](#onenus-2223-cvwo-winter-assignment)
 - [Project Status](#project-status)
 - [Demo](#demo)
-    - [Screenshots](#screenshots)
+  - [Backend](#backend)
+  - [Screenshots](#screenshots)
 - [Building the project](#building-the-project)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -106,14 +111,14 @@ You can find the live version of this project [here](https://app.onenus.link).
 # Technologies used
 
 - [ReactJS](https://reactjs.org/) with [Typescript](https://www.typescriptlang.org/)
-- [React Query](https://react-query-v3.tanstack.com/) - Data synchronization
+- [Redux](https://redux.js.org/) - State management (`client-state`)
+- [React Query](https://react-query-v3.tanstack.com/) - Data synchronization (`server-state`)
 - [React Query Auth](https://github.com/alan2207/react-query-auth) - User authentication
 - [Axios](https://axios-http.com/docs/intro) - HTTP Client
-- [TailwindCSS](https://tailwindcss.com/) - CSS Framework
-- [Material Tailwind](https://www.material-tailwind.com/) - UI-Components library
-- [HeadlessUI](https://headlessui.com/) - Unstyled UI-Components library
 - [React Hook Form](https://react-hook-form.com/) - Form validation
 - [Zod](https://zod.dev/) - Schema validation
+- [TailwindCSS](https://tailwindcss.com/) - CSS Framework
+- [Material Tailwind](https://www.material-tailwind.com/) - UI-Components library
 
 - Misc:
   - [Dicebear Avatars](https://avatars.dicebear.com/) - User avatars
@@ -131,10 +136,15 @@ All of the codebase resides in the [`src`](src/) directory.
 
 Some key sub-directories in src are:
 
-- [`src/components/`](src/components/) - Shared components with reusable functionality (eg. Button, Link)
-- [`src/features/`](src/features/) - Components with specific functionality (eg. Auth, Post, Comment)
-- [`src/routes`](src/routes/) - Routing for the app (see the [Routes](#Routes) section for more inf for more information)
-- [`src/config/`](src/config/) - Environment variables and global configuration values are exported and accessible here.
+```sh
+src
+├── components # Shared components with reusable functionality (eg. Button, Link)
+├── features   # Specific functionality related to a feature (eg. Auth, Post, Comment)
+├── routes     # Global routing for the app (see Routes section for more information)
+├── config     # Environment variables and global configuration values are exported and accessible here.
+├── lib        # Preconfigured libraries used by the application
+└── stores     # Global state store managed by Redux (see State management section for more information)
+```
 
 <br/>
 
@@ -142,20 +152,44 @@ Some key sub-directories in src are:
 
 Routing in this project is managed by [`react-router-dom v6.4.5`](https://reactrouter.com/en/main).
 
-Global routing is defined in [src/routes/index.jsx](src/routes/index.tsx) which splits routes into two categories:
+Global routing is defined in [src/routes/index.tsx](src/routes/index.tsx) which splits routes into two categories:
 
 - Public: Freely accessible (includes pages to login and register)
 - Protected: Requires user authentication to access
 
-Only routing _TO_ the feature is handled here. Further sub-routing _WITHIN_ the feature are handled by the respective feature itself in `src/$FEATURENAME/routes/index.tsx`.
+Only routing _to_ the feature is handled here. Further sub-routing _within_ the feature are handled by the respective feature itself in `src/$FEATURENAME/routes/index.tsx`.
 
-e.g. [`src/auth/routes/index.jsx`](src/features/auth/routes/index.tsx)
+e.g. [`src/auth/routes/index.tsx`](src/features/auth/routes/index.tsx)
 
 <br/>
 
 # State management
 
-...
+- `client-state`
+
+  Client-state in this project is managed using [`Redux`](https://redux.js.org/).
+
+  Client-state in use are:
+
+  - [`posts`](src/features/posts/slices/):
+    - current page number
+    - current sort option
+    - current category filter
+  - comments:
+    - current page number
+  - [`notifications`](src/components/Notifications/notificationSlices.ts)
+
+- `server-state`
+
+  Server-state in this project is managed using [`React Query v3`](https://react-query-v3.tanstack.com/).
+
+  Server-state includes:
+
+  - user authentication (further managed by [React Query Auth](https://github.com/alan2207/react-query-auth))
+  - creating posts and comments (<ins>**C**</ins>RUD)
+  - fetching posts and comments (C<ins>**R**</ins>UD)
+  - updating posts and comments (CR<ins>**U**</ins>D)
+  - deleting posts and comments (CRU<ins>**D**</ins>)
 
 <br/>
 
@@ -172,10 +206,11 @@ Each feature follows the convention below:
 - `api`: Handles any API calls made by the feature
 - `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](src/components/))
 - `routes`: Handles any sub-routing within the feature
+- `slices`: Contains reducer logic and associated actions for any client-state of the feature.
 - `types`: Defines any custom types used in this feature
 - `index.ts`: Exports all required components or types that is used elsewhere (e.g. by other features)
 
-Note that each subdirectory in this convention is optional and can be left out if not required by the feature (e.g. comments feature does not have a routes/ subdirectory as it not have any subrouting within it)
+Note that each subdirectory in this convention is optional and can be left out if not required by the feature (e.g. comments feature does not have a routes subdirectory as the feature has no subrouting within it)
 
 <br/>
 
