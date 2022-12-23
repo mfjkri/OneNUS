@@ -4,7 +4,7 @@ import { color } from "@material-tailwind/react/types/components/chip";
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 
 import { PostTag, PostTags, PostTagColors } from "../types";
-import { setFilterTag } from "../slices";
+import { setFilterTag, setPageNumber } from "../slices";
 
 export type PostFlairProps = {
   category: PostTag;
@@ -16,13 +16,13 @@ export const PostFlair = ({ category }: PostFlairProps) => {
   );
 };
 
-export type FilterPostFlairProps = {
+type FilterPostFlairProps = {
   category: PostTag;
   activeFilterTag: string;
   onActivate: (newFilterTag: string) => void;
 };
 
-export const FilterPostFlair = ({
+const FilterPostFlair = ({
   category,
   activeFilterTag,
   onActivate,
@@ -58,14 +58,25 @@ export const FilterPostFlair = ({
 export const PostFlairs = () => {
   const activeFilterTag = useAppSelector((state) => state.posts.filterTag);
   const dispatch = useAppDispatch();
-  const setActiveFilterTag = (newFilterTag: string) =>
+  const setActiveFilterTag = (newFilterTag: string) => {
+    dispatch(setPageNumber(1));
     dispatch(setFilterTag(newFilterTag));
+  };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row flex-wrap">
       <p className="mr-2 font-black">Categories:</p>
+      <div
+        className="hover:cursor-pointer hover:opacity-80"
+        onClick={() => setActiveFilterTag("-")}
+      >
+        <Chip
+          value="ALL"
+          color={activeFilterTag === "-" ? "deep-purple" : "blue-gray"}
+        />
+      </div>
       {PostTags.map(([type, _]) => (
-        <div className="ml-2" key={type}>
+        <div className="ml-2 mb-2" key={type}>
           <FilterPostFlair
             category={type as PostTag}
             activeFilterTag={activeFilterTag}

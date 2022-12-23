@@ -43,8 +43,8 @@ export const Posts = () => {
 
   return (
     <ContentLayout title="">
-      <div className="flex flex-col md:flex-row px-6 py-2">
-        <div className="grow">
+      <div className="flex flex-row flex-wrap px-6 py">
+        <div className="grow mr-3">
           <PostFlairs />
         </div>
         <div className="flex-none w-fit">
