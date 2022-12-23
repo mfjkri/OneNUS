@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { useAuth } from "lib/auth";
 
 import { PostsList } from "../components/PostsList";
+import { PostFlairs } from "../components/PostFlair";
 import { usePosts } from "../api/getPosts";
 import { SortTypes } from "../types";
 import { setPageNumber, setSortby } from "../slices";
@@ -42,25 +43,30 @@ export const Posts = () => {
 
   return (
     <ContentLayout title="">
-      <div className="float-right">
-        <PageSortBy
-          sortOptions={[
-            [SortTypes[SortTypes.byHot], "hot", "Sort by replies count"],
-            [SortTypes[SortTypes.ByNew], "new", "Sort by creation date"],
-            [
-              SortTypes[SortTypes.byRecent],
-              "recent",
-              "Sort by lastest replies",
-            ],
-          ]}
-          activeSortOption={sortBy}
-          setSortOption={(sortOption: string) => {
-            dispatch(setSortby(sortOption));
-            goToPage(1);
-          }}
-        />
+      <div className="flex flex-col md:flex-row px-6 py-2">
+        <div className="grow">
+          <PostFlairs />
+        </div>
+        <div className="flex-none w-fit">
+          <PageSortBy
+            sortOptions={[
+              [SortTypes[SortTypes.byHot], "hot", "Sort by replies count"],
+              [SortTypes[SortTypes.ByNew], "new", "Sort by creation date"],
+              [
+                SortTypes[SortTypes.byRecent],
+                "recent",
+                "Sort by lastest replies",
+              ],
+            ]}
+            activeSortOption={sortBy}
+            setSortOption={(sortOption: string) => {
+              dispatch(setSortby(sortOption));
+              goToPage(1);
+            }}
+          />
+        </div>
       </div>
-      <div className="mt-3 clear-both">
+      <div>
         <PostsList posts={postsQuery.data.posts} user={user} />
         <div className="mt-5">
           <PagePaginator

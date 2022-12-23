@@ -6,6 +6,7 @@ import { UserIcon } from "features/auth";
 import { UTCEpochToLocalDate } from "utils/format";
 
 import { Post } from "../types";
+import { PostFlair } from "./PostFlair";
 
 type PostPreviewProps = {
   post: Post;
@@ -40,9 +41,12 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
                 <p className="text-center text-[12px]">{post.commentsCount}</p>
               </div>
             </div>
-            <h2 className="text-xl break-all font-bold mb-2 truncate text-ellipsis group-hover:underline">
-              {post.title}
-            </h2>
+            <div className="flex flex-row mb-2">
+              <h2 className="text-xl break-all font-bold truncate text-ellipsis group-hover:underline mr-4">
+                {post.title}
+              </h2>
+              <PostFlair category={post.tag} />
+            </div>
             <p className="text-md break-all whitespace-pre-line truncate text-ellipsis max-h-[100%]">
               {post.text}
             </p>

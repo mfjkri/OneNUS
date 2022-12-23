@@ -8,11 +8,10 @@ A webforum designed with simplicity in mind.
 
 This project is currently still in development.
 
-- Functionality for categorizing posts is still in progress.
 - Starring of posts is not yet available
 - Mobile support is still severely lacking
 
-Last updated: 22/12/22
+Last updated: 23/12/22
 
 <br/>
 

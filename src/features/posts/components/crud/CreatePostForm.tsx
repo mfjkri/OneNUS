@@ -55,8 +55,8 @@ export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
             label="Category"
             error={formState.errors["tag"]}
             registration={register("tag")}
-            options={PostTags.map((type) => ({
-              label: type,
+            options={PostTags.map(([type, text]) => ({
+              label: text,
               value: type,
             }))}
             defaultValue={PostTags[0]}
