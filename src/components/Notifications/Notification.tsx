@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -9,6 +9,8 @@ import { Alert } from "@material-tailwind/react";
 import { color } from "@material-tailwind/react/types/components/alert";
 
 import { delay } from "utils/delay";
+
+import { Notif } from "./notificationSlices";
 
 const icons = {
   info: (
@@ -43,15 +45,8 @@ const default_ttl = {
   warning: 3000,
 };
 
-export type NotificationProps = {
-  notification: {
-    id: string;
-    type: keyof typeof icons;
-    title: string;
-    message?: string;
-    ttl?: number;
-  };
-  onDismiss: (id: string) => void;
+export type NotificationProps = Notif & {
+  onDismiss: (id: number) => void;
 };
 
 /*
@@ -73,23 +68,26 @@ Attributes:
     Callback function when notification is dismissed by user or timedout
 */
 export const Notification = ({
-  notification: { id, type, title, message, ttl = default_ttl[type] },
+  id,
+  type,
+  title,
+  message,
+  ttl = default_ttl[type],
   onDismiss,
 }: NotificationProps) => {
   const [show, setShow] = useState(true);
 
-  async function dismissNotification() {
+  const dismissNotification = useCallback(async () => {
     setShow(false);
     await delay(200);
     onDismiss(id);
-  }
+  }, [id, onDismiss]);
 
   useEffect(() => {
     setTimeout(() => {
       dismissNotification();
     }, ttl);
-    //eslint-disable-next-line
-  }, []);
+  }, [dismissNotification, ttl]);
 
   return (
     <Fragment>
