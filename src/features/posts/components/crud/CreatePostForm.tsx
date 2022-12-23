@@ -59,7 +59,6 @@ export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
               label: text,
               value: type,
             }))}
-            defaultValue={PostTags[0]}
           />
           <div>
             <Button
