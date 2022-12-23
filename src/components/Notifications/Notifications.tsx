@@ -5,7 +5,8 @@ import { dismissNotification } from "./notificationSlices";
 
 /*
 Notifications component.
-This component creates Notification components and is maanged by the NotificationsStore.
+This component creates each Notification component and listens to 
+notifications state in redux store.
 
 Attributes:
   None
@@ -31,3 +32,24 @@ export const Notifications = () => {
     </div>
   );
 };
+
+/*
+Usage (adding notification)
+
+import { addNotification } from "components/Notifications";
+...
+newNotification = {type: ..., title: ...,message: ...}
+
+
+1) Within a React component:
+  import { useAppDispatch } from "hooks/typedRedux";
+  ...
+  const dispatch = useAppDispatch();
+  dispatch(addNotification(newNotification));
+
+
+2) Outside of React a component:
+  import {store} from "stores/store"; 
+  ...
+  store.dispatch(addNotification(newNotification);
+*/

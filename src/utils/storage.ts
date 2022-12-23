@@ -1,7 +1,8 @@
 const storagePrefix = "one_nus_";
 
-// Any methods related to localStorage (right now only used for JWT Token)
+// Any methods related to localStorage (right now used for JWT Token and theme preference)
 const storage = {
+  /* -------------------------------- JWT TOKEN ------------------------------- */
   getToken: () => {
     return JSON.parse(
       window.localStorage.getItem(`${storagePrefix}token`) as string
@@ -14,6 +15,7 @@ const storage = {
     window.localStorage.removeItem(`${storagePrefix}token`);
   },
 
+  /* ---------------------------- Theme Preference ---------------------------- */
   getDarkMode: () => {
     const cachedThemePreference = JSON.parse(
       window.localStorage.getItem(`${storagePrefix}darkMode`) as string
