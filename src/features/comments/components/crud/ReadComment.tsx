@@ -1,10 +1,9 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { IconButton } from "components/Elements";
+import { Timestamps } from "components/Timestamps";
 import { UserIcon } from "features/auth";
-
 import { useDisclosure } from "hooks/useDisclosure";
-import { UTCEpochToLocalDate } from "utils/format";
 
 import { Comment } from "../../types";
 import { UpdateCommentForm } from "./UpdateComment";
@@ -83,9 +82,12 @@ export const CommentView = ({
           </div>
         </div>
       </div>
-      <div className="grow mt-8 text-xs text-right text-gray-700 dark:text-gray-400">
-        <p>Commented at: {UTCEpochToLocalDate(comment.createdAt)}</p>
-        <p>Last modified at: {UTCEpochToLocalDate(comment.updatedAt)}</p>
+      <div className="mt-8">
+        <Timestamps
+          createdAt={comment.createdAt}
+          updatedAt={comment.updatedAt}
+          createdText="commented"
+        />
       </div>
     </div>
   );

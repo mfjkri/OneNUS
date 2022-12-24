@@ -1,10 +1,8 @@
 import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "@material-tailwind/react";
 
 import { Link } from "components/Elements";
+import { Timestamps } from "components/Timestamps";
 import { UserIcon } from "features/auth";
-
-import { UTCEpochToLocalDate } from "utils/format";
 
 import { Post } from "../types";
 import { PostFlair } from "./PostFlair";
@@ -64,16 +62,8 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-row mt-3 ">
-          <div className="grow"></div>
-          <div className="text-xs text-right text-gray-700 dark:text-gray-400 w-fit">
-            <Tooltip
-              content={UTCEpochToLocalDate(post.createdAt)}
-              className="bg-secondary dark:bg-primary text-primary dark:text-secondary text-xs"
-            >
-              <p>Posted at: {UTCEpochToLocalDate(post.createdAt)}</p>
-            </Tooltip>
-          </div>
+        <div className="mt-3">
+          <Timestamps createdAt={post.createdAt} />
         </div>
       </div>
     </Link>

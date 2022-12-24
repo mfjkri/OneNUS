@@ -1,9 +1,8 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
-import { UTCEpochToLocalDate } from "utils/format";
-import { useDisclosure } from "hooks/useDisclosure";
-
 import { IconButton } from "components/Elements";
+import { Timestamps } from "components/Timestamps";
+import { useDisclosure } from "hooks/useDisclosure";
 import { AuthUser, UserIcon, UserRoles } from "features/auth";
 
 import { Post } from "../../types";
@@ -68,9 +67,8 @@ const PostView = ({
           <p className="text-md break-words whitespace-pre-line">{post.text}</p>
         </div>
       </div>
-      <div className="grow mt-8 text-xs text-right text-gray-700 dark:text-gray-400">
-        <p>Posted at: {UTCEpochToLocalDate(post.createdAt)}</p>
-        <p>Last modified at: {UTCEpochToLocalDate(post.updatedAt)}</p>
+      <div className="mt-8">
+        <Timestamps createdAt={post.createdAt} updatedAt={post.updatedAt} />
       </div>
     </div>
   );
