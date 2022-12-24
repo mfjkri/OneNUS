@@ -104,6 +104,7 @@ You can find the backend API that this project consumes [here](https://github.co
 - [Features](#features)
 - [Deployment](#deployment)
 - [Reflection](#reflection)
+- [Credits](#credits)
 
 <br/>
 
@@ -224,3 +225,11 @@ Signed SSL certificates for the domain are provided by [AWS ACM](https://aws.ama
 # Reflection
 
 ...
+
+<br/>
+
+# Credits
+
+- Project structure inspiration: https://github.com/alan2207/bulletproof-react
+- Logo: https://logoipsum.com/
+- Background: https://unsplash.com/photos/v6uXUGQSDLY
