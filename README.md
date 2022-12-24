@@ -9,9 +9,8 @@ A webforum designed with simplicity in mind.
 This project is currently still in development.
 
 - Starring of posts is not yet available
-- Mobile support is still severely lacking
 
-Last updated: 23/12/22
+Last updated: 24/12/22
 
 <br/>
 
