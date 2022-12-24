@@ -46,7 +46,7 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
           refetch={postQuery.refetch}
         />
       </div>
-      <div className="px-6 py-5">
+      <div className="px-2 md:px-6 py-5">
         <CommentsThread user={user} post={postQuery.data} />
       </div>
     </ContentLayout>

@@ -65,7 +65,7 @@ export const PostFlairs = () => {
 
   return (
     <div className="flex flex-row flex-wrap">
-      <p className="mr-2 font-black my-auto">Categories:</p>
+      {/* <p className="mr-2 mb-2 font-black">Categories:</p> */}
       <div
         className="hover:cursor-pointer hover:opacity-80"
         onClick={() => setActiveFilterTag("-")}
@@ -76,7 +76,7 @@ export const PostFlairs = () => {
         />
       </div>
       {PostTags.map(([type, _]) => (
-        <div className="ml-2" key={type}>
+        <div className="ml-2 mb-2" key={type}>
           <FilterPostFlair
             category={type as PostTag}
             activeFilterTag={activeFilterTag}

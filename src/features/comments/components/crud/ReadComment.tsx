@@ -29,46 +29,58 @@ export const CommentView = ({
 }: CommentViewProps) => {
   return (
     <div className="my-5">
-      <div className="flex flex-row h-fit">
-        <div className="flex-none w-0 md:w-24 invisible md:visible md:mr-4">
-          <UserIcon
-            className="w-auto h-auto"
-            userId={comment.userId}
-            username={comment.author}
-          />
-          <p className="break-all text-center">{comment.author}</p>
+      <div className="flex flex-col">
+        <div className="visible md:invisible mb-2 md:mb-0 h-auto md:h-0 flex flex-row">
+          <p className="break-all my-auto text-primary2 dark:text-secondary2 ">
+            Commented by: {comment.author}
+          </p>
           {(ownComment || isPosterComment) && (
-            <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
-              {ownComment ? "Me" : "Author"}
+            <p className="text-xs ml-2 my-auto font-bold text-green-600 dark:text-green-600">
+              ({ownComment ? "Me" : "Author"})
             </p>
           )}
         </div>
-        <div className="grow w-[85%]">
-          <div className="float-right ml-4 pt-1">
-            {(canEdit || canDelete) && (
-              <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
-                {canDelete && (
-                  <DeleteComment
-                    commentId={comment.id}
-                    postId={comment.postId}
-                  />
-                )}
-                {canEdit && (
-                  <IconButton
-                    variant="text"
-                    color="white"
-                    size="sm"
-                    icon={<PencilIcon className="h-6 w-6" />}
-                    toolTip="Edit"
-                    onClick={toggleEditMode}
-                  />
-                )}
-              </div>
+        <div className="flex flex-row h-fit">
+          <div className="flex-none w-0 md:w-24 h-0 md:h-auto invisible md:visible md:mr-4">
+            <UserIcon
+              className="w-auto h-auto"
+              userId={comment.userId}
+              username={comment.author}
+            />
+            <p className="break-all text-center">{comment.author}</p>
+            {(ownComment || isPosterComment) && (
+              <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
+                {ownComment ? "Me" : "Author"}
+              </p>
             )}
           </div>
-          <p className="text-md break-all whitespace-pre-line">
-            {comment.text}
-          </p>
+          <div className="grow w-[85%]">
+            <div className="float-right ml-4 pt-1">
+              {(canEdit || canDelete) && (
+                <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
+                  {canDelete && (
+                    <DeleteComment
+                      commentId={comment.id}
+                      postId={comment.postId}
+                    />
+                  )}
+                  {canEdit && (
+                    <IconButton
+                      variant="text"
+                      color="white"
+                      size="sm"
+                      icon={<PencilIcon className="h-6 w-6" />}
+                      toolTip="Edit"
+                      onClick={toggleEditMode}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+            <p className="text-md break-all whitespace-pre-line">
+              {comment.text}
+            </p>
+          </div>
         </div>
       </div>
       <div className="grow mt-8 text-xs text-right text-gray-700 dark:text-gray-400">
