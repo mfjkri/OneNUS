@@ -21,7 +21,7 @@ export const CommentsList = ({
   return (
     <>
       {comments ? (
-        <ul className="divide-y divide-dashed px-6 py-2">
+        <ul className="divide-y divide-solid divide-primary dark:divide-secondary px-6 py-2">
           {comments.map((comment, commentIndex) => (
             <li key={commentIndex}>
               <ReadComment

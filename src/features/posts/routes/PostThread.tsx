@@ -5,23 +5,25 @@ import { Button, Link, SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { NotFound } from "features/misc";
 import { CommentsThread } from "features/comments";
-
+import { AuthUser } from "features/auth";
 import { useAuth } from "lib/auth";
 
 import { ReadPost } from "../components/crud/ReadPost";
 import { usePost } from "../api/getPost";
 
-export const PostThread = () => {
-  const { postId } = useParams();
-  const { user } = useAuth();
-  const parsedPostId = postId ? parseInt(postId) : 0;
-  const postQuery = usePost({ postId: parsedPostId });
+type ValidPostProps = {
+  postId: number;
+  user: AuthUser;
+};
+
+const ValidPost = ({ postId, user }: ValidPostProps) => {
+  const postQuery = usePost({ postId: postId });
 
   if (postQuery.isLoading) {
     return <SpinnerWithBackground size="lg" />;
   }
 
-  if (!postQuery.data || !user) {
+  if (!postQuery.data) {
     return <NotFound />;
   }
 
@@ -48,5 +50,24 @@ export const PostThread = () => {
         <CommentsThread user={user} post={postQuery.data} />
       </div>
     </ContentLayout>
+  );
+};
+
+export const PostThread = () => {
+  const { postId } = useParams();
+  const { user } = useAuth();
+
+  const parsedPostId = postId ? parseInt(postId) : 0;
+  // Check for any invalid postIds
+  const targetPostId = parsedPostId && parsedPostId > 0 ? parsedPostId : -1;
+
+  return (
+    <>
+      {!user || targetPostId === -1 ? (
+        <NotFound />
+      ) : (
+        <ValidPost postId={targetPostId} user={user} />
+      )}
+    </>
   );
 };

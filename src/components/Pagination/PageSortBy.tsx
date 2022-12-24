@@ -34,7 +34,7 @@ export const PageSortBy = ({
       {sortOptions.map(([sortOption, sortText, sortDesc]) => (
         <Tooltip content={sortDesc} className="text-secondary" key={sortOption}>
           <p
-            className={`mx-2 text-accent2 ${
+            className={`mx-2 text-blue-500 ${
               sortOption !== activeSortOption
                 ? "hover:underline hover:text-secondary hover:cursor-pointer"
                 : "underline font-bold hover:cursor-not-allowed"
