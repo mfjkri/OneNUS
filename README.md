@@ -25,10 +25,10 @@ You can find the backend API that this project consumes [here](https://github.co
 
 ## Screenshots
 
-|                                     |                                       |
-| :---------------------------------: | :-----------------------------------: |
-| ![Landing](docs/images/landing.jpg) |    ![Login](docs/images/login.jpg)    |
-|   ![Posts](docs/images/posts.jpg)   | ![PostView](docs/images/postview.jpg) |
+|                                     |                                        |
+| :---------------------------------: | :------------------------------------: |
+| ![Landing](docs/images/landing.jpg) |    ![Login](docs/images/login.jpg)     |
+|  ![Posts](docs/images/posts2.jpg)   | ![PostView](docs/images/postview2.jpg) |
 
 <br/>
 
