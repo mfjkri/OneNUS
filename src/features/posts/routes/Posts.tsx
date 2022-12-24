@@ -14,7 +14,6 @@ import { setPageNumber, setSortby } from "../slices";
 export const Posts = () => {
   const { user } = useAuth();
 
-  // TODO Add pageNumber and filterTag selectors
   const pageNumber = useAppSelector((state) => state.posts.pageNumber);
   const perPage = useAppSelector((state) => state.posts.perPage);
   const filterTag = useAppSelector((state) => state.posts.filterTag);
