@@ -29,7 +29,7 @@ export const PageSortBy = ({
   setSortOption,
 }: PageSortByProps) => {
   return (
-    <div className="flex justify-center mb-1">
+    <div className="flex justify-center mt-1">
       <p className="mr-2 font-black">Sort by:</p>
       {sortOptions.map(([sortOption, sortText, sortDesc]) => (
         <Tooltip content={sortDesc} className="text-secondary" key={sortOption}>

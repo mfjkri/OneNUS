@@ -28,9 +28,7 @@ export const ContentLayout = ({ children, title }: ContentLayoutProps) => {
             <u>{title}</u>
           </h1>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-7">
-          {children}
-        </div>
+        <div className="mx-auto px-4 sm:px-6 md:px-8 py-7">{children}</div>
       </div>
     </>
   );

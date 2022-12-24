@@ -19,7 +19,7 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
     <Link to={`./${post.id}`}>
       <div className="my-5 pr-5 text-primary dark:text-secondary hover:opacity-50 hover:cursor-pointer group">
         <div className="flex flex-row h-24">
-          <div className="flex-none w-[10%]">
+          <div className="flex-none w-12 md:w-24">
             <UserIcon
               className="w-auto h-auto"
               userId={post.userId}

@@ -30,7 +30,7 @@ export const CommentView = ({
   return (
     <div className="my-5">
       <div className="flex flex-row h-fit">
-        <div className="flex-none w-[0%] md:w-[10%] invisible md:visible md:mr-4">
+        <div className="flex-none w-0 md:w-24 invisible md:visible md:mr-4">
           <UserIcon
             className="w-auto h-auto"
             userId={comment.userId}

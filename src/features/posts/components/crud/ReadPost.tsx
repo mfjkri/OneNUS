@@ -29,7 +29,7 @@ const PostView = ({
   return (
     <div>
       <div className="flex flex-row">
-        <div className="flex-none w-[10%]">
+        <div className="flex-none w-12 md:w-24">
           <UserIcon
             className="w-auto h-auto"
             userId={post.userId}

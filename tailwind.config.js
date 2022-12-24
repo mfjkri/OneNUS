@@ -15,7 +15,7 @@ module.exports = withMT({
         secondary2: "#A6A6A6",
         secondary3: "#9EB1AF",
         accent: "#00ADB5",
-        accent2: "#818CF8",
+        accent2: "#aa56ff",
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
