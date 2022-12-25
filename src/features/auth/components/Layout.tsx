@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as z from "zod";
 
-import logo from "assets/logo.svg";
 import { Link } from "components/Elements";
 import { Head } from "components/Head";
-
+import { Footer } from "components/Layout";
 import { isAlphaOnlyString } from "utils/strings";
+import logo from "assets/logo.svg";
 
 export const AuthInputSchema = z.object({
   username: z
@@ -44,6 +44,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
