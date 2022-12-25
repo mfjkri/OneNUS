@@ -7,7 +7,7 @@ type UserIconProps = {
 
 export const UserIcon = ({
   username,
-  gender = "male",
+  gender = "open-peeps",
   className = "w-4 h-4",
 }: UserIconProps) => {
   return (
