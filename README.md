@@ -200,7 +200,7 @@ There are 3 main features in this app.
 - [`posts`](src/features/posts/) - Forum posts
 - [`comments`](src/features/comments/) - Forum comments
 
-Each feature follows the convention below:
+Each feature follows a structure convention as follows:
 
 - `api`: Handles any API calls made by the feature
 - `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](src/components/))
@@ -230,5 +230,5 @@ Signed SSL certificates for the domain are provided by [AWS ACM](https://aws.ama
 # Credits
 
 - Project structure inspiration: https://github.com/alan2207/bulletproof-react
-- Logo: https://logoipsum.com/
-- Background: https://unsplash.com/photos/v6uXUGQSDLY
+- Website Logo: https://logoipsum.com/
+- Website Background: https://unsplash.com/photos/v6uXUGQSDLY
