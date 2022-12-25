@@ -5,6 +5,9 @@ export const API_URL =
     ? (process.env.REACT_APP_LOCAL_API_URL as string)
     : (process.env.REACT_APP_API_URL as string);
 
+export const QUERY_REFETCH_ON_WINDOW_FOCUS =
+  process.env.REACT_APP_QUERY_REFETCH_ON_WINDOW_FOCUS === "true";
+
 export const MAX_POST_TITLE_CHAR = parseInt(
   process.env.REACT_APP_MAX_POST_TITLE_CHAR || "100"
 );

@@ -74,6 +74,8 @@ You can find the backend API that this project consumes [here](https://github.co
    REACT_APP_LOCAL_API_URL=LOCAL_API_URL # Local testing API endpoint
    REACT_APP_API_MOCKING=false # Whether to use production or local API for local testing (in production mode it will use PRODUCTION_API_URL regardless)
 
+   REACT_APP_QUERY_REFETCH_ON_WINDOW_FOCUS=true # Whether to refetch stale queries on window focus.
+
    # Number of posts and comments to display per page
    REACT_APP_POSTS_PER_PAGE=10
    REACT_APP_COMMENTS_PER_PAGE=10

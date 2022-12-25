@@ -6,11 +6,13 @@ import {
   DefaultOptions,
 } from "react-query";
 
+import { QUERY_REFETCH_ON_WINDOW_FOCUS } from "config";
+
 // Set default options for all queries
 const queryConfig: DefaultOptions = {
   queries: {
     useErrorBoundary: true,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: QUERY_REFETCH_ON_WINDOW_FOCUS,
     retry: 1,
   },
 };
