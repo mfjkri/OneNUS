@@ -20,7 +20,7 @@ You can find the live version of this project [here](https://app.onenus.link).
 
 ## Backend
 
-You can find the backend API that this project consumes [here](https://github.com/mfjkri/One-NUS-Backend).
+You can find the backend API that this project consumes [here](https://github.com/mfjkri/OneNUS-Backend).
 
 ## Screenshots
 
@@ -49,11 +49,11 @@ You can find the backend API that this project consumes [here](https://github.co
 
 1. Clone this repo.
    ```
-   $ git clone https://github.com/mfjkri/One-NUS.git
+   $ git clone https://github.com/mfjkri/OneNUS.git
    ```
 2. Change into the repo directory.
    ```
-   $ cd One-NUS
+   $ cd OneNUS
    ```
 3. Install project dependencies.
 
@@ -81,7 +81,7 @@ You can find the backend API that this project consumes [here](https://github.co
    REACT_APP_COMMENTS_PER_PAGE=10
 
    # These values should mirror the ones in the server config
-   # See https://github.com/mfjkri/One-NUS-Backend#config for more details
+   # See https://github.com/mfjkri/OneNUS-Backend#config for more details
    REACT_APP_MAX_POST_TITLE_CHAR=100
    REACT_APP_MAX_POST_TEXT_CHAR=5000
    REACT_APP_MAX_COMMENT_TEXT_CHAR=1000

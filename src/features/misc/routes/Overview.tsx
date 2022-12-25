@@ -12,7 +12,7 @@ export const Overview = () => {
         Welcome <u>{user?.username}</u>!
       </h1>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary rounded-3xl w-full p-4 mb-5">
-        <p>oneNUS is the one-stop place for you to hangout!</p>
+        <p>OneNUS is the one-stop place for you to hangout!</p>
         <br />
         <p>Before you begin, do give the rules below a read.</p>
         <br />
