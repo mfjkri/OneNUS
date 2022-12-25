@@ -61,14 +61,28 @@ You can find the backend API that this project consumes [here](https://github.co
    $ yarn install
    ```
 
-4. Required config files.
+4. Create a `.env` file from the template `.env.example` file.
 
-   Create a dotenv file `.env` under the root directory with the following variables:
+   ```
+   $ cp .env.example .env
+   ```
+
+   Modify the following environment variables in the newly created `.env` file accordingly:
 
    ```python
-   REACT_APP_API_URL: PRODUCTION_API_URL # Production API endpoint
-   REACT_APP_LOCAL_API_URL: LOCAL_API_URL # Local testing API endpoint
-   REACT_APP_API_MOCKING: false # Whether to use production or local API for local testing (in production mode it will use PRODUCTION_API_URL regardless)
+   REACT_APP_API_URL=PRODUCTION_API_URL # Production API endpoint
+   REACT_APP_LOCAL_API_URL=LOCAL_API_URL # Local testing API endpoint
+   REACT_APP_API_MOCKING=false # Whether to use production or local API for local testing (in production mode it will use PRODUCTION_API_URL regardless)
+
+   # Number of posts and comments to display per page
+   REACT_APP_POSTS_PER_PAGE=10
+   REACT_APP_COMMENTS_PER_PAGE=10
+
+   # These values should mirror the ones in the server config
+   # See https://github.com/mfjkri/One-NUS-Backend#config for more details
+   REACT_APP_MAX_POST_TITLE_CHAR=100
+   REACT_APP_MAX_POST_TEXT_CHAR=5000
+   REACT_APP_MAX_COMMENT_TEXT_CHAR=1000
    ```
 
 5. Start test server.
