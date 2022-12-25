@@ -10,7 +10,7 @@ export const axios = Axios.create({
   baseURL: API_URL,
 });
 
-// Intercept outgoing requests and injectauthorization token (JWT)
+// Intercept outgoing requests and include authorization token (JWT)
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
   config.headers = config.headers ?? {};
   const token = storage.getToken();
