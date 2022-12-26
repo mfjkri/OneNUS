@@ -1,3 +1,4 @@
+import { SortOptions } from "components/Pagination";
 import { BaseEntity } from "types";
 
 export const PostTagColors = {
@@ -16,6 +17,15 @@ export const PostTags = [
   ["misc", "Misc"],
 ];
 
+export const PostSortOptions = new SortOptions(
+  [
+    ["hot", "Sort by replies count"],
+    ["new", "Sort by creation date"],
+    ["recent", "Sort by lastest replies"],
+  ],
+  "new"
+);
+
 export type Post = {
   title: string;
   tag: PostTag;
@@ -29,9 +39,3 @@ export type Post = {
 
   starsCount: number;
 } & BaseEntity;
-
-export enum SortTypes {
-  ByNew,
-  byHot,
-  byRecent,
-}

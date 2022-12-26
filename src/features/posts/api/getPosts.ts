@@ -9,7 +9,8 @@ import { Post } from "../types";
 export type GetPostsDTO = {
   perPage: number;
   pageNumber: number;
-  sortBy: string;
+  sortOption: string;
+  sortOrder: string;
   filterTag: string;
 };
 
@@ -20,7 +21,7 @@ export type GetPostsResponse = {
 
 export const getPosts = (data: GetPostsDTO): Promise<GetPostsResponse> => {
   return axios.get(
-    `/posts/get/${data.perPage}/${data.pageNumber}/${data.sortBy}/${data.filterTag}`
+    `/posts/get/${data.perPage}/${data.pageNumber}/${data.sortOption}/${data.sortOrder}/${data.filterTag}`
   );
 };
 

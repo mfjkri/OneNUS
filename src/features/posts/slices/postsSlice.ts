@@ -1,21 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 
+import { SortOrderTypes } from "components/Pagination";
 import { POSTS_PER_PAGE } from "config";
 
-import { SortTypes } from "../types";
+import { PostSortOptions } from "../types";
+
+const initState = {
+  pageNumber: 1,
+  perPage: POSTS_PER_PAGE,
+  filterTag: "-",
+  sortOption: PostSortOptions.defaultOption,
+  sortOrder: SortOrderTypes.descending,
+};
 
 const postsSlice = createSlice({
   name: "posts",
-  initialState: {
-    pageNumber: 1,
-    perPage: POSTS_PER_PAGE,
-    filterTag: "-",
-    sortBy: SortTypes[SortTypes.ByNew],
-  },
+  initialState: initState,
   reducers: {
     setPageNumber: (state, action: PayloadAction<number>) => {
       state.pageNumber = action.payload;
+    },
+    resetPageNumber: (state) => {
+      state.pageNumber = initState.pageNumber;
     },
     setPerPage: (state, action: PayloadAction<number>) => {
       state.perPage = action.payload;
@@ -23,12 +30,36 @@ const postsSlice = createSlice({
     setFilterTag: (state, action: PayloadAction<string>) => {
       state.filterTag = action.payload;
     },
-    setSortby: (state, action: PayloadAction<string>) => {
-      state.sortBy = action.payload;
+    setSortOption: (state, action: PayloadAction<string>) => {
+      state.sortOption = action.payload;
+    },
+    setSortOrder: (state, action: PayloadAction<SortOrderTypes>) => {
+      state.sortOrder = action.payload;
+    },
+    toggleSortOrder: (state) => {
+      state.sortOrder =
+        state.sortOrder === SortOrderTypes.ascending
+          ? SortOrderTypes.descending
+          : SortOrderTypes.ascending;
+    },
+    resetSortOrder: (state) => {
+      state.sortOrder = initState.sortOrder;
+    },
+    resetState: (state) => {
+      return initState;
     },
   },
 });
 
-export const { setPageNumber, setPerPage, setFilterTag, setSortby } =
-  postsSlice.actions;
+export const {
+  setPageNumber,
+  resetPageNumber,
+  setPerPage,
+  setFilterTag,
+  setSortOption,
+  setSortOrder,
+  toggleSortOrder,
+  resetSortOrder,
+  resetState,
+} = postsSlice.actions;
 export const postReducer = postsSlice.reducer;

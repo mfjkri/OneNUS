@@ -1,23 +1,33 @@
+import { useAuth } from "lib/auth";
+import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
-import { PagePaginator, PageSortBy } from "components/Pagination";
-
-import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
-import { useAuth } from "lib/auth";
+import {
+  PagePaginator,
+  PageSortBy,
+  SortOrderTypes,
+} from "components/Pagination";
 
 import { PostsList } from "../components/PostsList";
 import { PostFlairs } from "../components/PostFlair";
 import { usePosts } from "../api/getPosts";
-import { SortTypes } from "../types";
-import { setPageNumber, setSortby } from "../slices";
+import {
+  setPageNumber,
+  setSortOption,
+  resetSortOrder,
+  toggleSortOrder,
+  resetPageNumber,
+} from "../slices";
+import { PostSortOptions } from "../types";
 
 export const Posts = () => {
   const { user } = useAuth();
 
-  const pageNumber = useAppSelector((state) => state.posts.pageNumber);
-  const perPage = useAppSelector((state) => state.posts.perPage);
-  const filterTag = useAppSelector((state) => state.posts.filterTag);
-  const sortBy = useAppSelector((state) => state.posts.sortBy);
+  const activePageNumber = useAppSelector((state) => state.posts.pageNumber);
+  const activePerPage = useAppSelector((state) => state.posts.perPage);
+  const activeFilterTag = useAppSelector((state) => state.posts.filterTag);
+  const activeSortOption = useAppSelector((state) => state.posts.sortOption);
+  const activeSortOrder = useAppSelector((state) => state.posts.sortOrder);
 
   const dispatch = useAppDispatch();
   const goToPage = (newPageNumber: number) =>
@@ -25,10 +35,11 @@ export const Posts = () => {
 
   const postsQuery = usePosts({
     data: {
-      perPage: perPage,
-      pageNumber: pageNumber,
-      sortBy: sortBy,
-      filterTag: filterTag,
+      perPage: activePerPage,
+      pageNumber: activePageNumber,
+      sortOption: activeSortOption,
+      sortOrder: SortOrderTypes[activeSortOrder],
+      filterTag: activeFilterTag,
     },
   });
 
@@ -48,19 +59,17 @@ export const Posts = () => {
         </div>
         <div className="flex-none w-fit mb-2">
           <PageSortBy
-            sortOptions={[
-              [SortTypes[SortTypes.byHot], "hot", "Sort by replies count"],
-              [SortTypes[SortTypes.ByNew], "new", "Sort by creation date"],
-              [
-                SortTypes[SortTypes.byRecent],
-                "recent",
-                "Sort by lastest replies",
-              ],
-            ]}
-            activeSortOption={sortBy}
+            sortOptions={PostSortOptions}
+            activeSortOption={activeSortOption}
             setSortOption={(sortOption: string) => {
-              dispatch(setSortby(sortOption));
-              goToPage(1);
+              dispatch(setSortOption(sortOption));
+              dispatch(resetSortOrder());
+              dispatch(resetPageNumber());
+            }}
+            activeSortOrder={activeSortOrder}
+            toggleSortOrder={() => {
+              dispatch(toggleSortOrder());
+              dispatch(resetPageNumber());
             }}
           />
         </div>
@@ -69,8 +78,10 @@ export const Posts = () => {
         <PostsList posts={postsQuery.data.posts} user={user} />
         <div className="mt-5">
           <PagePaginator
-            pageNumber={pageNumber}
-            maxPageNumber={Math.ceil(postsQuery.data.postsCount / perPage)}
+            pageNumber={activePageNumber}
+            maxPageNumber={Math.ceil(
+              postsQuery.data.postsCount / activePerPage
+            )}
             goToPage={goToPage}
           />
         </div>
