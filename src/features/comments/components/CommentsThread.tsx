@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { COMMENTS_PER_PAGE } from "config";
 import { SpinnerWithBackground } from "components/Elements";
-import { PagePaginator } from "components/Pagination";
+import { PagePaginator, SortOrderTypes } from "components/Pagination";
 import { Post } from "features/posts";
 import { AuthUser } from "features/auth";
 
-import { SortTypes } from "../types";
+import { CommentSortOptions } from "../types";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
@@ -17,18 +17,23 @@ type CommentsListProps = {
 };
 
 export const CommentsThread = ({ user, post }: CommentsListProps) => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [activePageNumber, setPageNumber] = useState(1);
   // eslint-disable-next-line
-  const [perPage, setPerPage] = useState(COMMENTS_PER_PAGE);
+  const [activePerPage, setPerPage] = useState(COMMENTS_PER_PAGE);
   // eslint-disable-next-line
-  const [sortBy, setSortBy] = useState(SortTypes[SortTypes.ByNew]);
+  const [activeSortOption, setSortBy] = useState(
+    CommentSortOptions.defaultOption
+  );
+  // eslint-disable-next-line
+  const [activeSortOrder, setSortOrder] = useState(SortOrderTypes.descending);
 
   const commentsQuery = useComments({
     data: {
       postId: post.id,
-      perPage: perPage,
-      pageNumber: pageNumber,
-      sortBy: sortBy,
+      perPage: activePerPage,
+      pageNumber: activePageNumber,
+      sortOption: activeSortOption,
+      sortOrder: SortOrderTypes[activeSortOrder],
     },
   });
 
@@ -51,8 +56,10 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
       </div>
       <div className="mt-3">
         <PagePaginator
-          pageNumber={pageNumber}
-          maxPageNumber={Math.ceil(commentsQuery.data?.commentsCount / perPage)}
+          pageNumber={activePageNumber}
+          maxPageNumber={Math.ceil(
+            commentsQuery.data?.commentsCount / activePerPage
+          )}
           goToPage={setPageNumber}
         />
       </div>

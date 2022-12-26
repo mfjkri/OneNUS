@@ -10,7 +10,8 @@ export type GetCommentsDTO = {
   postId: number;
   perPage: number;
   pageNumber: number;
-  sortBy: string;
+  sortOption: string;
+  sortOrder: string;
 };
 
 export type GetCommentsResponse = {
@@ -22,7 +23,7 @@ export const getComments = (
   data: GetCommentsDTO
 ): Promise<GetCommentsResponse> => {
   return axios.get(
-    `/comments/get/${data.postId}/${data.perPage}/${data.pageNumber}/${data.sortBy}`
+    `/comments/get/${data.postId}/${data.perPage}/${data.pageNumber}/${data.sortOption}/${data.sortOrder}`
   );
 };
 

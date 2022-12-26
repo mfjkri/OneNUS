@@ -21,20 +21,23 @@ export class SortOptions {
     activeSortOption: string,
     setSortOption: (sortOption: string) => void
   ) {
-    return this.options.map(([sortOption, sortDesc]) => (
-      <Tooltip content={sortDesc} className="text-secondary" key={sortOption}>
-        <p
-          className={`mx-2 text-blue-500 ${
-            sortOption !== activeSortOption
-              ? "hover:underline hover:text-secondary hover:cursor-pointer"
-              : "underline font-bold hover:cursor-not-allowed"
-          }`}
-          onClick={() => setSortOption(sortOption)}
-        >
-          {sortOption}
-        </p>
-      </Tooltip>
-    ));
+    return (
+      this.options.length > 1 &&
+      this.options.map(([sortOption, sortDesc]) => (
+        <Tooltip content={sortDesc} className="text-secondary" key={sortOption}>
+          <p
+            className={`mx-2 text-blue-500 ${
+              sortOption !== activeSortOption
+                ? "hover:underline hover:text-secondary hover:cursor-pointer"
+                : "underline font-bold hover:cursor-not-allowed"
+            }`}
+            onClick={() => setSortOption(sortOption)}
+          >
+            {sortOption}
+          </p>
+        </Tooltip>
+      ))
+    );
   }
 }
 

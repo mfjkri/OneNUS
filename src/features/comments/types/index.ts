@@ -1,3 +1,4 @@
+import { SortOptions } from "components/Pagination";
 import { BaseEntity } from "types";
 
 export type Comment = {
@@ -7,8 +8,7 @@ export type Comment = {
   userId: number;
 } & BaseEntity;
 
-export enum SortTypes {
-  ByNew,
-  byHot,
-  byRecent,
-}
+export const CommentSortOptions = new SortOptions(
+  [["new", "Sort by creation date"]],
+  "new"
+);
