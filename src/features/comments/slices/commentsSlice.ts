@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 
-import { SortOrderTypes } from "components/Pagination";
+import { DefaultSortOrder, SortOrderTypes } from "components/Pagination";
 import { COMMENTS_PER_PAGE } from "config";
 
 import { CommentSortOptions } from "../types";
@@ -10,7 +10,7 @@ const initState = {
   pageNumber: 1,
   perPage: COMMENTS_PER_PAGE,
   sortOption: CommentSortOptions.defaultOption,
-  sortOrder: SortOrderTypes.descending,
+  sortOrder: DefaultSortOrder,
 };
 
 const commentsSlice = createSlice({

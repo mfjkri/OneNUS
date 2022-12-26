@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 
-import { SortOrderTypes } from "components/Pagination";
+import { DefaultSortOrder, SortOrderTypes } from "components/Pagination";
 import { POSTS_PER_PAGE } from "config";
 
 import { PostSortOptions } from "../types";
@@ -11,7 +11,7 @@ const initState = {
   perPage: POSTS_PER_PAGE,
   filterTag: "-",
   sortOption: PostSortOptions.defaultOption,
-  sortOrder: SortOrderTypes.descending,
+  sortOrder: DefaultSortOrder,
 };
 
 const postsSlice = createSlice({

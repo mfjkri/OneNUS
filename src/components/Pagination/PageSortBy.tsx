@@ -8,6 +8,8 @@ export enum SortOrderTypes {
   descending,
 }
 
+export const DefaultSortOrder = SortOrderTypes.descending;
+
 export class SortOptions {
   options: [string, string][];
   defaultOption: string;
@@ -53,18 +55,28 @@ export type PageSortByProps = {
 Adds sorting functionality. Allows user to apply sorting option.
 
 Attributes:
-  - sortOptions: [string, string, string][]
+  - sortOptions: SortOptions
     Sort options available.
-    [
-      [sortOptionKey, displayed text, tooltip message on hover],
-      ...
-    ]
-  
-  - setSortOption: function [(newSortOption: string) => void]
-    Callback function that is used to sort by the newSortOption.
+    
+    sortOption = new SortOptions(
+      [
+        ["new", "Sort by creation date"],
+        ...
+      ],
+      "new"
+    );
   
   - activeSortOption: string
-    Current sort option.
+    Currently active sorting option
+
+  - activeSortOrder: string
+    Currently active sorting type (descending / ascending)
+
+  - setSortOption: function [(newSortOption: string) => void]
+    Handler function to sort by the newSortOption.
+  
+  - toggleSortOrder: function [() => void]
+    Handler function to toggle between sorting tpye (descending vs ascending)
 */
 export const PageSortBy = ({
   activeSortOption,
@@ -77,11 +89,13 @@ export const PageSortBy = ({
     <div className="flex justify-center">
       <p className="mr-2 font-black">Sort by:</p>
       {sortOptions.showOptions(activeSortOption, setSortOption)}
-      <Tooltip content={`Sorting ${SortOrderTypes[activeSortOrder]}`}>
+      <Tooltip
+        content={`Sorting ${SortOrderTypes[activeSortOrder]}`}
+        className="text-secondary"
+      >
         <IconButton
           variant={
-            SortOrderTypes[activeSortOrder] ===
-            SortOrderTypes[SortOrderTypes.descending]
+            SortOrderTypes[activeSortOrder] === SortOrderTypes[DefaultSortOrder]
               ? "text"
               : "gradient"
           }
