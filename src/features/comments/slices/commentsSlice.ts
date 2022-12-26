@@ -17,12 +17,6 @@ const commentsSlice = createSlice({
   name: "comments",
   initialState: initState,
   reducers: {
-    setPageNumber: (state, action: PayloadAction<number>) => {
-      state.pageNumber = action.payload;
-    },
-    resetPageNumber: (state) => {
-      state.pageNumber = initState.pageNumber;
-    },
     setPerPage: (state, action: PayloadAction<number>) => {
       state.perPage = action.payload;
     },
@@ -48,8 +42,6 @@ const commentsSlice = createSlice({
 });
 
 export const {
-  setPageNumber,
-  resetPageNumber,
   setPerPage,
   setSortOption,
   setSortOrder,

@@ -188,10 +188,14 @@ e.g. [`src/auth/routes/index.tsx`](src/features/auth/routes/index.tsx)
 
   - [`posts`](src/features/posts/slices/):
     - current page number
-    - current sort option
     - current category filter
-  - comments:
-    - current page number
+    - current sort option
+    - current sort order (ascending / descending)
+    - results per page
+  - [`comments`](src/features//comments/slices/):
+    - current sort option
+    - current sort order (ascending / descending)
+    - results per page
   - [`notifications`](src/components/Notifications/notificationSlices.ts)
 
 - `server-state`

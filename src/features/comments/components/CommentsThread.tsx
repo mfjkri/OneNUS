@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
 import {
@@ -11,13 +12,7 @@ import { AuthUser } from "features/auth";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
-import {
-  resetPageNumber,
-  resetSortOrder,
-  setPageNumber,
-  setSortOption,
-  toggleSortOrder,
-} from "../slices";
+import { resetSortOrder, setSortOption, toggleSortOrder } from "../slices";
 import { CommentSortOptions } from "../types";
 
 type CommentsListProps = {
@@ -26,15 +21,14 @@ type CommentsListProps = {
 };
 
 export const CommentsThread = ({ user, post }: CommentsListProps) => {
-  const activePageNumber = useAppSelector((state) => state.comments.pageNumber);
+  const [activePageNumber, setPageNumber] = useState(1);
   const activePerPage = useAppSelector((state) => state.comments.perPage);
   const activeSortOption = useAppSelector((state) => state.comments.sortOption);
   const activeSortOrder = useAppSelector((state) => state.comments.sortOrder);
 
   const dispatch = useAppDispatch();
-  const goToPage = (newPageNumber: number) =>
-    dispatch(setPageNumber(newPageNumber));
 
+  const resetPageNumber = () => setPageNumber(1);
   const commentsQuery = useComments({
     data: {
       postId: post.id,
@@ -63,12 +57,12 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
             setSortOption={(sortOption: string) => {
               dispatch(setSortOption(sortOption));
               dispatch(resetSortOrder());
-              dispatch(resetPageNumber());
+              resetPageNumber();
             }}
             activeSortOrder={activeSortOrder}
             toggleSortOrder={() => {
               dispatch(toggleSortOrder());
-              dispatch(resetPageNumber());
+              resetPageNumber();
             }}
           />
         </div>
@@ -86,7 +80,7 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
           maxPageNumber={Math.ceil(
             commentsQuery.data?.commentsCount / activePerPage
           )}
-          goToPage={goToPage}
+          goToPage={setPageNumber}
         />
       </div>
     </div>
