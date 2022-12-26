@@ -1,15 +1,24 @@
-import { useState } from "react";
-
-import { COMMENTS_PER_PAGE } from "config";
+import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
-import { PagePaginator, SortOrderTypes } from "components/Pagination";
+import {
+  PagePaginator,
+  PageSortBy,
+  SortOrderTypes,
+} from "components/Pagination";
 import { Post } from "features/posts";
 import { AuthUser } from "features/auth";
 
-import { CommentSortOptions } from "../types";
 import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
+import {
+  resetPageNumber,
+  resetSortOrder,
+  setPageNumber,
+  setSortOption,
+  toggleSortOrder,
+} from "../slices";
+import { CommentSortOptions } from "../types";
 
 type CommentsListProps = {
   user: AuthUser;
@@ -17,15 +26,14 @@ type CommentsListProps = {
 };
 
 export const CommentsThread = ({ user, post }: CommentsListProps) => {
-  const [activePageNumber, setPageNumber] = useState(1);
-  // eslint-disable-next-line
-  const [activePerPage, setPerPage] = useState(COMMENTS_PER_PAGE);
-  // eslint-disable-next-line
-  const [activeSortOption, setSortBy] = useState(
-    CommentSortOptions.defaultOption
-  );
-  // eslint-disable-next-line
-  const [activeSortOrder, setSortOrder] = useState(SortOrderTypes.descending);
+  const activePageNumber = useAppSelector((state) => state.comments.pageNumber);
+  const activePerPage = useAppSelector((state) => state.comments.perPage);
+  const activeSortOption = useAppSelector((state) => state.comments.sortOption);
+  const activeSortOrder = useAppSelector((state) => state.comments.sortOrder);
+
+  const dispatch = useAppDispatch();
+  const goToPage = (newPageNumber: number) =>
+    dispatch(setPageNumber(newPageNumber));
 
   const commentsQuery = useComments({
     data: {
@@ -46,8 +54,26 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
   return (
     <div>
       <CreateComment postId={post.id} onSuccess={() => null} />
-      <h1 className="text-xl ml-3">Comments</h1>
-      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-5">
+      <div className="flex flex-row flex-wrap-reverse mt-4  px-2">
+        <h1 className="grow text-xl ml-3">Comments</h1>
+        <div className="flex-none w-fit">
+          <PageSortBy
+            sortOptions={CommentSortOptions}
+            activeSortOption={activeSortOption}
+            setSortOption={(sortOption: string) => {
+              dispatch(setSortOption(sortOption));
+              dispatch(resetSortOrder());
+              dispatch(resetPageNumber());
+            }}
+            activeSortOrder={activeSortOrder}
+            toggleSortOrder={() => {
+              dispatch(toggleSortOrder());
+              dispatch(resetPageNumber());
+            }}
+          />
+        </div>
+      </div>
+      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-1">
         <CommentsList
           comments={commentsQuery.data.comments}
           user={user}
@@ -60,7 +86,7 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
           maxPageNumber={Math.ceil(
             commentsQuery.data?.commentsCount / activePerPage
           )}
-          goToPage={setPageNumber}
+          goToPage={goToPage}
         />
       </div>
     </div>
