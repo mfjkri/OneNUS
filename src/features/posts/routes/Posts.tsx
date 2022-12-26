@@ -57,7 +57,7 @@ export const Posts = () => {
         <div className="grow mr-3">
           <PostFlairs />
         </div>
-        <div className="flex-none w-fit mb-2">
+        <div className="flex-none w-fit mt-1">
           <PageSortBy
             sortOptions={PostSortOptions}
             activeSortOption={activeSortOption}

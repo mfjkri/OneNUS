@@ -56,7 +56,7 @@ export const CommentsThread = ({ user, post }: CommentsListProps) => {
       <CreateComment postId={post.id} onSuccess={() => null} />
       <div className="flex flex-row flex-wrap-reverse mt-4  px-2">
         <h1 className="grow text-xl ml-3">Comments</h1>
-        <div className="flex-none w-fit">
+        <div className="flex-none w-fit my-auto">
           <PageSortBy
             sortOptions={CommentSortOptions}
             activeSortOption={activeSortOption}

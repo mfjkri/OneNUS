@@ -74,7 +74,7 @@ export const PageSortBy = ({
   toggleSortOrder,
 }: PageSortByProps) => {
   return (
-    <div className="flex justify-center mt-1">
+    <div className="flex justify-center">
       <p className="mr-2 font-black">Sort by:</p>
       {sortOptions.showOptions(activeSortOption, setSortOption)}
       <Tooltip content={`Sorting ${SortOrderTypes[activeSortOrder]}`}>

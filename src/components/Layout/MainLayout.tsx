@@ -64,7 +64,7 @@ const NavigationBar = () => {
 export const Footer = () => {
   return (
     <footer>
-      <div className="bg-primary p-4 mt-28 border-t border-primary2 text-primary dark:text-secondary">
+      <div className="bg-primary p-4 mt-28 border-t border-primary2 text-secondary">
         <div className="flex flex-col items-center content-center">
           <a
             href="https://github.com/mfjkri/oneNUS"
@@ -81,7 +81,9 @@ export const Footer = () => {
           <div className="mt-2 text-sm text-gray-500">
             <i>A webforum designed with simplicity in mind.</i>
           </div>
-          <div className="">OneNUS © | CVWO 22/23 Winter Assignment</div>
+          <div className="text-[14px]">
+            OneNUS © | CVWO 22/23 Winter Assignment
+          </div>
         </div>
       </div>
     </footer>

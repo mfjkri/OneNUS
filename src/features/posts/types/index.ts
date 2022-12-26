@@ -21,7 +21,7 @@ export const PostSortOptions = new SortOptions(
   [
     ["hot", "Sort by replies count"],
     ["new", "Sort by creation date"],
-    ["recent", "Sort by lastest replies"],
+    ["recent", "Sort by latest replies"],
   ],
   "new"
 );
