@@ -8,9 +8,11 @@ A webforum designed with simplicity in mind.
 
 This project is currently still in development.
 
+Project version: v0.1.4
+
 - Starring of posts is not yet available
 
-Last updated: 24/12/22
+Last updated: 27/12/22
 
 <br/>
 
@@ -24,10 +26,10 @@ You can find the backend API that this project consumes [here](https://github.co
 
 ## Screenshots
 
-|                                     |                                        |
-| :---------------------------------: | :------------------------------------: |
-| ![Landing](docs/images/landing.jpg) |    ![Login](docs/images/login.jpg)     |
-|  ![Posts](docs/images/posts2.jpg)   | ![PostView](docs/images/postview2.jpg) |
+|                                     |                                       |
+| :---------------------------------: | :-----------------------------------: |
+| ![Landing](docs/images/landing.jpg) |   ![Login](docs/images/loginv2.jpg)   |
+|   ![Posts](docs/images/posts.jpg)   | ![PostView](docs/images/postview.jpg) |
 
 <br/>
 
@@ -243,7 +245,7 @@ Signed SSL certificates for the domain are provided by [AWS ACM](https://aws.ama
 
 # Reflection
 
-...
+See [Reflections](docs/reflections.md).
 
 <br/>
 
