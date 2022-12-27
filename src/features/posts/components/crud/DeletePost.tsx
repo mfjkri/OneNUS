@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 import { Button, IconButton, ConfirmationDialog } from "components/Elements";
+import { useAppDispatch } from "hooks/typedRedux";
 
 import { useDeletePost } from "../../api/deletePost";
+import { resetState } from "../../slices";
 
 type DeletePostProps = {
   postId: number;
@@ -11,6 +13,7 @@ type DeletePostProps = {
 
 export const DeletePost = ({ postId }: DeletePostProps) => {
   const deletePostMutation = useDeletePost();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
@@ -34,6 +37,7 @@ export const DeletePost = ({ postId }: DeletePostProps) => {
           isLoading={deletePostMutation.isLoading}
           onClick={async () => {
             await deletePostMutation.mutateAsync(postId);
+            dispatch(resetState());
             navigate("/app/posts");
           }}
         >
