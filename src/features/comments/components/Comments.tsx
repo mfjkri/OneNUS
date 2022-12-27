@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
 import {
@@ -21,14 +22,30 @@ export type CommentsProps = {
 };
 
 export const Comments = ({ user, post }: CommentsProps) => {
+  // CommentsState props
   const [activePageNumber, setPageNumber] = useState(1);
   const activePerPage = useAppSelector((state) => state.comments.perPage);
   const activeSortOption = useAppSelector((state) => state.comments.sortOption);
   const activeSortOrder = useAppSelector((state) => state.comments.sortOrder);
 
   const dispatch = useAppDispatch();
-  const resetPageNumber = () => setPageNumber(1);
 
+  // Callbacks for updating CommentsState (passed down)
+  const resetPageNumber = useCallback(() => setPageNumber(1), []);
+  const setActiveSortOption = useCallback(
+    (sortOption: string) => {
+      resetPageNumber();
+      dispatch(resetSortOrder());
+      dispatch(setSortOption(sortOption));
+    },
+    [dispatch, resetPageNumber]
+  );
+  const toggleActiveSortOrder = useCallback(() => {
+    resetPageNumber();
+    dispatch(toggleSortOrder());
+  }, [dispatch, resetPageNumber]);
+
+  // Fetch comments
   const commentsQuery = useComments({
     data: {
       postId: post.id,
@@ -47,23 +64,16 @@ export const Comments = ({ user, post }: CommentsProps) => {
 
   return (
     <div>
-      <CreateComment postId={post.id} onSuccess={() => null} />
+      <CreateComment postId={post.id} />
       <div className="flex flex-row flex-wrap-reverse mt-4  px-2">
         <h1 className="grow text-xl ml-3">Comments</h1>
         <div className="flex-none w-fit my-auto">
           <PageSortBy
             sortOptions={CommentSortOptions}
             activeSortOption={activeSortOption}
-            setSortOption={(sortOption: string) => {
-              dispatch(setSortOption(sortOption));
-              dispatch(resetSortOrder());
-              resetPageNumber();
-            }}
+            setSortOption={setActiveSortOption}
             activeSortOrder={activeSortOrder}
-            toggleSortOrder={() => {
-              dispatch(toggleSortOrder());
-              resetPageNumber();
-            }}
+            toggleSortOrder={toggleActiveSortOrder}
           />
         </div>
       </div>

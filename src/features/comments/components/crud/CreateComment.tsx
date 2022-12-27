@@ -18,10 +18,9 @@ export const CreateCommentSchema = z.object({
 
 export type CreateCommentProps = {
   postId: number;
-  onSuccess: () => void;
 };
 
-export const CreateComment = ({ postId, onSuccess }: CreateCommentProps) => {
+export const CreateComment = ({ postId }: CreateCommentProps) => {
   const createCommentMutation = useCreateComment({ postId: postId });
 
   return (
@@ -31,7 +30,6 @@ export const CreateComment = ({ postId, onSuccess }: CreateCommentProps) => {
           ...values,
           postId: postId,
         });
-        onSuccess();
       }}
       schema={CreateCommentSchema}
     >

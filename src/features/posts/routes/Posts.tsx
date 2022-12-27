@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { useAuth } from "lib/auth";
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
@@ -24,6 +26,7 @@ import { PostSortOptions } from "../types";
 export const Posts = () => {
   const { user } = useAuth();
 
+  // PostsState props
   const activePageNumber = useAppSelector((state) => state.posts.pageNumber);
   const activePerPage = useAppSelector((state) => state.posts.perPage);
   const activeFilterTag = useAppSelector((state) => state.posts.filterTag);
@@ -31,9 +34,33 @@ export const Posts = () => {
   const activeSortOrder = useAppSelector((state) => state.posts.sortOrder);
 
   const dispatch = useAppDispatch();
-  const goToPage = (newPageNumber: number) =>
-    dispatch(setPageNumber(newPageNumber));
 
+  // Callbacks for updating PostsState (passed down)
+  const goToPage = useCallback(
+    (newPageNumber: number) => dispatch(setPageNumber(newPageNumber)),
+    [dispatch]
+  );
+  const setActiveFilterTag = useCallback(
+    (filterTag: string) => {
+      dispatch(resetPageNumber());
+      dispatch(setFilterTag(filterTag));
+    },
+    [dispatch]
+  );
+  const setActiveSortOption = useCallback(
+    (sortOption: string) => {
+      dispatch(resetPageNumber());
+      dispatch(resetSortOrder());
+      dispatch(setSortOption(sortOption));
+    },
+    [dispatch]
+  );
+  const toggleActiveSortOrder = useCallback(() => {
+    dispatch(resetPageNumber());
+    dispatch(toggleSortOrder());
+  }, [dispatch]);
+
+  // Fetch posts
   const postsQuery = usePosts({
     data: {
       perPage: activePerPage,
@@ -58,26 +85,16 @@ export const Posts = () => {
         <div className="grow mr-3">
           <PostFlairFilters
             activeFilterTag={activeFilterTag}
-            setActiveFilterTag={(filterTag: string) => {
-              dispatch(resetPageNumber());
-              dispatch(setFilterTag(filterTag));
-            }}
+            setActiveFilterTag={setActiveFilterTag}
           />
         </div>
         <div className="flex-none w-fit mt-1">
           <PageSortBy
             sortOptions={PostSortOptions}
             activeSortOption={activeSortOption}
-            setSortOption={(sortOption: string) => {
-              dispatch(resetPageNumber());
-              dispatch(resetSortOrder());
-              dispatch(setSortOption(sortOption));
-            }}
+            setSortOption={setActiveSortOption}
             activeSortOrder={activeSortOrder}
-            toggleSortOrder={() => {
-              dispatch(resetPageNumber());
-              dispatch(toggleSortOrder());
-            }}
+            toggleSortOrder={toggleActiveSortOrder}
           />
         </div>
       </div>
