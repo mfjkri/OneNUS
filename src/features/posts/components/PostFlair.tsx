@@ -1,32 +1,48 @@
 import { Chip } from "@material-tailwind/react";
-import { color } from "@material-tailwind/react/types/components/chip";
-
-import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
+import {
+  color,
+  dismissible,
+} from "@material-tailwind/react/types/components/chip";
 
 import { PostTag, PostTags, PostTagColors } from "../types";
-import { setFilterTag, setPageNumber } from "../slices";
 
 export type PostFlairProps = {
   category: PostTag;
+  isActive?: boolean;
+  inActiveColor?: color;
+  dismissible?: dismissible;
 };
 
-export const PostFlair = ({ category }: PostFlairProps) => {
+export const PostFlair = ({
+  category,
+  isActive,
+  inActiveColor = "blue-gray",
+  dismissible,
+}: PostFlairProps) => {
   return (
-    <Chip value={category} color={PostTagColors[category] as color}></Chip>
+    <Chip
+      value={category}
+      color={
+        isActive === undefined || isActive
+          ? (PostTagColors[category] as color)
+          : inActiveColor
+      }
+      dismissible={dismissible}
+    ></Chip>
   );
 };
 
-type FilterPostFlairProps = {
+type PostFlairFilterProps = {
   category: PostTag;
   activeFilterTag: string;
   onActivate: (newFilterTag: string) => void;
 };
 
-const FilterPostFlair = ({
+const PostFlairFilter = ({
   category,
   activeFilterTag,
   onActivate,
-}: FilterPostFlairProps) => {
+}: PostFlairFilterProps) => {
   const isActive = category === activeFilterTag;
 
   return (
@@ -40,9 +56,9 @@ const FilterPostFlair = ({
         }
       }}
     >
-      <Chip
-        value={category}
-        color={isActive ? (PostTagColors[category] as color) : "blue-gray"}
+      <PostFlair
+        category={category}
+        isActive={isActive}
         dismissible={
           isActive
             ? {
@@ -55,14 +71,15 @@ const FilterPostFlair = ({
   );
 };
 
-export const PostFlairs = () => {
-  const activeFilterTag = useAppSelector((state) => state.posts.filterTag);
-  const dispatch = useAppDispatch();
-  const setActiveFilterTag = (newFilterTag: string) => {
-    dispatch(setPageNumber(1));
-    dispatch(setFilterTag(newFilterTag));
-  };
+export type PostFlairFiltersProps = {
+  activeFilterTag: string;
+  setActiveFilterTag: (newFilterTag: string) => void;
+};
 
+export const PostFlairFilters = ({
+  activeFilterTag,
+  setActiveFilterTag,
+}: PostFlairFiltersProps) => {
   return (
     <div className="flex flex-row flex-wrap">
       {/* <p className="mr-2 mb-2 font-black">Categories:</p> */}
@@ -70,14 +87,11 @@ export const PostFlairs = () => {
         className="hover:cursor-pointer hover:opacity-80"
         onClick={() => setActiveFilterTag("-")}
       >
-        <Chip
-          value="ALL"
-          color={activeFilterTag === "-" ? "deep-purple" : "blue-gray"}
-        />
+        <PostFlair category="all" isActive={activeFilterTag === "-"} />
       </div>
       {PostTags.map(([type, _]) => (
         <div className="ml-2 mb-2" key={type}>
-          <FilterPostFlair
+          <PostFlairFilter
             category={type as PostTag}
             activeFilterTag={activeFilterTag}
             onActivate={setActiveFilterTag}

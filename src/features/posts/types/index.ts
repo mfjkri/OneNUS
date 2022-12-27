@@ -2,13 +2,14 @@ import { SortOptions } from "components/Pagination";
 import { BaseEntity } from "types";
 
 export const PostTagColors = {
+  all: "deep-purple",
   general: "blue",
   cs: "red",
   life: "yellow",
   misc: "green",
 };
 
-export type PostTag = "general" | "cs" | "life" | "misc";
+export type PostTag = "all" | "general" | "cs" | "life" | "misc";
 
 export const PostTags = [
   ["general", "General"],

@@ -9,7 +9,7 @@ import {
 } from "components/Pagination";
 
 import { PostsList } from "../components/PostsList";
-import { PostFlairs } from "../components/PostFlair";
+import { PostFlairFilters } from "../components/PostFlair";
 import { usePosts } from "../api/getPosts";
 import {
   setPageNumber,
@@ -17,6 +17,7 @@ import {
   resetSortOrder,
   toggleSortOrder,
   resetPageNumber,
+  setFilterTag,
 } from "../slices";
 import { PostSortOptions } from "../types";
 
@@ -55,21 +56,27 @@ export const Posts = () => {
     <ContentLayout title="">
       <div className="flex flex-row flex-wrap-reverse px-6 py">
         <div className="grow mr-3">
-          <PostFlairs />
+          <PostFlairFilters
+            activeFilterTag={activeFilterTag}
+            setActiveFilterTag={(filterTag: string) => {
+              dispatch(resetPageNumber());
+              dispatch(setFilterTag(filterTag));
+            }}
+          />
         </div>
         <div className="flex-none w-fit mt-1">
           <PageSortBy
             sortOptions={PostSortOptions}
             activeSortOption={activeSortOption}
             setSortOption={(sortOption: string) => {
-              dispatch(setSortOption(sortOption));
-              dispatch(resetSortOrder());
               dispatch(resetPageNumber());
+              dispatch(resetSortOrder());
+              dispatch(setSortOption(sortOption));
             }}
             activeSortOrder={activeSortOrder}
             toggleSortOrder={() => {
-              dispatch(toggleSortOrder());
               dispatch(resetPageNumber());
+              dispatch(toggleSortOrder());
             }}
           />
         </div>
