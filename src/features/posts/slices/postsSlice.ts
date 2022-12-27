@@ -6,7 +6,15 @@ import { POSTS_PER_PAGE } from "config";
 
 import { PostSortOptions } from "../types";
 
-const initState = {
+export type PostsStateProps = {
+  pageNumber: number;
+  perPage: number;
+  filterTag: string;
+  sortOption: string;
+  sortOrder: SortOrderTypes;
+};
+
+const initState: PostsStateProps = {
   pageNumber: 1,
   perPage: POSTS_PER_PAGE,
   filterTag: "-",

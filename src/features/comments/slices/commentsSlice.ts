@@ -6,7 +6,14 @@ import { COMMENTS_PER_PAGE } from "config";
 
 import { CommentSortOptions } from "../types";
 
-const initState = {
+export type CommentsStateProps = {
+  pageNumber: number;
+  perPage: number;
+  sortOption: string;
+  sortOrder: SortOrderTypes;
+};
+
+const initState: CommentsStateProps = {
   pageNumber: 1,
   perPage: COMMENTS_PER_PAGE,
   sortOption: CommentSortOptions.defaultOption,
