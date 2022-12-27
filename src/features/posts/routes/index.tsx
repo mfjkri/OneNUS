@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { NotFound } from "features/misc";
 
 import { Posts } from "./Posts";
-import { PostThread } from "./PostThread";
-import { NewPost } from "./NewPost";
+import { PostThread } from "./Post";
+import { NewPost } from "./New";
 
 export const PostsRoutes = () => {
   return (
