@@ -91,7 +91,7 @@ export const PageSortBy = ({
       {sortOptions.showOptions(activeSortOption, setSortOption)}
       <Tooltip
         content={`Sorting ${SortOrderTypes[activeSortOrder]}`}
-        className="text-secondary"
+        className="text-secondary whitespace-nowrap"
       >
         <IconButton
           variant={
