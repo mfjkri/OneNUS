@@ -3,7 +3,11 @@ import { StarIcon } from "@heroicons/react/24/outline";
 
 import { useDisclosure } from "hooks/useDisclosure";
 
-export const StarPost = ({ starsCount }: { starsCount: number }) => {
+export type StarPostProps = {
+  starsCount: number;
+};
+
+export const StarPost = ({ starsCount }: StarPostProps) => {
   const { isOpen: isStarred, toggle } = useDisclosure(false);
 
   return (

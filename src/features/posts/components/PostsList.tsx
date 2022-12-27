@@ -3,13 +3,13 @@ import { AuthUser } from "features/auth";
 import { Post } from "../types";
 import { PostPreview } from "./PostPreview";
 
-type PostsListProps = {
-  posts: Post[];
-  user: AuthUser;
-};
-
 const NoPosts = () => {
   return <div className="px-6 py-4">No Posts</div>;
+};
+
+export type PostsListProps = {
+  posts: Post[];
+  user: AuthUser;
 };
 
 export const PostsList = ({ posts, user }: PostsListProps) => {

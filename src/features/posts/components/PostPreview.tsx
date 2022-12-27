@@ -7,7 +7,7 @@ import { UserIcon } from "features/auth";
 import { Post } from "../types";
 import { PostFlair } from "./PostFlair";
 
-type PostPreviewProps = {
+export type PostPreviewProps = {
   post: Post;
   postIndex: number;
   ownPost: boolean;
