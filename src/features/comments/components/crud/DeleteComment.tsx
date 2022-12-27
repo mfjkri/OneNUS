@@ -4,7 +4,7 @@ import { Button, IconButton, ConfirmationDialog } from "components/Elements";
 
 import { useDeleteComment } from "../../api/deleteComment";
 
-type DeleteCommentProps = {
+export type DeleteCommentProps = {
   commentId: number;
   postId: number;
 };

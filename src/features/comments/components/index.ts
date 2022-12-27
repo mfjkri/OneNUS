@@ -1,1 +1,1 @@
-export * from "./CommentsThread";
+export * from "./Comments";

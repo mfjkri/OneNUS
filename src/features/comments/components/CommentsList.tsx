@@ -7,7 +7,7 @@ const NoComments = () => {
   return <div className="ml-3 px-6 py-4">No Comments</div>;
 };
 
-type CommentsListProps = {
+export type CommentsListProps = {
   comments: Comment[];
   user: AuthUser;
   postUserid: number;

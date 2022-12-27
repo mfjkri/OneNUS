@@ -4,7 +4,7 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { Button, Link, SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { NotFound } from "features/misc";
-import { CommentsThread } from "features/comments";
+import { Comments } from "features/comments";
 import { AuthUser } from "features/auth";
 import { useAuth } from "lib/auth";
 
@@ -47,7 +47,7 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
         />
       </div>
       <div className="px-2 md:px-6 py-5">
-        <CommentsThread user={user} post={postQuery.data} />
+        <Comments user={user} post={postQuery.data} />
       </div>
     </ContentLayout>
   );

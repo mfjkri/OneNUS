@@ -18,7 +18,7 @@ type CommentViewProps = {
   toggleEditMode: () => void;
 };
 
-export const CommentView = ({
+const CommentView = ({
   comment,
   canEdit,
   canDelete,
@@ -93,7 +93,7 @@ export const CommentView = ({
   );
 };
 
-type ReadCommentProps = {
+export type ReadCommentProps = {
   comment: Comment;
   canEdit: boolean;
   canDelete: boolean;

@@ -9,26 +9,26 @@ import {
 import { Post } from "features/posts";
 import { AuthUser } from "features/auth";
 
-import { useComments } from "../api/getComments";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
+import { useComments } from "../api/getComments";
 import { resetSortOrder, setSortOption, toggleSortOrder } from "../slices";
 import { CommentSortOptions } from "../types";
 
-type CommentsListProps = {
+export type CommentsProps = {
   user: AuthUser;
   post: Post;
 };
 
-export const CommentsThread = ({ user, post }: CommentsListProps) => {
+export const Comments = ({ user, post }: CommentsProps) => {
   const [activePageNumber, setPageNumber] = useState(1);
   const activePerPage = useAppSelector((state) => state.comments.perPage);
   const activeSortOption = useAppSelector((state) => state.comments.sortOption);
   const activeSortOrder = useAppSelector((state) => state.comments.sortOrder);
 
   const dispatch = useAppDispatch();
-
   const resetPageNumber = () => setPageNumber(1);
+
   const commentsQuery = useComments({
     data: {
       postId: post.id,

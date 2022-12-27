@@ -5,7 +5,7 @@ import { Comment } from "../../types";
 import { UpdateCommentDTO, useUpdateComment } from "../../api/updateComment";
 import { CreateCommentSchema } from "./CreateComment";
 
-type UpdateCommentFormProps = {
+export type UpdateCommentFormProps = {
   comment: Comment;
   onSuccess: () => void;
   onCancel: () => void;

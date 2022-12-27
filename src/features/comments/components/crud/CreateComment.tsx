@@ -16,7 +16,7 @@ export const CreateCommentSchema = z.object({
     ),
 });
 
-type CreateCommentProps = {
+export type CreateCommentProps = {
   postId: number;
   onSuccess: () => void;
 };
