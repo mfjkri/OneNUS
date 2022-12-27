@@ -82,7 +82,14 @@ export const Footer = () => {
             <i>A webforum designed with simplicity in mind.</i>
           </div>
           <div className="text-[14px]">
-            OneNUS © | CVWO 22/23 Winter Assignment
+            OneNUS © |{" "}
+            <a
+              href="https://www.comp.nus.edu.sg/~vwo/"
+              className="text-indigo-200"
+            >
+              CVWO
+            </a>{" "}
+            22/23 Winter Assignment
           </div>
         </div>
       </div>
