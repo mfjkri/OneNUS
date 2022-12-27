@@ -30,11 +30,11 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
               username={post.author}
             />
             <div className="h-[25%] flex flex-col ">
-              <p className="h-[50%] invisible md:visible break-all text-center">
+              <p className="h-fit invisible md:visible break-all text-center">
                 {post.author}
               </p>
               {ownPost && (
-                <p className="h-[50%] invisible md:visible text-[10px] text-center font-bold text-green-600 dark:text-green-600">
+                <p className="invisible md:visible text-[10px] text-center font-bold text-green-600 dark:text-green-600">
                   Me
                 </p>
               )}

@@ -41,7 +41,7 @@ export const Spinner = ({
     <>
       <svg
         className={clsx(
-          "animate-spin",
+          "animate-spin hover:cursor-progress",
           sizes[size],
           variants[variant],
           className
