@@ -4,7 +4,7 @@ import { ContentLayout } from "components/Layout";
 import { useAppDispatch } from "hooks/typedRedux";
 
 import { CreatePostForm } from "../components/crud/CreatePostForm";
-import { resetState } from "../slices";
+import { resetState } from "../slice";
 
 export const NewPost = () => {
   const navigate = useNavigate();

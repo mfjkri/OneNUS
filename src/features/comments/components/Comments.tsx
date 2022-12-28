@@ -13,7 +13,7 @@ import { AuthUser } from "features/auth";
 import { CommentsList } from "./CommentsList";
 import { CreateComment } from "./crud/CreateComment";
 import { useComments } from "../api/getComments";
-import { resetSortOrder, setSortOption, toggleSortOrder } from "../slices";
+import { resetSortOrder, setSortOption, toggleSortOrder } from "../slice";
 import { CommentSortOptions } from "../types";
 
 export type CommentsProps = {

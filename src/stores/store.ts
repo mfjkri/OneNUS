@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { postReducer } from "features/posts";
-import { commentReducer } from "features/comments/slices";
+import { commentReducer } from "features/comments";
 import { notificationReducer } from "components/Notifications";
 
 export const store = configureStore({

@@ -5,7 +5,7 @@ import { Button, IconButton, ConfirmationDialog } from "components/Elements";
 import { useAppDispatch } from "hooks/typedRedux";
 
 import { useDeletePost } from "../../api/deletePost";
-import { resetState } from "../../slices";
+import { resetState } from "../../slice";
 
 type DeletePostProps = {
   postId: number;

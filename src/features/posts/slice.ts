@@ -2,30 +2,41 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 
 import { DefaultSortOrder, SortOrderTypes } from "components/Pagination";
-import { COMMENTS_PER_PAGE } from "config";
+import { POSTS_PER_PAGE } from "config";
 
-import { CommentSortOptions } from "../types";
+import { PostSortOptions } from "./types";
 
-export type CommentsStateProps = {
+export type PostsStateProps = {
   pageNumber: number;
   perPage: number;
+  filterTag: string;
   sortOption: string;
   sortOrder: SortOrderTypes;
 };
 
-const initState: CommentsStateProps = {
+const initState: PostsStateProps = {
   pageNumber: 1,
-  perPage: COMMENTS_PER_PAGE,
-  sortOption: CommentSortOptions.defaultOption,
+  perPage: POSTS_PER_PAGE,
+  filterTag: "-",
+  sortOption: PostSortOptions.defaultOption,
   sortOrder: DefaultSortOrder,
 };
 
-const commentsSlice = createSlice({
-  name: "comments",
+const postsSlice = createSlice({
+  name: "posts",
   initialState: initState,
   reducers: {
+    setPageNumber: (state, action: PayloadAction<number>) => {
+      state.pageNumber = action.payload;
+    },
+    resetPageNumber: (state) => {
+      state.pageNumber = initState.pageNumber;
+    },
     setPerPage: (state, action: PayloadAction<number>) => {
       state.perPage = action.payload;
+    },
+    setFilterTag: (state, action: PayloadAction<string>) => {
+      state.filterTag = action.payload;
     },
     setSortOption: (state, action: PayloadAction<string>) => {
       state.sortOption = action.payload;
@@ -49,11 +60,14 @@ const commentsSlice = createSlice({
 });
 
 export const {
+  setPageNumber,
+  resetPageNumber,
   setPerPage,
+  setFilterTag,
   setSortOption,
   setSortOrder,
   toggleSortOrder,
   resetSortOrder,
   resetState,
-} = commentsSlice.actions;
-export const commentReducer = commentsSlice.reducer;
+} = postsSlice.actions;
+export const postReducer = postsSlice.reducer;

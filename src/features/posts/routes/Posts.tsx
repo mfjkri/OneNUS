@@ -20,7 +20,7 @@ import {
   toggleSortOrder,
   resetPageNumber,
   setFilterTag,
-} from "../slices";
+} from "../slice";
 import { PostSortOptions } from "../types";
 
 export const Posts = () => {

@@ -33,8 +33,8 @@ Each feature follows a structure convention as follows:
 - `api`: Handles any API calls made by the feature
 - `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](src/components/))
 - `routes`: Handles any sub-routing within the feature
-- `slices`: Contains reducer logic and associated actions for any client-state of the feature.
 - `types`: Defines any custom types used in this feature
+- `slice.ts`: Contains reducer logic and associated actions for any client-state of the feature.
 - `index.ts`: Exports all required components or types that is used elsewhere (e.g. by other features)
 
 Note that each subdirectory in this convention is optional and can be left out if not required by the feature (e.g. comments feature does not have a routes subdirectory as the feature has no subrouting within it)
