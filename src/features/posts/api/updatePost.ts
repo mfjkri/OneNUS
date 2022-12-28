@@ -42,7 +42,7 @@ export const useUpdatePost = ({ config }: UseUpdatePostOptions = {}) => {
     onError: (_, __, context: any) => {
       if (context?.previousPost) {
         queryClient.setQueryData(
-          postKeys.post(context.previousPost.postId),
+          postKeys.post(context.previousPost.id),
           context.previousPost
         );
       }
