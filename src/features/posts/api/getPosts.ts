@@ -11,6 +11,7 @@ export type GetPostsDTO = {
   pageNumber: number;
   sortOption: string;
   sortOrder: string;
+  filterUserId: number;
   filterTag: string;
 };
 
@@ -21,7 +22,7 @@ export type GetPostsResponse = {
 
 export const getPosts = (data: GetPostsDTO): Promise<GetPostsResponse> => {
   return axios.get(
-    `/posts/get/${data.perPage}/${data.pageNumber}/${data.sortOption}/${data.sortOrder}/${data.filterTag}`
+    `/posts/get/${data.perPage}/${data.pageNumber}/${data.sortOption}/${data.sortOrder}/${data.filterUserId}/${data.filterTag}`
   );
 };
 

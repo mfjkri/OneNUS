@@ -1,7 +1,4 @@
-export * from "./slice";
-
-export * from "./api/createPost";
-
-export * from "./routes";
-
 export * from "./types";
+export * from "./routes";
+export * from "./slice";
+export * from "./components/Posts";

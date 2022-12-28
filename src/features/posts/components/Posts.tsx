@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { useAuth } from "lib/auth";
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 import { SpinnerWithBackground } from "components/Elements";
-import { ContentLayout } from "components/Layout";
 import {
   PagePaginator,
   PageSortBy,
@@ -23,7 +22,10 @@ import {
 } from "../slice";
 import { PostSortOptions } from "../types";
 
-export const Posts = () => {
+export type PostsProps = {
+  filterUserId?: number;
+};
+export const Posts = ({ filterUserId = 0 }: PostsProps) => {
   const { user } = useAuth();
 
   // PostsState props
@@ -67,6 +69,7 @@ export const Posts = () => {
       pageNumber: activePageNumber,
       sortOption: activeSortOption,
       sortOrder: SortOrderTypes[activeSortOrder],
+      filterUserId: filterUserId,
       filterTag: activeFilterTag,
     },
   });
@@ -78,9 +81,8 @@ export const Posts = () => {
   }
 
   if (!postsQuery.data) return null;
-
   return (
-    <ContentLayout title="">
+    <div>
       <div className="flex flex-row flex-wrap-reverse px-6 py">
         <div className="grow mr-3">
           <PostFlairFilters
@@ -110,6 +112,6 @@ export const Posts = () => {
           />
         </div>
       </div>
-    </ContentLayout>
+    </div>
   );
 };
