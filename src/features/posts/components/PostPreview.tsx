@@ -15,7 +15,7 @@ export type PostPreviewProps = {
 
 export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
   return (
-    <Link to={`./${post.id}`}>
+    <Link to={`/app/posts/${post.id}`}>
       <div
         className={
           `my-2 py-3 pl-2 pr-4 bg-secondary dark:bg-primary hover:bg-secondary2 dark:hover:bg-primary2 hover:opacity-80 ` +

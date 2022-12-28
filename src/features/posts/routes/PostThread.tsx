@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 import { Button, Link, SpinnerWithBackground } from "components/Elements";
@@ -17,6 +17,7 @@ type ValidPostProps = {
 };
 
 const ValidPost = ({ postId, user }: ValidPostProps) => {
+  const navigate = useNavigate();
   const postQuery = usePost({ postId: postId });
 
   if (postQuery.isLoading) {
@@ -29,16 +30,15 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
 
   return (
     <ContentLayout title="">
-      <Link to="/app/posts">
-        <Button
-          variant="text"
-          startIcon={
-            <ChevronLeftIcon className="w-auto h-4" aria-hidden="true" />
-          }
-        >
-          <p className="text-xl font-bold leading-tight">Back to posts</p>
-        </Button>
-      </Link>
+      <Button
+        variant="text"
+        startIcon={
+          <ChevronLeftIcon className="w-auto h-4" aria-hidden="true" />
+        }
+        onClick={() => navigate(-1)}
+      >
+        <p className="text-xl font-bold leading-tight">Back to posts</p>
+      </Button>
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
         <ReadPost
           user={user}
