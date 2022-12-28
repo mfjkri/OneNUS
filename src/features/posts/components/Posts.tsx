@@ -24,8 +24,13 @@ import { PostSortOptions } from "../types";
 
 export type PostsProps = {
   filterUserId?: number;
+  disableControls?: boolean;
 };
-export const Posts = ({ filterUserId = 0 }: PostsProps) => {
+
+export const Posts = ({
+  filterUserId = 0,
+  disableControls = false,
+}: PostsProps) => {
   const { user } = useAuth();
 
   // PostsState props
@@ -81,36 +86,41 @@ export const Posts = ({ filterUserId = 0 }: PostsProps) => {
   }
 
   if (!postsQuery.data) return null;
+
   return (
     <div>
-      <div className="flex flex-row flex-wrap-reverse px-6 py">
-        <div className="grow mr-3">
-          <PostFlairFilters
-            activeFilterTag={activeFilterTag}
-            setActiveFilterTag={setActiveFilterTag}
-          />
+      {!disableControls && (
+        <div className="flex flex-row flex-wrap-reverse px-6 py">
+          <div className="grow mr-3">
+            <PostFlairFilters
+              activeFilterTag={activeFilterTag}
+              setActiveFilterTag={setActiveFilterTag}
+            />
+          </div>
+          <div className="flex-none w-fit mt-1">
+            <PageSortBy
+              sortOptions={PostSortOptions}
+              activeSortOption={activeSortOption}
+              setSortOption={setActiveSortOption}
+              activeSortOrder={activeSortOrder}
+              toggleSortOrder={toggleActiveSortOrder}
+            />
+          </div>
         </div>
-        <div className="flex-none w-fit mt-1">
-          <PageSortBy
-            sortOptions={PostSortOptions}
-            activeSortOption={activeSortOption}
-            setSortOption={setActiveSortOption}
-            activeSortOrder={activeSortOrder}
-            toggleSortOrder={toggleActiveSortOrder}
-          />
-        </div>
-      </div>
+      )}
       <div>
         <PostsList posts={postsQuery.data.posts} user={user} />
-        <div className="mt-5">
-          <PagePaginator
-            pageNumber={activePageNumber}
-            maxPageNumber={Math.ceil(
-              postsQuery.data.postsCount / activePerPage
-            )}
-            goToPage={goToPage}
-          />
-        </div>
+        {!disableControls && (
+          <div className="mt-5">
+            <PagePaginator
+              pageNumber={activePageNumber}
+              maxPageNumber={Math.ceil(
+                postsQuery.data.postsCount / activePerPage
+              )}
+              goToPage={goToPage}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

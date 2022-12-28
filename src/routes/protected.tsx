@@ -12,6 +12,11 @@ const { PostsRoutes } = lazyImport(
   "PostsRoutes"
 );
 
+const { UsersRoutes } = lazyImport(
+  () => import("features/users"),
+  "UsersRoutes"
+);
+
 const App = () => {
   return (
     <MainLayout>
@@ -34,6 +39,7 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: "posts/*", element: <PostsRoutes /> },
+      { path: "users/*", element: <UsersRoutes /> },
       { path: "", element: <Overview /> },
       { path: "*", element: <Navigate to="." /> },
     ],

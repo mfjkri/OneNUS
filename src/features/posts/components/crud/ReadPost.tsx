@@ -1,6 +1,6 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
-import { IconButton } from "components/Elements";
+import { IconButton, Link } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
 import { useDisclosure } from "hooks/useDisclosure";
 import { AuthUser, UserIcon, UserRoles } from "features/auth";
@@ -28,18 +28,24 @@ const PostView = ({
   return (
     <div>
       <div className="flex flex-row">
-        <div className="w-12 min-w-[48px] md:w-24 md:min-w-[96px]">
+        <div className="w-12 min-w-[48px] md:w-24 md:min-w-[96px] flex flex-col">
           <UserIcon
             className="w-auto h-auto"
             userId={post.userId}
             username={post.author}
           />
-          <p className="break-all text-center">{post.author}</p>
+          <p className=" break-all text-center">{post.author}</p>
           {ownPost && (
             <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
               Me
             </p>
           )}
+          <Link
+            to={`/app/users/${post.userId}`}
+            className="text-sm mx-auto mt-1"
+          >
+            View profile
+          </Link>
         </div>
         <div className="grow w-[80%] ml-4">
           <div className="float-right ml-4 pt-1">

@@ -1,6 +1,6 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 
-import { IconButton } from "components/Elements";
+import { IconButton, Link } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
 import { UserIcon } from "features/auth";
 import { useDisclosure } from "hooks/useDisclosure";
@@ -40,7 +40,7 @@ const CommentView = ({
           )}
         </div>
         <div className="flex flex-row h-fit">
-          <div className="flex-none w-0 md:w-24 h-0 md:h-auto invisible md:visible md:mr-4">
+          <div className="flex-none w-0 md:w-24 h-0 md:h-auto invisible md:visible md:mr-4 flex flex-col">
             <UserIcon
               className="w-auto h-auto"
               userId={comment.userId}
@@ -52,6 +52,12 @@ const CommentView = ({
                 {ownComment ? "Me" : "Author"}
               </p>
             )}
+            <Link
+              to={`/app/users/${comment.userId}`}
+              className="text-sm mx-auto mt-1"
+            >
+              View profile
+            </Link>
           </div>
           <div className="grow w-[85%]">
             <div className="float-right ml-4 pt-1">

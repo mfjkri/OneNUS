@@ -8,7 +8,10 @@ page upon clicking.
 export const Link = ({ className, children, ...props }: LinkProps) => {
   return (
     <RouterLink
-      className={clsx("text-indigo-600 hover:text-indigo-900", className)}
+      className={clsx(
+        "text-indigo-300 dark:text-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-300",
+        className
+      )}
       {...props}
     >
       {children}
