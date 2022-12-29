@@ -22,11 +22,12 @@ src
 
 # 🌟 Features
 
-There are 3 main features in this app.
+There are 4 main features in this app.
 
 - [`auth`](src/features/auth/) - User authentication (Login & Register)
 - [`posts`](src/features/posts/) - Forum posts
 - [`comments`](src/features/comments/) - Forum comments
+- [`users`](src/features/users) - Forum users
 
 Each feature follows a structure convention as follows:
 

@@ -45,7 +45,11 @@ See more upcoming features at: [💡 Future Plans](docs/project-plans.md#-future
    - Users can only edit or delete their own comments and posts.
 
 3. 🗂 Category tagging for posts
+
    - Users can filter posts by category to allow for easier searching.
+
+4. 👤 User profiles
+   - Users can view their own as well as other user profiles to see their forum statistics.
 
 ## 🛠 Building the project
 
@@ -107,10 +111,6 @@ See more upcoming features at: [💡 Future Plans](docs/project-plans.md#-future
 - [🌐 Deployment](docs/deployment.md#-deployment)
 - [💡 Future Plans](docs/project-plans.md#-future-plans)
 - [✨ Future Considerations](docs/technologies-used.md#-future-considerations)
-
-## 🤔 Reflections
-
-...
 
 ## 👏 Credits
 
