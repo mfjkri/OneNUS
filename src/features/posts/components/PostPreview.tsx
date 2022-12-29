@@ -2,7 +2,7 @@ import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
 
 import { Link } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
-import { UserIcon } from "features/auth";
+import { UserIcon } from "features/users";
 
 import { Post } from "../types";
 import { PostFlair } from "./PostFlair";

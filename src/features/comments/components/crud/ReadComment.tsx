@@ -2,7 +2,7 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 
 import { IconButton, Link } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
-import { UserIcon } from "features/auth";
+import { UserIcon } from "features/users";
 import { useDisclosure } from "hooks/useDisclosure";
 
 import { Comment } from "../../types";
@@ -31,7 +31,8 @@ const CommentView = ({
       <div className="flex flex-col">
         <div className="visible md:invisible mb-2 md:mb-0 h-auto md:h-0 flex flex-row">
           <p className="break-all my-auto text-primary2 dark:text-secondary2 ">
-            Commented by: {comment.author}
+            Commented by:{" "}
+            <Link to={`/app/users/${comment.userId}`}>{comment.author}</Link>
           </p>
           {(ownComment || isPosterComment) && (
             <p className="text-xs ml-2 my-auto font-bold text-green-600 dark:text-green-600">

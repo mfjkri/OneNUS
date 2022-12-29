@@ -1,9 +1,12 @@
+import { useAuth } from "lib/auth";
 import { useAppDispatch } from "hooks/typedRedux";
 import { Posts, resetState } from "features/posts";
-import { UserIcon } from "features/auth";
+import { NotFound } from "features/misc";
+import { ContentLayout } from "components/Layout";
 import { BackButton, SpinnerWithBackground } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
 
+import { UserIcon } from "./UserIcon";
 import { useUser } from "../api/getUser";
 
 export type UserProfileProps = {
@@ -13,18 +16,19 @@ export type UserProfileProps = {
 export const UserProfile = ({ userId }: UserProfileProps) => {
   const dispatch = useAppDispatch();
   const userQuery = useUser({ userId: userId });
+  const authUser = useAuth();
 
   if (userQuery.isLoading) {
     return <SpinnerWithBackground size="lg" />;
   }
 
-  if (!userQuery.data) return null;
+  if (!userQuery.data || !authUser.user) return <NotFound />;
 
   const targetUser = userQuery.data;
   dispatch(resetState());
 
   return (
-    <>
+    <ContentLayout title="">
       <BackButton />
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-8">
         <div className="flex flex-row h-fit">
@@ -43,10 +47,16 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
         </div>
         <Timestamps createdAt={targetUser.createdAt} createdText="joined" />
       </div>
-      <div className="px-8">
+      <div className="px-0 md:px-8">
         <div className="h-[1px] mt-12 mb-4 bg-secondary"></div>
         <p className="ml-2 mb-4 text-3xl">
-          Viewing <b>{targetUser.username}</b>'s posts ({targetUser.postsCount}
+          Viewing{" "}
+          {authUser.user.username === targetUser.username ? (
+            "your"
+          ) : (
+            <b>{targetUser.username}'s</b>
+          )}{" "}
+          posts ({targetUser.postsCount}
           ):
         </p>
         <Posts
@@ -54,6 +64,6 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
           disableControls={targetUser.postsCount === 0}
         />
       </div>
-    </>
+    </ContentLayout>
   );
 };

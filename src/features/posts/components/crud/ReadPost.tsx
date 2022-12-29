@@ -3,7 +3,8 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import { IconButton, Link } from "components/Elements";
 import { Timestamps } from "components/Timestamps";
 import { useDisclosure } from "hooks/useDisclosure";
-import { AuthUser, UserIcon, UserRoles } from "features/auth";
+import { AuthUser, UserRoles } from "features/auth";
+import { UserIcon } from "features/users";
 
 import { Post } from "../../types";
 import { StarPost } from "../StarPost";
