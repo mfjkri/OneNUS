@@ -13,26 +13,11 @@ export const Landing = () => {
   const { user } = useAuth();
 
   useEffect(() => {
+    // If user is already signed in, redirect to app
     if (user) {
       navigate("/app");
     }
   });
-
-  const redirectLogin = () => {
-    if (user) {
-      navigate("/app");
-    } else {
-      navigate("/auth/login");
-    }
-  };
-
-  const redirectRegister = () => {
-    if (user) {
-      navigate("/app");
-    } else {
-      navigate("/auth/register");
-    }
-  };
 
   return (
     <>
@@ -48,8 +33,8 @@ export const Landing = () => {
           <div className="mt-8 flex justify-center">
             <Button
               color="blue"
-              onClick={redirectLogin}
               className="w-1/3"
+              onClick={() => navigate("/auth/login")}
               startIcon={
                 <ArrowTopRightOnSquareIcon
                   className="h-6 w-6"
@@ -62,7 +47,7 @@ export const Landing = () => {
             <Button
               color="white"
               className="ml-3 w-1/3"
-              onClick={redirectRegister}
+              onClick={() => navigate("/auth/register")}
             >
               Register
             </Button>
