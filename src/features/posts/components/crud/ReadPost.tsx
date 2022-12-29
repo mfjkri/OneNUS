@@ -1,15 +1,18 @@
-import { PencilIcon } from "@heroicons/react/24/outline";
+import { useCallback } from "react";
 
-import { IconButton, Link } from "components/Elements";
-import { Timestamps } from "components/Timestamps";
+import {
+  ProfilePreview,
+  Controls,
+  Timestamps,
+  InlineProfilePreview,
+} from "components/ThreadDrawer";
 import { useDisclosure } from "hooks/useDisclosure";
 import { AuthUser, UserRoles } from "features/auth";
-import { UserIcon } from "features/users";
 
-import { Post } from "../../types";
-import { StarPost } from "../StarPost";
-import { DeletePost } from "./DeletePost";
 import { UpdatePostForm } from "./UpdatePostForm";
+import { DeletePost } from "./DeletePost";
+import { StarPost } from "../StarPost";
+import { Post } from "../../types";
 
 type PostViewProps = {
   post: Post;
@@ -26,47 +29,33 @@ const PostView = ({
   ownPost,
   toggleEditMode,
 }: PostViewProps) => {
+  const authorTitle = ownPost ? "Me" : "";
+
   return (
     <div>
+      <InlineProfilePreview
+        userId={post.userId}
+        author={post.author}
+        authorTitle={authorTitle}
+        actionText="Posted by"
+      />
       <div className="flex flex-row">
-        <div className="w-12 min-w-[48px] md:w-24 md:min-w-[96px] flex flex-col">
-          <UserIcon
-            className="w-auto h-auto"
-            userId={post.userId}
-            username={post.author}
-          />
-          <p className=" break-all text-center">{post.author}</p>
-          {ownPost && (
-            <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
-              Me
-            </p>
-          )}
-          <Link
-            to={`/app/users/${post.userId}`}
-            className="text-sm mx-auto mt-1"
-          >
-            View profile
-          </Link>
-        </div>
-        <div className="grow w-[80%] ml-4">
+        <ProfilePreview
+          userId={post.userId}
+          author={post.author}
+          authorTitle={authorTitle}
+          showProfileLink={true}
+          responsiveHide={true}
+        />
+        <div className="grow w-[80%]">
           <div className="float-right ml-4 pt-1">
-            {canEdit || canDelete ? (
-              <div className="flex flex-row rounded-lg p-1 bg-secondary2 dark:bg-primary2">
-                {canDelete && <DeletePost postId={post.id} />}
-                {canEdit && (
-                  <IconButton
-                    variant="text"
-                    color="white"
-                    size="sm"
-                    icon={<PencilIcon className="h-6 w-6" />}
-                    toolTip="Edit"
-                    onClick={toggleEditMode}
-                  />
-                )}
-              </div>
-            ) : (
-              <StarPost starsCount={post.starsCount} />
-            )}
+            <Controls
+              canEdit={canEdit}
+              canDelete={canDelete}
+              deleteControls={<DeletePost postId={post.id} />}
+              altControls={<StarPost starsCount={post.starsCount} />}
+              toggleEditMode={toggleEditMode}
+            />
           </div>
           <h2 className="text-2xl break-all font-extrabold mb-2">
             {post.title}
@@ -91,15 +80,17 @@ export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
   const isOwner = user.id === post.userId;
 
+  const onEditSucess = useCallback(() => {
+    toggle();
+    refetch();
+  }, [refetch, toggle]);
+
   return (
     <div>
       {editMode ? (
         <UpdatePostForm
           post={post}
-          onSuccess={() => {
-            toggle();
-            refetch();
-          }}
+          onSuccess={onEditSucess}
           onCancel={toggle}
         />
       ) : (

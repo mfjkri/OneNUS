@@ -4,7 +4,7 @@ import { Posts, resetState } from "features/posts";
 import { NotFound } from "features/misc";
 import { ContentLayout } from "components/Layout";
 import { BackButton, SpinnerWithBackground } from "components/Elements";
-import { Timestamps } from "components/Timestamps";
+import { Timestamps } from "components/ThreadDrawer";
 
 import { UserIcon } from "./UserIcon";
 import { useUser } from "../api/getUser";

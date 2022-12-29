@@ -1,8 +1,7 @@
 import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
 
 import { Link } from "components/Elements";
-import { Timestamps } from "components/Timestamps";
-import { UserIcon } from "features/users";
+import { ProfilePreview, Timestamps } from "components/ThreadDrawer";
 
 import { Post } from "../types";
 import { PostFlair } from "./PostFlair";
@@ -23,24 +22,13 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
         }
       >
         <div className="flex flex-row h-40">
-          <div className="w-12 min-w-[48px] md:w-24 md:min-w-[96px] flex flex-col">
-            <UserIcon
-              className="w-auto h-auto"
-              userId={post.userId}
-              username={post.author}
-            />
-            <div className="h-[25%] flex flex-col ">
-              <p className="h-fit invisible md:visible break-all text-center">
-                {post.author}
-              </p>
-              {ownPost && (
-                <p className="invisible md:visible text-[10px] text-center font-bold text-green-600 dark:text-green-600">
-                  Me
-                </p>
-              )}
-            </div>
-          </div>
-          <div className="grow flex flex-col ml-4 max-w-[calc(100%-64px)] md:max-w-[calc(100%-112px)]">
+          <ProfilePreview
+            userId={post.userId}
+            author={post.author}
+            authorTitle={ownPost ? "Me" : ""}
+            showProfileLink={false}
+          />
+          <div className="grow flex flex-col max-w-[calc(100%-140px)] md:max-w-[calc(100%-140px)]">
             <div className="h-fit">
               <div className="float-right ml-4">
                 <div className="flex flex-col">

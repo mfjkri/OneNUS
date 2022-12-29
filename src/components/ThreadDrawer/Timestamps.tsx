@@ -3,7 +3,7 @@ import moment from "moment";
 
 import { UTCEpochToLocalDate } from "utils/format";
 
-type TimestampsProps = {
+export type TimestampsProps = {
   createdAt: number;
   createdText?: string;
   updatedAt?: number;
