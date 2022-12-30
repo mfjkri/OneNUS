@@ -12,6 +12,7 @@ import { useUser } from "../api/getUser";
 import { UpdateBioForm } from "./UpdateBioForm";
 import { DeleteUser } from "./DeleteUser";
 import { User } from "../types";
+import { InfoTooltip } from "components/Elements/InfoTooltip";
 
 type UserStatisticsProps = {
   targetUser: User;
@@ -23,8 +24,21 @@ const UserStatistics = ({ targetUser }: UserStatisticsProps) => {
       <p className="text-xl">Username: {targetUser.username}</p>
       <p className="mt-1">Role: {targetUser.role}</p>
       <p className="mt-1">Bio: {targetUser.bio}</p>
-      <p className="mt-1">Forum posts: {targetUser.postsCount}</p>
-      <p className="mt-1">Forum comments: {targetUser.commentsCount}</p>
+      <div className="mt-1 flex flex-row">
+        <p>Forum posts: {targetUser.postsCount}</p>
+        <InfoTooltip
+          infoText="Deleted posts are included in this count."
+          tooltipPlacement="right-end"
+        />
+      </div>
+      <p className="mt-1"></p>
+      <div className="mt-1 flex flex-row">
+        <p>Forum comments: {targetUser.commentsCount}</p>
+        <InfoTooltip
+          infoText="Deleted comments are included in this count."
+          tooltipPlacement="right-end"
+        />
+      </div>
     </div>
   );
 };
