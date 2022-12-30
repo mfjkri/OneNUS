@@ -11,16 +11,13 @@ _Note: Whether or not they will be implemented eventually is unknown._
 - Posts
   - Starring of posts
   - Searching of posts from title and text
-- Comments
-  - Upvote system for comments
 - User
   - User dashboard
-    - Overview of user account
-    - View created posts
-    - View created comments
+    - Overview of user account ✅ (28/12/22)
+    - View created posts ✅ (28/12/22)
+    - View starred posts
     - Change password
     - Delete account
-  - Ability to choose avatar
   - Ability to set bio
 - Moderation:
   - Add filtering to prevent inappropriate messages
@@ -33,7 +30,7 @@ _Note: Whether or not they will be implemented eventually is unknown._
 
 ## Authentication:
 
-- Add confirm password field
+- Add confirm password field ✅ (30/12/22)
 - Add email field (optional)
 - Allow users to reset password if they have an email
 
@@ -41,5 +38,5 @@ _Note: Whether or not they will be implemented eventually is unknown._
 
 ## Backend:
 
-- Rate-limit API requests
+- Rate-limit API requests ✅ (30/12/22)
 - Move to Entgo instead of GORM

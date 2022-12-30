@@ -1,15 +1,38 @@
+import * as z from "zod";
 import { Link } from "react-router-dom";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
 
 import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
 import { useAuth } from "lib/auth";
+import { isAlphaOnlyString } from "utils/strings";
 
-import { AuthInputSchema } from "./Layout";
+const RegisterFormSchema = z
+  .object({
+    username: z
+      .string()
+      .min(1, "Required")
+      .max(10, "Maximum of 10 characters")
+      .refine((val) => isAlphaOnlyString(val), {
+        message: "Only alphabetical letters allowed",
+      }),
+    password: z.string().min(1, "Required").max(32, "Maximum of 32 characters"),
+    cpassword: z.string().min(1, "Required"),
+  })
+  .superRefine(({ password, cpassword }, ctx) => {
+    if (password !== cpassword) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["cpassword"],
+        message: "Passwords do not match.",
+      });
+    }
+  });
 
 type RegisterValues = {
   username: string;
   password: string;
+  cpassword: string;
 };
 
 type RegisterFormProps = {
@@ -21,12 +44,12 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   return (
     <div>
-      <Form<RegisterValues, typeof AuthInputSchema>
+      <Form<RegisterValues, typeof RegisterFormSchema>
         onSubmit={async (values) => {
           await register(values);
           onSuccess();
         }}
-        schema={AuthInputSchema}
+        schema={RegisterFormSchema}
         options={{
           shouldUnregister: true,
         }}
@@ -45,6 +68,13 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               label="Password"
               error={formState.errors["password"]}
               registration={register("password")}
+              icon={<LockClosedIcon className="h-4 w-4" aria-hidden="true" />}
+            />
+            <InputField
+              type="password"
+              label="Confirm Password"
+              error={formState.errors["cpassword"]}
+              registration={register("cpassword")}
               icon={<LockClosedIcon className="h-4 w-4" aria-hidden="true" />}
             />
 

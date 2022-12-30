@@ -1,11 +1,22 @@
+import * as z from "zod";
 import { Link } from "react-router-dom";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
 
 import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
 import { useAuth } from "lib/auth";
+import { isAlphaOnlyString } from "utils/strings";
 
-import { AuthInputSchema } from "./Layout";
+const LoginFormSchema = z.object({
+  username: z
+    .string()
+    .min(1, "Required")
+    .max(10, "Maximum of 10 characters")
+    .refine((val) => isAlphaOnlyString(val), {
+      message: "Only alphabetical letters allowed",
+    }),
+  password: z.string().min(1, "Required").max(32, "Maximum of 32 characters"),
+});
 
 type LoginValues = {
   username: string;
@@ -21,12 +32,12 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   return (
     <div>
-      <Form<LoginValues, typeof AuthInputSchema>
+      <Form<LoginValues, typeof LoginFormSchema>
         onSubmit={async (values) => {
           await login(values);
           onSuccess();
         }}
-        schema={AuthInputSchema}
+        schema={LoginFormSchema}
       >
         {({ register, formState }) => (
           <>

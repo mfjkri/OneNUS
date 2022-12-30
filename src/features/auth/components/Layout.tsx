@@ -1,22 +1,9 @@
 import * as React from "react";
-import * as z from "zod";
 
 import { Link } from "components/Elements";
 import { Head } from "components/Head";
 import { Footer } from "components/Layout";
-import { isAlphaOnlyString } from "utils/strings";
 import logo from "assets/logo.svg";
-
-export const AuthInputSchema = z.object({
-  username: z
-    .string()
-    .min(1, "Required")
-    .max(10, "Maximum of 10 characters")
-    .refine((val) => isAlphaOnlyString(val), {
-      message: "Only alphabetical letters allowed",
-    }),
-  password: z.string().min(1, "Required").max(32, "Maximum of 32 characters"),
-});
 
 type LayoutProps = {
   children: React.ReactNode;
