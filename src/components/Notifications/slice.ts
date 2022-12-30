@@ -16,7 +16,7 @@ type InitState = {
 
 const initState: InitState = { notifs: [], currId: 0 };
 
-const notificationSlices = createSlice({
+const notificationSlice = createSlice({
   name: "notifications",
   initialState: initState,
   reducers: {
@@ -33,5 +33,5 @@ const notificationSlices = createSlice({
 });
 
 export const { addNotification, dismissNotification } =
-  notificationSlices.actions;
-export const notificationReducer = notificationSlices.reducer;
+  notificationSlice.actions;
+export const notificationReducer = notificationSlice.reducer;

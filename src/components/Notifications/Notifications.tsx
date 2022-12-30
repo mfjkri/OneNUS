@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from "hooks/typedRedux";
 
 import { Notification } from "./Notification";
-import { dismissNotification } from "./notificationSlices";
+import { dismissNotification } from "./slice";
 
 /*
 Notifications component.

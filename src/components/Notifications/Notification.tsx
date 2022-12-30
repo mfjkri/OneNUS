@@ -10,7 +10,7 @@ import { color } from "@material-tailwind/react/types/components/alert";
 
 import { delay } from "utils/delay";
 
-import { Notif } from "./notificationSlices";
+import { Notif } from "./slice";
 
 const icons = {
   info: (

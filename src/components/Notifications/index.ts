@@ -1,3 +1,2 @@
 export * from "./Notifications";
-
-export * from "./notificationSlices";
+export * from "./slice";
