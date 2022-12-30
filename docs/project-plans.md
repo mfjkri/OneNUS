@@ -18,7 +18,7 @@ _Note: Whether or not they will be implemented eventually is unknown._
     - View starred posts
     - Change password
     - Delete account
-  - Ability to set bio
+  - Ability to set bio ✅ (30/12/22)
 - Moderation:
   - Add filtering to prevent inappropriate messages
 

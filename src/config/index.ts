@@ -24,3 +24,7 @@ export const MAX_COMMENT_TEXT_CHAR = parseInt(
 export const COMMENTS_PER_PAGE = parseInt(
   process.env.REACT_APP_COMMENTS_PER_PAGE || "10"
 );
+
+export const MAX_USER_BIO_CHAR = parseInt(
+  process.env.REACT_APP_MAX_USER_BIO_CHAR || "100"
+);

@@ -1,13 +1,32 @@
 import { useAuth } from "lib/auth";
 import { useAppDispatch } from "hooks/typedRedux";
+import { useDisclosure } from "hooks/useDisclosure";
 import { Posts, resetState } from "features/posts";
 import { NotFound } from "features/misc";
 import { ContentLayout } from "components/Layout";
-import { BackButton, SpinnerWithBackground } from "components/Elements";
+import { BackButton, Button, SpinnerWithBackground } from "components/Elements";
 import { Timestamps } from "components/ThreadDrawer";
 
 import { UserIcon } from "./UserIcon";
 import { useUser } from "../api/getUser";
+import { UpdateBioForm } from "./UpdateBioForm";
+import { User } from "../types";
+
+type UserStatisticsProps = {
+  targetUser: User;
+};
+
+const UserStatistics = ({ targetUser }: UserStatisticsProps) => {
+  return (
+    <div className="ml-2 text-lg w-full">
+      <p className="text-xl">Username: {targetUser.username}</p>
+      <p className="mt-1">Role: {targetUser.role}</p>
+      <p className="mt-1">Bio: {targetUser.bio}</p>
+      <p className="mt-1">Forum posts: {targetUser.postsCount}</p>
+      <p className="mt-1">Forum comments: {targetUser.commentsCount}</p>
+    </div>
+  );
+};
 
 export type UserProfileProps = {
   userId: number;
@@ -17,6 +36,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
   const dispatch = useAppDispatch();
   const userQuery = useUser({ userId: userId });
   const authUser = useAuth();
+  const { isOpen: isEditMode, toggle: toggleEditMode } = useDisclosure(false);
 
   if (userQuery.isLoading) {
     return <SpinnerWithBackground size="lg" />;
@@ -24,8 +44,11 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
 
   if (!userQuery.data || !authUser.user) return <NotFound />;
 
-  const targetUser = userQuery.data;
+  // Reset PostsState (we want to reset pageNumber back to 1)
   dispatch(resetState());
+
+  const targetUser = userQuery.data;
+  const isOwnProfile = targetUser.id === authUser.user.id;
 
   return (
     <ContentLayout title="">
@@ -37,26 +60,41 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
             userId={targetUser.id}
             username={targetUser.username}
           />
-          <div className="ml-2 text-lg w-full">
-            <p className="text-xl">Username: {targetUser.username}</p>
-            <p className="mt-1">Role: {targetUser.role}</p>
-            <p className="mt-1">Bio: {targetUser.bio}</p>
-            <p className="mt-1">Forum posts: {targetUser.postsCount}</p>
-            <p className="mt-1">Forum comments: {targetUser.commentsCount}</p>
+
+          <div className="grow">
+            {isEditMode ? (
+              <UpdateBioForm
+                currentBio={targetUser.bio}
+                onSuccess={toggleEditMode}
+                onCancel={toggleEditMode}
+              />
+            ) : (
+              <div>
+                <UserStatistics targetUser={targetUser} />
+
+                {/* Only show User controls if they are viewing their own profile */}
+                {isOwnProfile && (
+                  <div className="flex flex-row mt-4">
+                    <Button className="ml-2" onClick={toggleEditMode}>
+                      Update Bio
+                    </Button>
+                    <Button className="ml-4" color="red">
+                      Delete account
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
+
         <Timestamps createdAt={targetUser.createdAt} createdText="joined" />
       </div>
       <div className="px-0 md:px-8">
         <div className="h-[1px] mt-12 mb-4 bg-secondary"></div>
         <p className="mx-2 mb-4 text-3xl">
-          Viewing{" "}
-          {authUser.user.username === targetUser.username ? (
-            "your"
-          ) : (
-            <b>{targetUser.username}'s</b>
-          )}{" "}
-          posts ({targetUser.postsCount}
+          Viewing {isOwnProfile ? "your" : <b>{targetUser.username}'s</b>} posts
+          ({targetUser.postsCount}
           ):
         </p>
 
