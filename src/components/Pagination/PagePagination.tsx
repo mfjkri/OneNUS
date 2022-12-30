@@ -112,7 +112,7 @@ export const PagePaginator = ({
   const showExtremeSelectors = maxPageNumber > totalPagesShown;
 
   return (
-    <div>
+    <>
       <ol className="flex justify-center gap-1 text-xs font-bold text-primary dark:text-secondary">
         {showExtremeSelectors && (
           <ChevronSelector
@@ -173,6 +173,6 @@ export const PagePaginator = ({
           />
         )}
       </ol>
-    </div>
+    </>
   );
 };

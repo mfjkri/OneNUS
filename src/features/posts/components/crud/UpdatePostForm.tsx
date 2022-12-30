@@ -33,48 +33,46 @@ export const UpdatePostForm = ({
   const updatePostMutation = useUpdatePost();
 
   return (
-    <div>
-      <Form<UpdatePostDTO, typeof UpdatePostSchema>
-        onSubmit={async (values) => {
-          await updatePostMutation.mutateAsync({
-            ...values,
-            postId: post.id,
-          });
-          onSuccess();
-        }}
-        schema={UpdatePostSchema}
-      >
-        {({ register, formState }) => (
-          <>
-            <InputField
-              type="text"
-              disabled={true}
-              label="Title"
-              error={formState.errors["title"]}
-              registration={register("title", {
-                value: post.title,
-              })}
-            />
-            <TextAreaField
-              label="Body"
-              className="h-72"
-              error={formState.errors["text"]}
-              registration={register("text", { value: post.text })}
-            />
-            <div>
-              <Button
-                type="submit"
-                className="w-full mb-2"
-                isLoading={updatePostMutation.isLoading}
-              >
-                Update Post
-              </Button>
+    <Form<UpdatePostDTO, typeof UpdatePostSchema>
+      onSubmit={async (values) => {
+        await updatePostMutation.mutateAsync({
+          ...values,
+          postId: post.id,
+        });
+        onSuccess();
+      }}
+      schema={UpdatePostSchema}
+    >
+      {({ register, formState }) => (
+        <>
+          <InputField
+            type="text"
+            disabled={true}
+            label="Title"
+            error={formState.errors["title"]}
+            registration={register("title", {
+              value: post.title,
+            })}
+          />
+          <TextAreaField
+            label="Body"
+            className="h-72"
+            error={formState.errors["text"]}
+            registration={register("text", { value: post.text })}
+          />
+          <div>
+            <Button
+              type="submit"
+              className="w-full mb-2"
+              isLoading={updatePostMutation.isLoading}
+            >
+              Update Post
+            </Button>
 
-              <DiscardConfirmationDialog onDiscard={onCancel} />
-            </div>
-          </>
-        )}
-      </Form>
-    </div>
+            <DiscardConfirmationDialog onDiscard={onCancel} />
+          </div>
+        </>
+      )}
+    </Form>
   );
 };

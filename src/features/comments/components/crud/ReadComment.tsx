@@ -89,7 +89,7 @@ export const ReadComment = ({
 }: ReadCommentProps) => {
   const { isOpen: editMode, toggle } = useDisclosure(false);
   return (
-    <div>
+    <>
       {editMode ? (
         <UpdateCommentForm
           comment={comment}
@@ -106,6 +106,6 @@ export const ReadComment = ({
           toggleEditMode={toggle}
         />
       )}
-    </div>
+    </>
   );
 };

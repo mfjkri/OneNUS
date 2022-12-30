@@ -43,7 +43,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const { register, isRegistering } = useAuth();
 
   return (
-    <div>
+    <>
       <Form<RegisterValues, typeof RegisterFormSchema>
         onSubmit={async (values) => {
           await register(values);
@@ -101,6 +101,6 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };

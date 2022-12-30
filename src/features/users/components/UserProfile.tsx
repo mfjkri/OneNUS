@@ -49,7 +49,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
       </div>
       <div className="px-0 md:px-8">
         <div className="h-[1px] mt-12 mb-4 bg-secondary"></div>
-        <p className="ml-2 mb-4 text-3xl">
+        <p className="mx-2 mb-4 text-3xl">
           Viewing{" "}
           {authUser.user.username === targetUser.username ? (
             "your"
@@ -59,10 +59,13 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
           posts ({targetUser.postsCount}
           ):
         </p>
-        <Posts
-          filterUserId={userId}
-          disableControls={targetUser.postsCount === 0}
-        />
+
+        <div>
+          <Posts
+            filterUserId={userId}
+            disableControls={targetUser.postsCount === 0}
+          />
+        </div>
       </div>
     </ContentLayout>
   );

@@ -32,7 +32,7 @@ const PostView = ({
   const authorTitle = ownPost ? "Me" : "";
 
   return (
-    <div>
+    <>
       <InlineProfilePreview
         userId={post.userId}
         author={post.author}
@@ -66,7 +66,7 @@ const PostView = ({
       <div className="mt-8">
         <Timestamps createdAt={post.createdAt} updatedAt={post.updatedAt} />
       </div>
-    </div>
+    </>
   );
 };
 
@@ -86,7 +86,7 @@ export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
   }, [refetch, toggle]);
 
   return (
-    <div>
+    <>
       {editMode ? (
         <UpdatePostForm
           post={post}
@@ -102,6 +102,6 @@ export const ReadPost = ({ user, post, refetch }: ReadPostProps) => {
           toggleEditMode={toggle}
         />
       )}
-    </div>
+    </>
   );
 };

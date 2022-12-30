@@ -31,7 +31,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { login, isLoggingIn } = useAuth();
 
   return (
-    <div>
+    <>
       <Form<LoginValues, typeof LoginFormSchema>
         onSubmit={async (values) => {
           await login(values);
@@ -74,6 +74,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };

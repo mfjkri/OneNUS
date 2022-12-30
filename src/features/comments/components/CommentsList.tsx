@@ -19,7 +19,7 @@ export const CommentsList = ({
   postUserid,
 }: CommentsListProps) => {
   return (
-    <>
+    <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-1">
       {comments ? (
         <ul className="divide-y divide-solid divide-primary dark:divide-secondary px-6 py-2">
           {comments.map((comment, commentIndex) => (
@@ -39,6 +39,6 @@ export const CommentsList = ({
       ) : (
         <NoComments />
       )}
-    </>
+    </div>
   );
 };

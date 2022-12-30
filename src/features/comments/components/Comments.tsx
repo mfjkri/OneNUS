@@ -63,8 +63,9 @@ export const Comments = ({ user, post }: CommentsProps) => {
   if (!commentsQuery.data) return null;
 
   return (
-    <div>
+    <>
       <CreateComment postId={post.id} />
+
       <div className="flex flex-row flex-wrap-reverse mt-4  px-2">
         <h1 className="grow text-xl ml-3">Comments</h1>
         <div className="flex-none w-fit my-auto">
@@ -77,13 +78,13 @@ export const Comments = ({ user, post }: CommentsProps) => {
           />
         </div>
       </div>
-      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-1">
-        <CommentsList
-          comments={commentsQuery.data.comments}
-          user={user}
-          postUserid={post.userId}
-        />
-      </div>
+
+      <CommentsList
+        comments={commentsQuery.data.comments}
+        user={user}
+        postUserid={post.userId}
+      />
+
       <div className="mt-3">
         <PagePaginator
           pageNumber={activePageNumber}
@@ -93,6 +94,6 @@ export const Comments = ({ user, post }: CommentsProps) => {
           goToPage={setPageNumber}
         />
       </div>
-    </div>
+    </>
   );
 };

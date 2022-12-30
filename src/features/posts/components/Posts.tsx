@@ -88,7 +88,7 @@ export const Posts = ({
   if (!postsQuery.data) return null;
 
   return (
-    <div>
+    <>
       {!disableControls && (
         <div className="flex flex-row flex-wrap-reverse px-6 py">
           <div className="grow mr-3">
@@ -108,20 +108,20 @@ export const Posts = ({
           </div>
         </div>
       )}
-      <div>
-        <PostsList posts={postsQuery.data.posts} user={user} />
-        {!disableControls && (
-          <div className="mt-5">
-            <PagePaginator
-              pageNumber={activePageNumber}
-              maxPageNumber={Math.ceil(
-                postsQuery.data.postsCount / activePerPage
-              )}
-              goToPage={goToPage}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+
+      <PostsList posts={postsQuery.data.posts} user={user} />
+
+      {!disableControls && (
+        <div className="mt-5">
+          <PagePaginator
+            pageNumber={activePageNumber}
+            maxPageNumber={Math.ceil(
+              postsQuery.data.postsCount / activePerPage
+            )}
+            goToPage={goToPage}
+          />
+        </div>
+      )}
+    </>
   );
 };
