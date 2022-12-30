@@ -24,15 +24,15 @@ src
 
 There are 4 main features in this app.
 
-- [`auth`](src/features/auth/) - User authentication (Login & Register)
-- [`posts`](src/features/posts/) - Forum posts
-- [`comments`](src/features/comments/) - Forum comments
-- [`users`](src/features/users) - Forum users
+- [`auth`](../src/features/auth/) - User authentication (Login & Register)
+- [`posts`](../src/features/posts/) - Forum posts
+- [`comments`](../src/features/comments/) - Forum comments
+- [`users`](../src/features/users) - Forum users
 
 Each feature follows a structure convention as follows:
 
 - `api`: Handles any API calls made by the feature
-- `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](src/components/))
+- `components`: Contains any components used in this feature (Any non-specific or reusable components should go in [src/components/\*](../src/components/))
 - `routes`: Handles any sub-routing within the feature
 - `types`: Defines any custom types used in this feature
 - `slice.ts`: Contains reducer logic and associated actions for any client-state of the feature.
@@ -46,14 +46,14 @@ Note that each subdirectory in this convention is optional and can be left out i
 
 Routing in this project is managed by [`react-router-dom v6.4.5`](https://reactrouter.com/en/main).
 
-Global routing is defined in [src/routes/index.tsx](src/routes/index.tsx) which splits routes into two categories:
+Global routing is defined in [src/routes/index.tsx](../src/routes/index.tsx) which splits routes into two categories:
 
 - Public: Freely accessible (includes pages to login and register)
 - Protected: Requires user authentication to access
 
 Only routing _to_ the feature is handled here. Further sub-routing _within_ the feature are handled by the respective feature itself in `src/$FEATURENAME/routes/index.tsx`.
 
-e.g. [`src/auth/routes/index.tsx`](src/features/auth/routes/index.tsx)
+e.g. [`src/auth/routes/index.tsx`](../src/features/auth/routes/index.tsx)
 
 <br>
 
@@ -65,17 +65,17 @@ e.g. [`src/auth/routes/index.tsx`](src/features/auth/routes/index.tsx)
 
   Client-state in use are:
 
-  - [`posts`](src/features/posts/slices/):
+  - [`posts`](../src/features/posts/slice.ts):
     - current page number
     - current category filter
     - current sort option
     - current sort order (ascending / descending)
     - results per page
-  - [`comments`](src/features//comments/slices/):
+  - [`comments`](../src/features/comments/slice.ts):
     - current sort option
     - current sort order (ascending / descending)
     - results per page
-  - [`notifications`](src/components/Notifications/notificationSlices.ts)
+  - [`notifications`](../src/components/Notifications/slice.ts)
 
 - `server-state`
 
