@@ -21,7 +21,7 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
           `text-primary dark:text-secondary rounded-2xl  hover:cursor-pointer group`
         }
       >
-        <div className="flex flex-row h-40">
+        <div className="flex flex-row h-[154px]">
           <ProfilePreview
             userId={post.userId}
             author={post.author}
