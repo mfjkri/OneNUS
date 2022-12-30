@@ -10,6 +10,7 @@ import { Timestamps } from "components/ThreadDrawer";
 import { UserIcon } from "./UserIcon";
 import { useUser } from "../api/getUser";
 import { UpdateBioForm } from "./UpdateBioForm";
+import { DeleteUser } from "./DeleteUser";
 import { User } from "../types";
 
 type UserStatisticsProps = {
@@ -78,9 +79,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
                     <Button className="ml-2" onClick={toggleEditMode}>
                       Update Bio
                     </Button>
-                    <Button className="ml-4" color="red">
-                      Delete account
-                    </Button>
+                    <DeleteUser />
                   </div>
                 )}
               </div>
