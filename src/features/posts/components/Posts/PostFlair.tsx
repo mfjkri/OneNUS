@@ -4,7 +4,7 @@ import {
   dismissible,
 } from "@material-tailwind/react/types/components/chip";
 
-import { PostTag, PostTags, PostTagColors } from "../types";
+import { PostTag, PostTags, PostTagColors } from "../../types";
 
 export type PostFlairProps = {
   category: PostTag;

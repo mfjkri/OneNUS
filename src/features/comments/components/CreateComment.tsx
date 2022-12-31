@@ -3,7 +3,7 @@ import * as z from "zod";
 import { Button } from "components/Elements";
 import { Form, TextAreaField } from "components/Form";
 
-import { CreateCommentDTO, useCreateComment } from "../../api/createComment";
+import { CreateCommentDTO, useCreateComment } from "../api/createComment";
 import { MAX_COMMENT_TEXT_CHAR } from "config";
 
 export const CreateCommentSchema = z.object({

@@ -6,8 +6,8 @@ import { Form, InputField, TextAreaField, SelectField } from "components/Form";
 
 import { MAX_POST_TEXT_CHAR, MAX_POST_TITLE_CHAR } from "config";
 
-import { CreatePostDTO, useCreatePost } from "../../api/createPost";
-import { PostTags } from "../../types";
+import { CreatePostDTO, useCreatePost } from "../api/createPost";
+import { PostTags } from "../types";
 
 export const CreatePostSchema = z.object({
   title: z

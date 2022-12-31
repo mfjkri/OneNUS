@@ -1,8 +1,8 @@
 import { Form, TextAreaField } from "components/Form";
 import { Button, DiscardConfirmationDialog } from "components/Elements";
 
-import { Comment } from "../../types";
-import { UpdateCommentDTO, useUpdateComment } from "../../api/updateComment";
+import { Comment } from "../types";
+import { UpdateCommentDTO, useUpdateComment } from "../api/updateComment";
 import { CreateCommentSchema } from "./CreateComment";
 
 export type UpdateCommentFormProps = {

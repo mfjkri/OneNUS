@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ContentLayout } from "components/Layout";
 import { useAppDispatch } from "hooks/typedRedux";
 
-import { CreatePostForm } from "../components/crud/CreatePostForm";
+import { CreatePostForm } from "../components/CreatePostForm";
 import { resetState } from "../slice";
 
 export const NewPost = () => {

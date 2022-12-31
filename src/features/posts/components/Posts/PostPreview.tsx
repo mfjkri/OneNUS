@@ -3,7 +3,7 @@ import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
 import { Link } from "components/Elements";
 import { ProfilePreview, Timestamps } from "components/ThreadDrawer";
 
-import { Post } from "../types";
+import { Post } from "../../types";
 import { PostFlair } from "./PostFlair";
 
 export type PostPreviewProps = {
@@ -22,12 +22,15 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
         }
       >
         <div className="flex flex-row h-[154px]">
+          {/* Post author details */}
           <ProfilePreview
             userId={post.userId}
             author={post.author}
             authorTitle={ownPost ? "Me" : ""}
             showProfileLink={false}
           />
+
+          {/* Post title and contents */}
           <div className="grow flex flex-col max-w-[calc(100%-140px)] md:max-w-[calc(100%-140px)]">
             <div className="h-fit">
               <div className="float-right ml-4">
@@ -50,6 +53,8 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
             </p>
           </div>
         </div>
+
+        {/* Timestamp */}
         <div className="mt-3">
           <Timestamps createdAt={post.createdAt} />
         </div>

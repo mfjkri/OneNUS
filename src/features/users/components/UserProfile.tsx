@@ -1,7 +1,7 @@
 import { useAuth } from "lib/auth";
 import { useAppDispatch } from "hooks/typedRedux";
 import { useDisclosure } from "hooks/useDisclosure";
-import { Posts, resetState } from "features/posts";
+import { PostsList, resetState } from "features/posts";
 import { NotFound } from "features/misc";
 import { ContentLayout } from "components/Layout";
 import { BackButton, Button, SpinnerWithBackground } from "components/Elements";
@@ -112,7 +112,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
         </p>
 
         <div>
-          <Posts
+          <PostsList
             filterUserId={userId}
             disableControls={targetUser.postsCount === 0}
           />

@@ -9,9 +9,10 @@ import {
   SortOrderTypes,
 } from "components/Pagination";
 
-import { PostsList } from "../components/PostsList";
-import { PostFlairFilters } from "../components/PostFlair";
-import { usePosts } from "../api/getPosts";
+import { PostPreview } from "./PostPreview";
+import { PostFlairFilters } from "./PostFlair";
+import { usePosts } from "../../api/getPosts";
+import { Post, PostSortOptions } from "../../types";
 import {
   setPageNumber,
   setSortOption,
@@ -19,18 +20,21 @@ import {
   toggleSortOrder,
   resetPageNumber,
   setFilterTag,
-} from "../slice";
-import { PostSortOptions } from "../types";
+} from "../../slice";
 
-export type PostsProps = {
+export type PostsListProps = {
   filterUserId?: number;
   disableControls?: boolean;
+  disablePageControls?: boolean;
+  disableSortControls?: boolean;
 };
 
-export const Posts = ({
+export const PostsList = ({
   filterUserId = 0,
   disableControls = false,
-}: PostsProps) => {
+  disablePageControls = false,
+  disableSortControls = false,
+}: PostsListProps) => {
   const { user } = useAuth();
 
   // PostsState props
@@ -89,7 +93,8 @@ export const Posts = ({
 
   return (
     <>
-      {!disableControls && (
+      {/* Sort and filter controls */}
+      {!disableControls && !disableSortControls && (
         <div className="flex flex-row flex-wrap-reverse px-6 py">
           <div className="grow mr-3">
             <PostFlairFilters
@@ -109,9 +114,27 @@ export const Posts = ({
         </div>
       )}
 
-      <PostsList posts={postsQuery.data.posts} user={user} />
+      {/* PostLists */}
+      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl">
+        {postsQuery.data.posts ? (
+          <ul className="divide-y divide-solid divide-primary dark:divide-secondary px-3 py-1">
+            {postsQuery.data.posts.map((post: Post, postIndex: number) => (
+              <li key={postIndex}>
+                <PostPreview
+                  post={post}
+                  postIndex={postIndex}
+                  ownPost={user.id === post.userId}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="px-6 py-4">No Posts</div>
+        )}
+      </div>
 
-      {!disableControls && (
+      {/* Page Controls */}
+      {!disableControls && !disablePageControls && (
         <div className="mt-5">
           <PagePaginator
             pageNumber={activePageNumber}

@@ -17,7 +17,7 @@ _Note: Whether or not they will be implemented eventually is unknown._
     - View created posts ✅ (28/12/22)
     - View starred posts
     - Change password
-    - Delete account
+    - Delete account ✅ (30/12/22)
   - Ability to set bio ✅ (30/12/22)
 - Moderation:
   - Add filtering to prevent inappropriate messages

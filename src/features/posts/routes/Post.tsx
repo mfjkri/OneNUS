@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 import { BackButton, SpinnerWithBackground } from "components/Elements";
@@ -7,7 +8,7 @@ import { Comments } from "features/comments";
 import { AuthUser } from "features/auth";
 import { useAuth } from "lib/auth";
 
-import { ReadPost } from "../components/crud/ReadPost";
+import { PostView } from "../components/Post/PostView";
 import { usePost } from "../api/getPost";
 
 type ValidPostProps = {
@@ -17,6 +18,10 @@ type ValidPostProps = {
 
 const ValidPost = ({ postId, user }: ValidPostProps) => {
   const postQuery = usePost({ postId: postId });
+  const refetchQuery = useCallback(
+    () => postQuery.refetch,
+    [postQuery.refetch]
+  );
 
   if (postQuery.isLoading) {
     return <SpinnerWithBackground size="lg" />;
@@ -31,13 +36,11 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
   return (
     <ContentLayout title="">
       <BackButton />
-      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
-        <ReadPost
-          user={user}
-          post={postQuery.data}
-          refetch={postQuery.refetch}
-        />
-      </div>
+
+      {/* Display Post */}
+      <PostView user={user} post={postQuery.data} refetchPost={refetchQuery} />
+
+      {/* Display Post's Comments */}
       <div className="px-2 md:px-6 py-5">
         <Comments user={user} post={postQuery.data} />
       </div>
@@ -45,14 +48,14 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
   );
 };
 
-export const PostThread = () => {
+export const Post = () => {
   const { postId } = useParams();
   const { user } = useAuth();
 
   const parsedPostId = postId ? parseInt(postId) : 0;
-  // Check for any invalid postIds
   const targetPostId = parsedPostId && parsedPostId > 0 ? parsedPostId : -1;
 
+  // Display ValidPost is postId is a valid number else NotFound
   return (
     <>
       {!user || targetPostId === -1 ? (

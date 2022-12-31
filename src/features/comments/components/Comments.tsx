@@ -8,10 +8,10 @@ import {
   SortOrderTypes,
 } from "components/Pagination";
 import { Post } from "features/posts";
-import { AuthUser } from "features/auth";
+import { AuthUser, UserRoles } from "features/auth";
 
-import { CommentsList } from "./CommentsList";
-import { CreateComment } from "./crud/CreateComment";
+import { CreateComment } from "./CreateComment";
+import { CommentView } from "./CommentView";
 import { useComments } from "../api/getComments";
 import { resetSortOrder, setSortOption, toggleSortOrder } from "../slice";
 import { CommentSortOptions } from "../types";
@@ -79,11 +79,27 @@ export const Comments = ({ user, post }: CommentsProps) => {
         </div>
       </div>
 
-      <CommentsList
-        comments={commentsQuery.data.comments}
-        user={user}
-        postUserid={post.userId}
-      />
+      <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl mt-1">
+        {commentsQuery.data.comments ? (
+          <ul className="divide-y divide-solid divide-primary dark:divide-secondary px-6 py-2">
+            {commentsQuery.data.comments.map((comment, commentIndex) => (
+              <li key={commentIndex}>
+                <CommentView
+                  comment={comment}
+                  canEdit={user.id === comment.userId}
+                  canDelete={
+                    user.id === comment.userId || user.role === UserRoles.ADMIN
+                  }
+                  ownComment={user.id === comment.userId}
+                  isPosterComment={post.userId === comment.userId}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="ml-3 px-6 py-4">No Comments</div>
+        )}
+      </div>
 
       <div className="mt-3">
         <PagePaginator
