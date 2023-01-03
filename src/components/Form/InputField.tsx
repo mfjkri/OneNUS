@@ -21,19 +21,6 @@ export type InputFieldProps = FieldWrapperPassThroughProps &
     registration: Partial<UseFormRegisterReturn>;
   };
 
-/*
-Input element with preset styling, options and error message.
-
-Attributes:
-  - variant, size, color, icon, label: Refer to
-    https://www.material-tailwind.com/docs/react/input
-    https://www.material-tailwind.com/docs/react/props/input
-
-  - registration: Partial<UseFormRegisterReturn>
-    Relevant props for input validation set by react-hook-form
-
-  - ALL OTHER NATIVE INPUT PROPS
-*/
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   (
     {

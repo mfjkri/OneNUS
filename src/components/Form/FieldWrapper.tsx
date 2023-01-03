@@ -2,18 +2,6 @@ import clsx from "clsx";
 import * as React from "react";
 import { FieldError } from "react-hook-form";
 
-type FieldWrapperProps = {
-  label?: string;
-  className?: string;
-  children: React.ReactNode;
-  error?: FieldError | undefined;
-};
-
-export type FieldWrapperPassThroughProps = Omit<
-  FieldWrapperProps,
-  "className" | "children"
->;
-
 /*
 Wrapper component around the other form fields (e.g. InputField).
 Provides error message functionality, label and description.
@@ -32,6 +20,19 @@ Attributes:
     Error object that is provided by react-hook-form. 
     Error message will be displayed.
 */
+
+type FieldWrapperProps = {
+  label?: string;
+  className?: string;
+  children: React.ReactNode;
+  error?: FieldError | undefined;
+};
+
+export type FieldWrapperPassThroughProps = Omit<
+  FieldWrapperProps,
+  "className" | "children"
+>;
+
 export const FieldWrapper = ({
   label,
   className,

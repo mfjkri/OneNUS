@@ -36,8 +36,9 @@ type UseCommentsOptions = {
 
 export const useComments = ({ data, config = {} }: UseCommentsOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
-    ...config,
+    useErrorBoundary: false,
     keepPreviousData: true,
+    ...config,
     queryKey: commentKeys.list(data),
     queryFn: () => getComments(data),
   });

@@ -19,23 +19,6 @@ export type TextAreaFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
 };
 
-/*
-Textarea element with preset styling, options and error message.
-
-Attributes:
-  - variant, size, color, label, resize: Refer to
-    https://www.material-tailwind.com/docs/react/textarea
-    https://www.material-tailwind.com/docs/react/props/textarea
-
-  - disabled: boolean | undefined
-    Whether the textarea is disabled.
-  
-  - className: string | undefined
-    Any additional styling for the textarea element.
-
-  - registration: Partial<UseFormRegisterReturn>
-    Relevant props for input validation set by react-hook-form
-*/
 export const TextAreaField = (props: TextAreaFieldProps) => {
   const {
     variant,

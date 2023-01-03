@@ -3,6 +3,34 @@ import { Tooltip } from "@material-tailwind/react";
 
 import { IconButton } from "components/Elements";
 
+/*
+Adds sorting functionality. Allows user to apply sorting option.
+
+Attributes:
+  - sortOptions: SortOptions
+    Sort options available.
+    
+    sortOption = new SortOptions(
+      [
+        ["new", "Sort by creation date"],
+        ...
+      ],
+      "new"
+    );
+  
+  - activeSortOption: string
+    Currently active sorting option
+
+  - activeSortOrder: string
+    Currently active sorting type (descending / ascending)
+
+  - setSortOption: function [(newSortOption: string) => void]
+    Handler function to sort by the newSortOption.
+  
+  - toggleSortOrder: function [() => void]
+    Handler function to toggle between sorting tpye (descending vs ascending)
+*/
+
 export enum SortOrderTypes {
   ascending,
   descending,
@@ -51,33 +79,6 @@ export type PageSortByProps = {
   toggleSortOrder: () => void;
 };
 
-/*
-Adds sorting functionality. Allows user to apply sorting option.
-
-Attributes:
-  - sortOptions: SortOptions
-    Sort options available.
-    
-    sortOption = new SortOptions(
-      [
-        ["new", "Sort by creation date"],
-        ...
-      ],
-      "new"
-    );
-  
-  - activeSortOption: string
-    Currently active sorting option
-
-  - activeSortOrder: string
-    Currently active sorting type (descending / ascending)
-
-  - setSortOption: function [(newSortOption: string) => void]
-    Handler function to sort by the newSortOption.
-  
-  - toggleSortOrder: function [() => void]
-    Handler function to toggle between sorting tpye (descending vs ascending)
-*/
 export const PageSortBy = ({
   activeSortOption,
   activeSortOrder,

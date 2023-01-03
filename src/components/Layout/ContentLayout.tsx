@@ -7,17 +7,6 @@ export type ContentLayoutProps = {
   title: string;
 };
 
-/*
-Standardized parent layout for all components in protected routes with content.
-
-Attributes:
-  - children: ReactNode
-    Children nodes contained in the MainLayout.
-
-  - title: string
-    Sets the title text in the layout.
-    Also sets the title tag in the head of the HTML document.
-*/
 export const ContentLayout = ({ children, title }: ContentLayoutProps) => {
   return (
     <>

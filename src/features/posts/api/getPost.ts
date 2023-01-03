@@ -19,6 +19,7 @@ type UsePostOptions = {
 
 export const usePost = ({ postId, config = {} }: UsePostOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
+    useErrorBoundary: false,
     ...config,
     queryKey: postKeys.post(postId),
     queryFn: () => getPost(postId),

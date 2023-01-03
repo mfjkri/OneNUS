@@ -13,6 +13,11 @@ export type PostFlairProps = {
   dismissible?: dismissible;
 };
 
+/**
+ * Post flair chip component
+ *
+ * dismissable determines whether this component is interactive
+ */
 export const PostFlair = ({
   category,
   isActive,

@@ -5,19 +5,16 @@ import { BackButton, SpinnerWithBackground } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 import { NotFound } from "features/misc";
 import { Comments } from "features/comments";
-import { AuthUser } from "features/auth";
 import { useAuth } from "lib/auth";
 
 import { PostView } from "../components/Post/PostView";
 import { usePost } from "../api/getPost";
 
-type ValidPostProps = {
-  postId: number;
-  user: AuthUser;
-};
+export const Post = () => {
+  const { postId } = useParams();
+  const postQuery = usePost({ postId: parseInt(postId || "") });
+  const { user } = useAuth();
 
-const ValidPost = ({ postId, user }: ValidPostProps) => {
-  const postQuery = usePost({ postId: postId });
   const refetchQuery = useCallback(
     () => postQuery.refetch,
     [postQuery.refetch]
@@ -27,7 +24,7 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
     return <SpinnerWithBackground size="lg" />;
   }
 
-  if (!postQuery.data) {
+  if (!postQuery.data || !user) {
     return <NotFound />;
   }
 
@@ -45,24 +42,5 @@ const ValidPost = ({ postId, user }: ValidPostProps) => {
         <Comments user={user} post={postQuery.data} />
       </div>
     </ContentLayout>
-  );
-};
-
-export const Post = () => {
-  const { postId } = useParams();
-  const { user } = useAuth();
-
-  const parsedPostId = postId ? parseInt(postId) : 0;
-  const targetPostId = parsedPostId && parsedPostId > 0 ? parsedPostId : -1;
-
-  // Display ValidPost is postId is a valid number else NotFound
-  return (
-    <>
-      {!user || targetPostId === -1 ? (
-        <NotFound />
-      ) : (
-        <ValidPost postId={targetPostId} user={user} />
-      )}
-    </>
   );
 };

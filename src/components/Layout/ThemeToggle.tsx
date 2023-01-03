@@ -4,13 +4,6 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { useDisclosure } from "hooks/useDisclosure";
 import storage from "utils/storage";
 
-/*
-Allows users to toggle between dark and light mode theme.
-Remembers their preference by saving to LocalStorage.
-
-Attributes:
-  None
-*/
 export const ThemeToggle = () => {
   const { isOpen: darkMode, toggle } = useDisclosure(storage.getDarkMode());
 

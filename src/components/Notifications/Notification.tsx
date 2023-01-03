@@ -12,6 +12,10 @@ import { delay } from "utils/delay";
 
 import { Notif } from "./slice";
 
+/*
+Notification component. DO NOT USE THIS COMPONENT DIRECTLY!
+*/
+
 const icons = {
   info: (
     <InformationCircleIcon
@@ -49,24 +53,6 @@ export type NotificationProps = Notif & {
   onDismiss: (id: number) => void;
 };
 
-/*
-Notification component. DO NOT USE THIS COMPONENT DIRECTLY!
-This component is managed and handled by notificationsStore and Notifications.
-
-Attributes:
-  - notification: object [
-                    id: string; 
-                    type: keyof typeof icons; 
-                    title: string;
-                    message?: string;
-                    ttl?: number;
-                  ]
-    Notification properties. 
-    
-
-  - onDismiss: (id: string) => void
-    Callback function when notification is dismissed by user or timedout
-*/
 export const Notification = ({
   id,
   type,

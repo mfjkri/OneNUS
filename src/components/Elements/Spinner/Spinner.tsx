@@ -19,19 +19,6 @@ export type SpinnerProps = {
   className?: string;
 };
 
-/*
-Loading svg with spinning animation.
-
-Attributes:
-  - size: sizes | undefined
-    Size of the loading svg. Defaults to "md".
-  
-  - variant: variants | undefined
-    Variant of the loading svg. Defaults to "blue".
-  
-  - className: string | undefined
-    Additional styling to include for the loading svg. Defaults to empty string "".
-*/
 export const Spinner = ({
   size = "md",
   variant = "blue",

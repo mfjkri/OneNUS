@@ -19,6 +19,7 @@ type UseUserOptions = {
 
 export const useUser = ({ userId, config = {} }: UseUserOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
+    useErrorBoundary: false,
     ...config,
     queryKey: userKeys.user(userId),
     queryFn: () => getUser(userId),

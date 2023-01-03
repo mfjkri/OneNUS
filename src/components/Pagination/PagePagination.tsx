@@ -6,6 +6,23 @@ import {
 } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 
+/*
+Adds pagination functionality. Allows user to navigate between pages.
+
+Attributes:
+  - pageNumber: number
+    The current page number.
+  
+  - maxPageNumber: number
+    The current maximum page number.
+  
+  - goToPage: function [(newPage: number) => void]
+    Callback function that is used to go to the newPage number.
+
+  - totalPagesShown: number
+    How many pages number to show at once. Defaults to 5.
+*/
+
 type PageSelectorProps = {
   pageNumber: number;
   goToPage: (newPage: number) => void;
@@ -74,22 +91,6 @@ export type PagePaginatorProps = {
   totalPagesShown?: number;
 };
 
-/*
-Adds pagination functionality. Allows user to navigate between pages.
-
-Attributes:
-  - pageNumber: number
-    The current page number.
-  
-  - maxPageNumber: number
-    The current maximum page number.
-  
-  - goToPage: function [(newPage: number) => void]
-    Callback function that is used to go to the newPage number.
-
-  - totalPagesShown: number
-    How many pages number to show at once. Defaults to 5.
-*/
 export const PagePaginator = ({
   pageNumber,
   maxPageNumber,
