@@ -44,9 +44,21 @@ export const PostsList = ({
   const activeSortOption = useAppSelector((state) => state.posts.sortOption);
   const activeSortOrder = useAppSelector((state) => state.posts.sortOrder);
 
+  // Fetch posts
+  const postsQuery = usePosts({
+    data: {
+      perPage: activePerPage,
+      pageNumber: activePageNumber,
+      sortOption: activeSortOption,
+      sortOrder: SortOrderTypes[activeSortOrder],
+      filterUserId: filterUserId,
+      filterTag: activeFilterTag,
+    },
+  });
+
   const dispatch = useAppDispatch();
 
-  // Callbacks for updating PostsState (passed down)
+  // Callbacks for updating state
   const goToPage = useCallback(
     (newPageNumber: number) => dispatch(setPageNumber(newPageNumber)),
     [dispatch]
@@ -70,18 +82,6 @@ export const PostsList = ({
     dispatch(resetPageNumber());
     dispatch(toggleSortOrder());
   }, [dispatch]);
-
-  // Fetch posts
-  const postsQuery = usePosts({
-    data: {
-      perPage: activePerPage,
-      pageNumber: activePageNumber,
-      sortOption: activeSortOption,
-      sortOrder: SortOrderTypes[activeSortOrder],
-      filterUserId: filterUserId,
-      filterTag: activeFilterTag,
-    },
-  });
 
   if (!user) return null;
 
@@ -114,7 +114,7 @@ export const PostsList = ({
         </div>
       )}
 
-      {/* PostLists */}
+      {/* List of post previews */}
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl">
         {postsQuery.data.posts ? (
           <ul className="divide-y divide-solid divide-primary dark:divide-secondary px-3 py-1">

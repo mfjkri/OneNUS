@@ -14,19 +14,6 @@ export type SelectFieldProps = FieldWrapperPassThroughProps &
     registration: Partial<UseFormRegisterReturn>;
   };
 
-/*
-Select element with preset styling, options and error message.
-
-Attributes:
-  - label : string | undefined
-    Label text of the select element.
-
-  - options | Option[]
-    List of options available for the select element.
-
-  - registration: Partial<UseFormRegisterReturn>
-    Relevant props for input validation set by react-hook-form
-*/
 export const SelectField = React.forwardRef<
   HTMLSelectElement,
   SelectFieldProps

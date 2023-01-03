@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-tailwind/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   PlusIcon,
@@ -8,7 +9,6 @@ import { Button, IconButton, Link } from "components/Elements";
 import { useAuth } from "lib/auth";
 import { UseMutateAsyncFunction } from "react-query";
 import logo from "assets/logo.svg";
-import { Tooltip } from "@material-tailwind/react";
 
 const NewPostButton = () => {
   return (
@@ -46,10 +46,10 @@ const LogoutButton = ({ logout, isLoggingOut }: LogoutButtonProps) => {
 };
 
 type UserProfileButtonProps = {
-  username: string;
   id: number;
 };
-const UserProfileButton = ({ username, id }: UserProfileButtonProps) => {
+
+const UserProfileButton = ({ id }: UserProfileButtonProps) => {
   return (
     <Link to={`/app/users/${id}`}>
       <Tooltip content="View profile" className="whitespace-nowrap">
@@ -83,10 +83,7 @@ export const NavigationBar = () => {
             logout={authUser.logout}
             isLoggingOut={authUser.isLoggingOut}
           />
-          <UserProfileButton
-            username={authUser.user?.username}
-            id={authUser.user?.id}
-          />
+          <UserProfileButton id={authUser.user?.id} />
         </div>
       </div>
     </nav>

@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 import { useAuth } from "lib/auth";
 import { useAppDispatch } from "hooks/typedRedux";
 import { useDisclosure } from "hooks/useDisclosure";
@@ -7,49 +9,18 @@ import { ContentLayout } from "components/Layout";
 import { BackButton, Button, SpinnerWithBackground } from "components/Elements";
 import { Timestamps } from "components/ThreadDrawer";
 
-import { UserIcon } from "./UserIcon";
+import { UserIcon } from "../components/UserIcon";
+import { UpdateBioForm } from "../components/UpdateBioForm";
+import { DeleteUser } from "../components/DeleteUser";
 import { useUser } from "../api/getUser";
-import { UpdateBioForm } from "./UpdateBioForm";
-import { DeleteUser } from "./DeleteUser";
-import { User } from "../types";
-import { InfoTooltip } from "components/Elements/InfoTooltip";
+import { UserStatistics } from "../components/UserStatistics";
 
-type UserStatisticsProps = {
-  targetUser: User;
-};
+export const User = () => {
+  const { userId } = useParams();
+  const targetUserId = parseInt(userId || "");
 
-const UserStatistics = ({ targetUser }: UserStatisticsProps) => {
-  return (
-    <div className="ml-2 text-lg w-full">
-      <p className="text-xl">Username: {targetUser.username}</p>
-      <p className="mt-1">Role: {targetUser.role}</p>
-      <p className="mt-1">Bio: {targetUser.bio}</p>
-      <div className="mt-1 flex flex-row">
-        <p>Forum posts: {targetUser.postsCount}</p>
-        <InfoTooltip
-          infoText="Deleted posts are included in this count."
-          tooltipPlacement="right-end"
-        />
-      </div>
-      <p className="mt-1"></p>
-      <div className="mt-1 flex flex-row">
-        <p>Forum comments: {targetUser.commentsCount}</p>
-        <InfoTooltip
-          infoText="Deleted comments are included in this count."
-          tooltipPlacement="right-end"
-        />
-      </div>
-    </div>
-  );
-};
-
-export type UserProfileProps = {
-  userId: number;
-};
-
-export const UserProfile = ({ userId }: UserProfileProps) => {
   const dispatch = useAppDispatch();
-  const userQuery = useUser({ userId: userId });
+  const userQuery = useUser({ userId: targetUserId });
   const authUser = useAuth();
   const { isOpen: isEditMode, toggle: toggleEditMode } = useDisclosure(false);
 
@@ -59,15 +30,16 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
 
   if (!userQuery.data || !authUser.user) return <NotFound />;
 
-  // Reset PostsState (we want to reset pageNumber back to 1)
-  dispatch(resetState());
-
   const targetUser = userQuery.data;
   const isOwnProfile = targetUser.id === authUser.user.id;
+
+  // Reset PostsState (we want to reset pageNumber back to 1)
+  dispatch(resetState());
 
   return (
     <ContentLayout title="">
       <BackButton />
+
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-8">
         <div className="flex flex-row h-fit">
           <UserIcon
@@ -93,6 +65,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
                     <Button className="ml-2" onClick={toggleEditMode}>
                       Update Bio
                     </Button>
+
                     <DeleteUser />
                   </div>
                 )}
@@ -103,6 +76,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
 
         <Timestamps createdAt={targetUser.createdAt} createdText="joined" />
       </div>
+
       <div className="px-0 md:px-8">
         <div className="h-[1px] mt-12 mb-4 bg-secondary"></div>
         <p className="mx-2 mb-4 text-3xl">
@@ -113,7 +87,7 @@ export const UserProfile = ({ userId }: UserProfileProps) => {
 
         <div>
           <PostsList
-            filterUserId={userId}
+            filterUserId={targetUserId}
             disableControls={targetUser.postsCount === 0}
           />
         </div>

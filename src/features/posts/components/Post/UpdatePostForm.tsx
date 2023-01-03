@@ -47,7 +47,7 @@ export const UpdatePostForm = ({
         <>
           <InputField
             type="text"
-            disabled={true}
+            disabled={true} // Users are not allowed to edit Post titles
             label="Title"
             error={formState.errors["title"]}
             registration={register("title", {

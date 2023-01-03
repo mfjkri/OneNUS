@@ -34,6 +34,7 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
   return (
     <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-7">
       {editMode ? (
+        // Editing Post form
         <UpdatePostForm
           post={post}
           onSuccess={onEditSucess}
@@ -41,7 +42,7 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
         />
       ) : (
         <>
-          {/* Display Post contents */}
+          {/* Post author name (only shown if on a small resolution size) */}
           <InlineProfilePreview
             userId={post.userId}
             author={post.author}
@@ -50,6 +51,7 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
           />
 
           <div className="flex flex-row">
+            {/* Post author avatar and name */}
             <ProfilePreview
               userId={post.userId}
               author={post.author}
@@ -59,6 +61,7 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
             />
 
             <div className="grow w-[80%]">
+              {/* Post Controls (Star, Edit and Delete) */}
               <div className="float-right ml-4 pt-1">
                 <Controls
                   canEdit={isOwner}
@@ -69,16 +72,17 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
                 />
               </div>
 
+              {/* Post title and text */}
               <h2 className="text-2xl break-all font-extrabold mb-2">
                 {post.title}
               </h2>
-
               <p className="text-md break-words whitespace-pre-line">
                 {post.text}
               </p>
             </div>
           </div>
 
+          {/* Timestamp */}
           <div className="mt-8">
             <Timestamps createdAt={post.createdAt} updatedAt={post.updatedAt} />
           </div>

@@ -6,13 +6,6 @@ export type MainLayoutProps = {
   children: React.ReactNode;
 };
 
-/*
-Standardized parent layout for all components in protected routes.
-
-Attributes:
-  - children: ReactNode
-    Children nodes contained in the MainLayout.
-*/
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <>

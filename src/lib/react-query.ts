@@ -13,7 +13,7 @@ const queryConfig: DefaultOptions = {
   queries: {
     useErrorBoundary: true,
     refetchOnWindowFocus: QUERY_REFETCH_ON_WINDOW_FOCUS,
-    retry: 1,
+    retry: false,
   },
 };
 

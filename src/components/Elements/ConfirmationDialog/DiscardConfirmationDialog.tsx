@@ -1,10 +1,6 @@
 import { Button } from "../Button";
 import { ConfirmationDialog } from "./ConfirmationDialog";
 
-export type DiscardConfirmationDialogProps = {
-  onDiscard: () => void;
-};
-
 /*
 Specific use case of ConfirmationDialog with preset title and body
 for discarding changes.
@@ -13,6 +9,11 @@ Attributes:
   - onDiscard: function [() => void]
     Callback called after confirming the dialog.
 */
+
+export type DiscardConfirmationDialogProps = {
+  onDiscard: () => void;
+};
+
 export const DiscardConfirmationDialog = ({
   onDiscard,
 }: DiscardConfirmationDialogProps) => {

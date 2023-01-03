@@ -67,7 +67,9 @@ export const Comments = ({ user, post }: CommentsProps) => {
       <CreateComment postId={post.id} />
 
       <div className="flex flex-row flex-wrap-reverse mt-4  px-2">
-        <h1 className="grow text-xl ml-3">Comments</h1>
+        <h1 className="grow text-xl ml-3">
+          Comments ({commentsQuery.data.commentsCount})
+        </h1>
         <div className="flex-none w-fit my-auto">
           <PageSortBy
             sortOptions={CommentSortOptions}
