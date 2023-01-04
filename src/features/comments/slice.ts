@@ -54,4 +54,4 @@ export const {
   resetSortOrder,
   resetState,
 } = commentsSlice.actions;
-export const commentReducer = commentsSlice.reducer;
+export const commentsReducer = commentsSlice.reducer;

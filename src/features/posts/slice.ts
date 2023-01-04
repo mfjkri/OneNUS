@@ -70,4 +70,4 @@ export const {
   resetSortOrder,
   resetState,
 } = postsSlice.actions;
-export const postReducer = postsSlice.reducer;
+export const postsReducer = postsSlice.reducer;
