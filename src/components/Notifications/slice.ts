@@ -34,4 +34,4 @@ const notificationSlice = createSlice({
 
 export const { addNotification, dismissNotification } =
   notificationSlice.actions;
-export const notificationReducer = notificationSlice.reducer;
+export const notificationsReducer = notificationSlice.reducer;

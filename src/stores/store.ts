@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { postReducer } from "features/posts";
-import { commentReducer } from "features/comments";
-import { notificationReducer } from "components/Notifications";
+import { postsReducer } from "features/posts";
+import { commentsReducer } from "features/comments";
+import { usersReducer } from "features/users";
+import { notificationsReducer } from "components/Notifications";
 
 export const store = configureStore({
   reducer: {
-    posts: postReducer,
-    comments: commentReducer,
-    notifications: notificationReducer,
+    posts: postsReducer,
+    comments: commentsReducer,
+    users: usersReducer,
+    notifications: notificationsReducer,
   },
 });
 

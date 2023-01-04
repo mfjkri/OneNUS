@@ -67,7 +67,7 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
                   canEdit={isOwner}
                   canDelete={isOwner || user.role === UserRoles.ADMIN}
                   deleteControls={<DeletePost postId={post.id} />}
-                  altControls={<StarPost starsCount={post.starsCount} />}
+                  altControls={<StarPost post={post} />}
                   toggleEditMode={toggle}
                 />
               </div>
