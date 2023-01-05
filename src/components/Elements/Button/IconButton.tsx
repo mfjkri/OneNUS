@@ -10,7 +10,7 @@ import {
   ripple,
 } from "@material-tailwind/react/types/components/button";
 
-import { Spinner } from "components/Elements/Spinner";
+import { Spinner } from "components/Elements";
 
 export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: variant;
@@ -28,21 +28,19 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     ref
   ) => {
     return (
-      <MaterialIconbutton
-        variant={variant}
-        size={size}
-        color={color}
-        ripple={ripple}
-        disabled={isLoading}
-        ref={ref}
-        {...props}
-      >
-        {isLoading ? (
-          <Spinner size={size} variant="light" />
-        ) : (
-          <Tooltip content={toolTip}>{icon}</Tooltip>
-        )}
-      </MaterialIconbutton>
+      <Tooltip content={toolTip}>
+        <MaterialIconbutton
+          variant={variant}
+          size={size}
+          color={color}
+          ripple={ripple}
+          disabled={isLoading}
+          ref={ref}
+          {...props}
+        >
+          {isLoading ? <Spinner size={size} variant="light" /> : icon}
+        </MaterialIconbutton>
+      </Tooltip>
     );
   }
 );

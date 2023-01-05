@@ -14,7 +14,7 @@ export const DeleteUser = () => {
       icon="danger"
       isDone={deleteUserMutation.isSuccess}
       triggerButton={
-        <Button className="ml-4" color="red">
+        <Button color="red" fullWidth={true}>
           Delete account
         </Button>
       }
