@@ -54,7 +54,7 @@ export class SortOptions {
     return (
       this.options.length > 1 &&
       this.options.map(([sortOption, sortDesc]) => (
-        <Tooltip content={sortDesc} className="text-secondary" key={sortOption}>
+        <Tooltip content={sortDesc} key={sortOption}>
           <p
             className={`mx-2 text-blue-500 ${
               sortOption !== activeSortOption
@@ -90,21 +90,17 @@ export const PageSortBy = ({
     <div className="flex justify-center">
       <p className="mr-2 font-black">Sort by:</p>
       {sortOptions.showOptions(activeSortOption, setSortOption)}
-      <Tooltip
-        content={`Sorting ${SortOrderTypes[activeSortOrder]}`}
-        className="text-secondary whitespace-nowrap"
-      >
-        <IconButton
-          variant={
-            SortOrderTypes[activeSortOrder] === SortOrderTypes[DefaultSortOrder]
-              ? "text"
-              : "gradient"
-          }
-          className="w-6 h-6 my-auto hover:text-secondary"
-          icon={<ArrowsUpDownIcon className="w-4 h-4" />}
-          onClick={toggleSortOrder}
-        />
-      </Tooltip>
+      <IconButton
+        tooltip={`Sorting ${SortOrderTypes[activeSortOrder]}`}
+        variant={
+          SortOrderTypes[activeSortOrder] === SortOrderTypes[DefaultSortOrder]
+            ? "text"
+            : "gradient"
+        }
+        className="w-6 h-6 my-auto hover:text-secondary"
+        icon={<ArrowsUpDownIcon className="w-4 h-4" />}
+        onClick={toggleSortOrder}
+      />
     </div>
   );
 };

@@ -28,7 +28,7 @@ export const DeletePost = ({ postId }: DeletePostProps) => {
           color="red"
           size="sm"
           icon={<TrashIcon className="h-6 w-6" />}
-          toolTip="Delete"
+          tooltip="Delete"
         />
       }
       confirmButton={

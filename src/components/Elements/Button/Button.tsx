@@ -22,7 +22,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   ripple?: ripple;
   fullWidth?: fullWidth;
   isLoading?: boolean;
-  toolTip?: string;
+  tooltip?: string;
 } & IconProps;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -34,7 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ripple,
       fullWidth,
       isLoading,
-      toolTip,
+      tooltip,
       startIcon,
       endIcon,
       ...props
@@ -42,7 +42,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     return (
-      <Tooltip content={toolTip}>
+      <Tooltip content={tooltip}>
         <MaterialButton
           variant={variant}
           size={size}
