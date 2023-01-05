@@ -28,7 +28,7 @@ export const Controls = ({
               color="white"
               size="sm"
               icon={<PencilIcon className="h-6 w-6" />}
-              toolTip="Edit"
+              tooltip="Edit"
               onClick={toggleEditMode}
             />
           )}

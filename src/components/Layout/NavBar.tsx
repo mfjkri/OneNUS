@@ -52,7 +52,7 @@ type UserProfileButtonProps = {
 const UserProfileButton = ({ id }: UserProfileButtonProps) => {
   return (
     <Link to={`/app/users/${id}`}>
-      <Tooltip content="View profile" className="whitespace-nowrap">
+      <Tooltip content="View profile">
         <IconButton
           variant="text"
           icon={<UserCircleIcon className="w-full h-full" />}

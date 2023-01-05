@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Tooltip } from "@material-tailwind/react";
 import { placement } from "@material-tailwind/react/types/components/menu";
 
@@ -18,11 +17,7 @@ export const InfoTooltip = ({
   placement,
 }: InfoTooltipProps) => {
   return (
-    <Tooltip
-      className={clsx("whitespace-nowrap", className)}
-      content={infoText}
-      placement={placement}
-    >
+    <Tooltip className={className} content={infoText} placement={placement}>
       {customDisplay ? (
         customDisplay
       ) : (

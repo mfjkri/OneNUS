@@ -222,7 +222,7 @@ export const appTheme = {
       offset: 5,
       dismiss: {},
       animate: { unmount: {}, mount: {} },
-      className: "",
+      className: "text-secondary whitespace-nowrap", // ""
     },
     styles: {
       base: {

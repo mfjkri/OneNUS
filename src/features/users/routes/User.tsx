@@ -114,7 +114,7 @@ export const User = () => {
                               }
                               className="w-5 h-5 ml-1"
                               variant="text"
-                              toolTip="Edit bio"
+                              tooltip="Edit bio"
                             />
                           }
                           placement="right-end"

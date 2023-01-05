@@ -18,17 +18,17 @@ export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: color;
   ripple?: ripple;
   icon: React.ReactElement;
-  toolTip?: string;
+  tooltip?: string;
   isLoading?: boolean;
 };
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (
-    { variant, size, color, ripple, icon, toolTip, isLoading, ...props },
+    { variant, size, color, ripple, icon, tooltip, isLoading, ...props },
     ref
   ) => {
     return (
-      <Tooltip content={toolTip}>
+      <Tooltip content={tooltip}>
         <MaterialIconbutton
           variant={variant}
           size={size}
