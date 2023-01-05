@@ -6,32 +6,30 @@ export type InfoTooltipProps = {
   displayText?: string;
   customDisplay?: React.ReactNode;
   infoText: string;
-  tooltipclassName?: string;
-  tooltipPlacement?: placement;
+  className?: string;
+  placement?: placement;
 };
 
 export const InfoTooltip = ({
   displayText = "?",
   customDisplay = null,
   infoText,
-  tooltipclassName = "",
-  tooltipPlacement,
+  className = "",
+  placement,
 }: InfoTooltipProps) => {
   return (
-    <div>
-      <Tooltip
-        className={clsx("whitespace-nowrap", tooltipclassName)}
-        content={infoText}
-        placement={tooltipPlacement}
-      >
-        {customDisplay ? (
-          customDisplay
-        ) : (
-          <p className="text-xs w-fit text-primary2 dark:text-secondary2">
-            {displayText}
-          </p>
-        )}
-      </Tooltip>
-    </div>
+    <Tooltip
+      className={clsx("whitespace-nowrap", className)}
+      content={infoText}
+      placement={placement}
+    >
+      {customDisplay ? (
+        customDisplay
+      ) : (
+        <p className="text-xs w-fit text-primary2 dark:text-secondary2">
+          {displayText}
+        </p>
+      )}
+    </Tooltip>
   );
 };

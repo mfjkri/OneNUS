@@ -1,4 +1,7 @@
+import { ReactNode } from "react";
 import { useParams } from "react-router-dom";
+import clsx from "clsx";
+import { PencilIcon } from "@heroicons/react/24/solid";
 
 import { useAuth } from "lib/auth";
 import { useAppDispatch } from "hooks/typedRedux";
@@ -6,14 +9,41 @@ import { useDisclosure } from "hooks/useDisclosure";
 import { PostsList, resetState } from "features/posts";
 import { NotFound } from "features/misc";
 import { ContentLayout } from "components/Layout";
-import { BackButton, Button, SpinnerWithBackground } from "components/Elements";
+import {
+  BackButton,
+  IconButton,
+  SpinnerWithBackground,
+} from "components/Elements";
+import { InfoTooltip } from "components/Elements";
 import { Timestamps } from "components/ThreadDrawer";
 
 import { UserIcon } from "../components/UserIcon";
 import { UpdateBioForm } from "../components/UpdateBioForm";
 import { DeleteUser } from "../components/DeleteUser";
 import { useUser } from "../api/getUser";
-import { UserStatistics } from "../components/UserStatistics";
+
+type UserStatisticsProps = {
+  statTitle: string;
+  statValue: any;
+  statInfoTooltip?: ReactNode;
+  className?: string;
+};
+
+const UserStatistics = ({
+  statTitle,
+  statValue,
+  statInfoTooltip,
+  className = "",
+}: UserStatisticsProps) => {
+  return (
+    <div className="flex flex-row">
+      <p className={clsx("mt-1", className)}>
+        {statTitle}: {statValue}
+      </p>
+      {statInfoTooltip && statInfoTooltip}
+    </div>
+  );
+};
 
 export const User = () => {
   const { userId } = useParams();
@@ -48,30 +78,82 @@ export const User = () => {
             username={targetUser.username}
           />
 
-          <div className="grow">
+          <>
             {isEditMode ? (
-              <UpdateBioForm
-                currentBio={targetUser.bio}
-                onSuccess={toggleEditMode}
-                onCancel={toggleEditMode}
-              />
+              <div className="grow">
+                <UpdateBioForm
+                  currentBio={targetUser.bio}
+                  onSuccess={toggleEditMode}
+                  onCancel={toggleEditMode}
+                />
+              </div>
             ) : (
-              <div>
-                <UserStatistics targetUser={targetUser} />
+              <div className="w-fit">
+                <div className="ml-2 text-lg w-full">
+                  <UserStatistics
+                    statTitle="Username"
+                    statValue={targetUser.username}
+                    className={"text-xl"}
+                  />
+                  <UserStatistics
+                    statTitle="Role"
+                    statValue={targetUser.role}
+                  />
+                  <UserStatistics
+                    statTitle="Bio"
+                    statValue={targetUser.bio}
+                    statInfoTooltip={
+                      isOwnProfile && (
+                        <InfoTooltip
+                          infoText="Edit bio"
+                          customDisplay={
+                            <IconButton
+                              onClick={toggleEditMode}
+                              icon={
+                                <PencilIcon className="w-full h-full text-blue-700" />
+                              }
+                              className="w-5 h-5 ml-1"
+                              variant="text"
+                              toolTip="Edit bio"
+                            />
+                          }
+                          placement="right-end"
+                        />
+                      )
+                    }
+                    className={"whitespace-normal break-all"}
+                  />
+                  <UserStatistics
+                    statTitle="Forum posts"
+                    statValue={targetUser.postsCount}
+                    statInfoTooltip={
+                      <InfoTooltip
+                        infoText="Deleted posts are included in this count."
+                        placement="right-end"
+                      />
+                    }
+                  />
+                  <UserStatistics
+                    statTitle="Forum comments"
+                    statValue={targetUser.commentsCount}
+                    statInfoTooltip={
+                      <InfoTooltip
+                        infoText="Deleted comments are included in this count."
+                        placement="right-end"
+                      />
+                    }
+                  />
+                </div>
 
                 {/* Only show User controls if they are viewing their own profile */}
                 {isOwnProfile && (
-                  <div className="flex flex-row mt-4">
-                    <Button className="ml-2" onClick={toggleEditMode}>
-                      Update Bio
-                    </Button>
-
+                  <div className="mt-4">
                     <DeleteUser />
                   </div>
                 )}
               </div>
             )}
-          </div>
+          </>
         </div>
 
         <Timestamps createdAt={targetUser.createdAt} createdText="joined" />
