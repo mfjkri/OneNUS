@@ -15,16 +15,15 @@ import {
   SpinnerWithBackground,
 } from "components/Elements";
 import { InfoTooltip } from "components/Elements";
-import { Timestamps } from "components/ThreadDrawer";
+import { ProfilePreview, Timestamps } from "components/ThreadDrawer";
 
-import { UserIcon } from "../components/UserIcon";
 import { UpdateBioForm } from "../components/UpdateBioForm";
 import { DeleteUser } from "../components/DeleteUser";
 import { useUser } from "../api/getUser";
 
 type UserStatisticsProps = {
-  statTitle: string;
   statValue: any;
+  statTitle?: string;
   statInfoTooltip?: ReactNode;
   className?: string;
 };
@@ -36,11 +35,12 @@ const UserStatistics = ({
   className = "",
 }: UserStatisticsProps) => {
   return (
-    <div className="flex flex-row">
-      <p className={clsx("mt-1", className)}>
-        {statTitle}: {statValue}
+    <div className={clsx("mt-1 flex flex-row", className)}>
+      <p>
+        {statTitle && `${statTitle}: `}
+        {statValue}
       </p>
-      {statInfoTooltip && statInfoTooltip}
+      <div className="float-right">{statInfoTooltip && statInfoTooltip}</div>
     </div>
   );
 };
@@ -72,10 +72,9 @@ export const User = () => {
 
       <div className="bg-secondary dark:bg-primary text-primary dark:text-secondary shadow rounded-3xl p-8">
         <div className="flex flex-row h-fit">
-          <UserIcon
-            className="w-20 md:w-40 h-auto"
-            userId={targetUser.id}
+          <ProfilePreview
             username={targetUser.username}
+            userTitle={targetUser.role}
           />
 
           <>
@@ -90,39 +89,37 @@ export const User = () => {
             ) : (
               <div className="w-fit">
                 <div className="ml-2 text-lg w-full">
-                  <UserStatistics
-                    statTitle="Username"
-                    statValue={targetUser.username}
-                    className={"text-xl"}
-                  />
-                  <UserStatistics
-                    statTitle="Role"
-                    statValue={targetUser.role}
-                  />
-                  <UserStatistics
-                    statTitle="Bio"
-                    statValue={targetUser.bio}
-                    statInfoTooltip={
-                      isOwnProfile && (
+                  <div className="flex flex_row">
+                    <p className="mr-2">Status: </p>
+                    <div
+                      className={clsx(
+                        "flex flex-row bg-secondary2 dark:bg-primary2 rounded-lg pl-2",
+                        !isOwnProfile && "pr-2"
+                      )}
+                    >
+                      <p className="whitespace-normal break-all italic">
+                        {targetUser.bio}
+                      </p>
+                      {isOwnProfile && (
                         <InfoTooltip
                           infoText="Edit bio"
                           customDisplay={
                             <IconButton
                               onClick={toggleEditMode}
-                              icon={
-                                <PencilIcon className="w-full h-full text-blue-700" />
-                              }
-                              className="w-5 h-5 ml-1"
+                              icon={<PencilIcon className="w-full h-full" />}
+                              className="w-5 h-5 ml-2 my-auto"
                               variant="text"
                               tooltip="Edit bio"
                             />
                           }
                           placement="right-end"
                         />
-                      )
-                    }
-                    className={"whitespace-normal break-all"}
-                  />
+                      )}
+                    </div>
+                  </div>
+
+                  <br />
+
                   <UserStatistics
                     statTitle="Forum posts"
                     statValue={targetUser.postsCount}
@@ -145,7 +142,7 @@ export const User = () => {
                   />
                 </div>
 
-                {/* Only show User controls if they are viewing their own profile */}
+                {/* Only show Delete Control for own profile */}
                 {isOwnProfile && (
                   <div className="mt-4">
                     <DeleteUser />
