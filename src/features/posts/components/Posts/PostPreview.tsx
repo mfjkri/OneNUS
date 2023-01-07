@@ -25,8 +25,8 @@ export const PostPreview = ({ post, ownPost }: PostPreviewProps) => {
           {/* Post author avatar and name */}
           <ProfilePreview
             userId={post.userId}
-            author={post.author}
-            authorTitle={ownPost ? "Me" : ""}
+            username={post.author}
+            userTitle={ownPost ? "Me" : ""}
             showProfileLink={false}
           />
 

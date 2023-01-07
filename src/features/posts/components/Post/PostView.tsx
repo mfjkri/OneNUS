@@ -45,8 +45,8 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
           {/* Post author name (only shown if on a small resolution size) */}
           <InlineProfilePreview
             userId={post.userId}
-            author={post.author}
-            authorTitle={authorTitle}
+            username={post.author}
+            userTitle={authorTitle}
             actionText="Posted by"
           />
 
@@ -54,8 +54,8 @@ export const PostView = ({ user, post, refetchPost }: PostViewProps) => {
             {/* Post author avatar and name */}
             <ProfilePreview
               userId={post.userId}
-              author={post.author}
-              authorTitle={authorTitle}
+              username={post.author}
+              userTitle={authorTitle}
               showProfileLink={true}
               responsiveHide={true}
             />
