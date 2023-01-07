@@ -1,6 +1,7 @@
 import * as z from "zod";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
+import { LockClosedIcon } from "@heroicons/react/24/outline";
 
 import { Button } from "components/Elements";
 import { Form, InputField } from "components/Form";
@@ -41,6 +42,7 @@ type RegisterFormProps = {
 
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const { register, isRegistering } = useAuth();
+  const [username, setUsername] = useState("");
 
   return (
     <>
@@ -60,8 +62,20 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               type="text"
               label="Username"
               error={formState.errors["username"]}
-              registration={register("username")}
-              icon={<UserIcon className="h-4 w-4" aria-hidden="true" />}
+              registration={register("username", {
+                onChange: (e) => {
+                  setUsername(e.target.value);
+                },
+              })}
+              icon={
+                username && (
+                  <img
+                    src={`https://avatars.dicebear.com/api/micah/${username}.svg`}
+                    alt=""
+                    className="w-4 h-4"
+                  />
+                )
+              }
             />
             <InputField
               type="password"
