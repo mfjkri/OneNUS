@@ -155,7 +155,7 @@ export const appTheme = {
 
   dialog: {
     defaultProps: {
-      size: "md",
+      size: "xs",
       dismiss: {},
       animate: { unmount: {}, mount: {} },
       className: "",

@@ -91,8 +91,8 @@ export const ConfirmationDialog = ({
   body = "",
   cancelButtonText = "Cancel",
   cancelButtonColor = "blue",
-  icon = "",
-  size = "sm",
+  icon,
+  size,
   isDone = false,
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
@@ -112,7 +112,7 @@ export const ConfirmationDialog = ({
       {trigger}
       <Dialog open={isOpen} handler={open} size={size}>
         <DialogHeader>
-          {icon !== "" && (
+          {icon && (
             <div className="mr-3">
               {icon === "danger" && <DangerIcon />}
 
