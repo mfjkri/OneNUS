@@ -4,8 +4,45 @@ import { Link } from "components/Elements";
 import { Head } from "components/Head";
 import { Footer } from "components/Layout";
 import logo from "assets/logo.svg";
+import { Tooltip } from "@material-tailwind/react";
+import { UserIcon } from "@heroicons/react/24/solid";
 
-type LayoutProps = {
+export type AuthAvatarPreviewProps = {
+  username: string;
+};
+
+export const AuthAvatarPreview = ({ username }: AuthAvatarPreviewProps) => {
+  username = username.toLowerCase();
+
+  return username ? (
+    <Tooltip
+      content={
+        <div className="flex flex-col bg-secondary dark:bg-primary rounded-3xl p-4 ml-12 border-primary2 border-2">
+          <img
+            src={`https://avatars.dicebear.com/api/micah/${username}.svg`}
+            alt=""
+            className="w-20 h-full"
+          />
+          <p className="m-auto">{username}</p>
+          <p className="m-auto text-[8px] text-primary2 dark:text-secondary2">
+            Avatar preview
+          </p>
+        </div>
+      }
+      placement="right"
+    >
+      <img
+        src={`https://avatars.dicebear.com/api/micah/${username}.svg`}
+        alt=""
+        className="w-4 h-4"
+      />
+    </Tooltip>
+  ) : (
+    <UserIcon className="w-4 h-4" aria-hidden="true" />
+  );
+};
+
+export type LayoutProps = {
   children: React.ReactNode;
   title: string;
 };
