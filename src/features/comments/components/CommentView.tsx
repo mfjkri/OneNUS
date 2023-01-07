@@ -41,15 +41,15 @@ export const CommentView = ({
         <div className="my-5">
           <InlineProfilePreview
             userId={comment.userId}
-            author={comment.author}
-            authorTitle={authorTitle}
+            username={comment.author}
+            userTitle={authorTitle}
             actionText="Commented by"
           />
           <div className="flex flex-row h-fit">
             <ProfilePreview
               userId={comment.userId}
-              author={comment.author}
-              authorTitle={authorTitle}
+              username={comment.author}
+              userTitle={authorTitle}
               showProfileLink={true}
               responsiveHide={true}
             />

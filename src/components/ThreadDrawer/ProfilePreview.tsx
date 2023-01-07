@@ -3,18 +3,18 @@ import { Link } from "components/Elements";
 import { UserIcon } from "features/users";
 
 export type ProfilePreviewProps = {
-  userId: number;
-  author: string;
-  authorTitle?: string;
+  username: string;
+  userTitle?: string;
+  userId?: number;
   showProfileLink?: boolean;
   responsiveHide?: boolean;
   actionText?: string;
 };
 
 export const ProfilePreview = ({
+  username,
+  userTitle,
   userId,
-  author,
-  authorTitle = "",
   showProfileLink = false,
   responsiveHide = false,
 }: ProfilePreviewProps) => {
@@ -26,11 +26,11 @@ export const ProfilePreview = ({
           : "min-w-[124px] flex flex-col mr-4"
       }
     >
-      <UserIcon className="w-auto h-auto" username={author} />
-      <p className=" break-all text-center">{author}</p>
-      {authorTitle && (
+      <UserIcon className="w-auto h-auto" username={username} />
+      <p className=" break-all text-center">{username}</p>
+      {userTitle && (
         <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
-          {authorTitle}
+          {userTitle}
         </p>
       )}
       {showProfileLink && (
@@ -44,18 +44,18 @@ export const ProfilePreview = ({
 
 export const InlineProfilePreview = ({
   userId,
-  author,
-  authorTitle: authorStatus = "",
+  username,
+  userTitle,
   actionText = "Action by",
 }: ProfilePreviewProps) => {
   return (
     <div className="visible md:invisible h-fit md:h-0 flex flex-row">
       <p className="text-primary2 dark:text-secondary2">
-        {actionText} <Link to={`/app/users/${userId}`}>{author}</Link>
+        {actionText} <Link to={`/app/users/${userId}`}>{username}</Link>
       </p>
-      {authorStatus && (
+      {userTitle && (
         <p className="text-[14px] ml-2 text-green-600 dark:text-green-600">
-          ({authorStatus})
+          ({userTitle})
         </p>
       )}
     </div>
