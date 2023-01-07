@@ -8,6 +8,8 @@ import { Form, InputField } from "components/Form";
 import { useAuth } from "lib/auth";
 import { isAlphaOnlyString } from "utils/strings";
 
+import { AuthAvatarPreview } from "./Layout";
+
 const LoginFormSchema = z.object({
   username: z
     .string()
@@ -52,15 +54,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                   setUsername(e.target.value);
                 },
               })}
-              icon={
-                username && (
-                  <img
-                    src={`https://avatars.dicebear.com/api/micah/${username}.svg`}
-                    alt=""
-                    className="w-4 h-4"
-                  />
-                )
-              }
+              icon={<AuthAvatarPreview username={username} />}
             />
             <InputField
               type="password"
