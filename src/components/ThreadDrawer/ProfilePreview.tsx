@@ -26,7 +26,7 @@ export const ProfilePreview = ({
           : "min-w-[124px] flex flex-col mr-4"
       }
     >
-      <UserIcon className="w-auto h-auto" userId={userId} username={author} />
+      <UserIcon className="w-auto h-auto" username={author} />
       <p className=" break-all text-center">{author}</p>
       {authorTitle && (
         <p className="text-[10px] text-center font-bold text-green-600 dark:text-green-600">
