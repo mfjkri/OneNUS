@@ -117,3 +117,4 @@ See more upcoming features at: [💡 Future Plans](docs/project-plans.md#-future
 - Project structure inspiration: https://github.com/alan2207/bulletproof-react
 - Website Logo: https://logoipsum.com/
 - Website Background: https://unsplash.com/photos/v6uXUGQSDLY
+- User Avatars: https://www.figma.com/community/file/829741575478342595 : [License](https://creativecommons.org/licenses/by/4.0/)
