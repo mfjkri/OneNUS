@@ -8,6 +8,8 @@ Notifications component.
 This component creates each Notification component and listens to 
 notifications state in redux store.
 
+This component should be added in the app providers (src/providers/)
+
 Attributes:
   None
 */
