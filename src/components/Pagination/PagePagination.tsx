@@ -4,7 +4,12 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/solid";
-import clsx from "clsx";
+
+import {
+  ActivePageSelector,
+  InactivePageSelector,
+  ChevronSelector,
+} from "./PageSelectors";
 
 /*
 Adds pagination functionality. Allows user to navigate between pages.
@@ -22,67 +27,6 @@ Attributes:
   - totalPagesShown: number
     How many pages number to show at once. Defaults to 5.
 */
-
-type PageSelectorProps = {
-  pageNumber: number;
-  goToPage: (newPage: number) => void;
-};
-
-const InactivePageSelector = ({ pageNumber, goToPage }: PageSelectorProps) => {
-  return (
-    <button
-      className="block h-8 w-8 rounded bg-secondary dark:bg-primary border-0 text-center leading-8"
-      onClick={() => goToPage(pageNumber)}
-    >
-      {pageNumber}
-    </button>
-  );
-};
-
-const ActivePageSelector = ({ pageNumber }: PageSelectorProps) => {
-  return (
-    <div className="block h-8 w-8 rounded border-0 bg-blue-600 text-center leading-8 text-secondary">
-      {pageNumber}
-    </div>
-  );
-};
-
-type ChevronSelectorProps = {
-  targetPageNumber: number;
-  currPageNumber: number;
-  maxPageNumber: number;
-  goToPage: (newPage: number) => void;
-  chevronIcon: JSX.Element;
-  selectorType: string;
-};
-
-const ChevronSelector = ({
-  targetPageNumber,
-  currPageNumber,
-  maxPageNumber,
-  goToPage,
-  chevronIcon,
-  selectorType,
-}: ChevronSelectorProps) => {
-  const isDisabled =
-    targetPageNumber < 1 ||
-    targetPageNumber > maxPageNumber ||
-    targetPageNumber === currPageNumber;
-  return (
-    <li key={`chevron_${selectorType}_${targetPageNumber}`}>
-      <button
-        className={clsx(
-          "inline-flex h-8 w-8 items-center justify-center bg-secondary2 dark:bg-primary2 rounded border-0",
-          isDisabled && `hover:cursor-not-allowed`
-        )}
-        disabled={isDisabled}
-        onClick={() => goToPage(targetPageNumber)}
-      >
-        {chevronIcon}
-      </button>
-    </li>
-  );
-};
 
 export type PagePaginatorProps = {
   pageNumber: number;
