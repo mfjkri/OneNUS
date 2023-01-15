@@ -9,12 +9,12 @@ export type Notif = {
   ttl?: number;
 };
 
-type InitState = {
+type NotificationsStateProps = {
   notifs: Notif[];
   currId: number;
 };
 
-const initState: InitState = { notifs: [], currId: 0 };
+const initState: NotificationsStateProps = { notifs: [], currId: 0 };
 
 const notificationSlice = createSlice({
   name: "notifications",
