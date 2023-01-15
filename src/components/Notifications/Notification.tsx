@@ -13,7 +13,7 @@ import { delay } from "utils/delay";
 import { Notif } from "./slice";
 
 /*
-Notification component. DO NOT USE THIS COMPONENT DIRECTLY!
+Notification component. Not to be used directly.
 */
 
 const icons = {
