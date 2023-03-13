@@ -28,7 +28,7 @@ export const Overview = () => {
         </p>
       </div>
       <div className="ml-3 inline-flex">
-        <Link to="/app/posts">
+        <Link to="/posts">
           <Button size="lg">Proceed</Button>
         </Link>
       </div>

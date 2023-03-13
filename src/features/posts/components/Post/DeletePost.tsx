@@ -38,7 +38,7 @@ export const DeletePost = ({ postId }: DeletePostProps) => {
           onClick={async () => {
             await deletePostMutation.mutateAsync(postId);
             dispatch(resetState());
-            navigate("/app/posts");
+            navigate("/posts");
           }}
         >
           Delete

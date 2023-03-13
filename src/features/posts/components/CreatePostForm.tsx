@@ -69,9 +69,7 @@ export const CreatePostForm = ({ onSuccess }: CreatePostFormProps) => {
               Create Post
             </Button>
 
-            <DiscardConfirmationDialog
-              onDiscard={() => navigate("/app/posts")}
-            />
+            <DiscardConfirmationDialog onDiscard={() => navigate("/posts")} />
           </div>
         </>
       )}

@@ -13,7 +13,7 @@ export const NewPost = () => {
 
   const onSuccess = useCallback(() => {
     dispatch(resetState());
-    navigate("/app/posts");
+    navigate("/posts");
   }, [navigate, dispatch]);
 
   return (

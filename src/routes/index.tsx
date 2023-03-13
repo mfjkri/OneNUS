@@ -1,6 +1,6 @@
-import { useRoutes } from "react-router-dom";
+import { RouteObject, useRoutes } from "react-router-dom";
 
-import { Landing, NotFound } from "features/misc";
+import { NotFound } from "features/misc";
 import { useAuth } from "lib/auth";
 
 import { protectedRoutes } from "./protected";
@@ -21,7 +21,8 @@ Further sub-routing are managed by the feature itself:
 export const AppRoutes = () => {
   const auth = useAuth();
 
-  const commonRoutes = [{ path: "/", element: <Landing /> }];
+  //{ path: "/", element: <Landing /> }
+  const commonRoutes: RouteObject[] = [];
   const fallbackRoute = [{ path: "*", element: <NotFound /> }];
 
   const routes = auth.user ? protectedRoutes : publicRoutes;

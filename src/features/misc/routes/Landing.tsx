@@ -1,23 +1,13 @@
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { Button } from "components/Elements";
 import { Head } from "components/Head";
 import { Footer } from "components/Layout";
-import { useAuth } from "lib/auth";
 import logo from "assets/logo.svg";
 
 export const Landing = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-
-  useEffect(() => {
-    // If user is already signed in, redirect to app
-    if (user) {
-      navigate("/app");
-    }
-  });
 
   return (
     <>

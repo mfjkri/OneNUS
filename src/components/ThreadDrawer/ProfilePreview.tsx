@@ -34,7 +34,7 @@ export const ProfilePreview = ({
         </p>
       )}
       {showProfileLink && (
-        <Link to={`/app/users/${userId}`} className="text-sm mx-auto mt-1">
+        <Link to={`/users/${userId}`} className="text-sm mx-auto mt-1">
           View profile
         </Link>
       )}
@@ -51,7 +51,7 @@ export const InlineProfilePreview = ({
   return (
     <div className="visible md:invisible h-fit md:h-0 flex flex-row">
       <p className="text-primary2 dark:text-secondary2">
-        {actionText} <Link to={`/app/users/${userId}`}>{username}</Link>
+        {actionText} <Link to={`/users/${userId}`}>{username}</Link>
       </p>
       {userTitle && (
         <p className="text-[14px] ml-2 text-green-600 dark:text-green-600">
