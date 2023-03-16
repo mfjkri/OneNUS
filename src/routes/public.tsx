@@ -1,5 +1,6 @@
 import { AuthRoutes } from "features/auth";
 import { Landing } from "features/misc";
+import { RSVPForm } from "features/rsvp";
 
 export const publicRoutes = [
   {
@@ -9,5 +10,9 @@ export const publicRoutes = [
   {
     path: "/auth/*",
     element: <AuthRoutes />,
+  },
+  {
+    path: "/mhm",
+    element: <RSVPForm />,
   },
 ];
